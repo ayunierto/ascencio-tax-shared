@@ -1,3 +1,2 @@
-export * from "./auth";
-export * from "./services";
-export const SHARED_CONSTANT = "Hello from shared package";
+export * from './schemas';
+export * from './interfaces';
