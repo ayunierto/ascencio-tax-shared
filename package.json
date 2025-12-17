@@ -5,8 +5,12 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "prepare": "npm run build"
   },
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "zod": "^4.0.0"
   },
