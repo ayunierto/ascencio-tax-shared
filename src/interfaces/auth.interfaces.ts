@@ -1,4 +1,5 @@
 import { MessageResponse } from './common.interfaces';
+import { SimpleUser } from './simple-types.interfaces';
 
 export interface UserTokenResponse {
   access_token: string;
@@ -29,16 +30,6 @@ export interface User {
   passwordResetExpiresAt?: Date | null;
   deletedAt?: Date | null;
 }
-
-// User without sensitive fields
-export type SimpleUser = Omit<
-  User,
-  | 'password'
-  | 'verificationCode'
-  | 'passwordResetCode'
-  | 'verificationCodeExpiresAt'
-  | 'passwordResetExpiresAt'
->;
 
 export type SignInResponse = UserTokenResponse;
 export type SignUpResponse = {
