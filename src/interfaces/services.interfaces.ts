@@ -22,5 +22,5 @@ export interface Service {
 }
 
 // Response type (Create/Update DTOs are in schemas)
-export type ServiceResponse = Omit<Service, 'staffMembers' | 'appointments'>;
+export type ServiceResponse = Service;
 export type ServicesResponse = PaginatedResponse<ServiceResponse>;

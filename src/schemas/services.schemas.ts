@@ -24,4 +24,7 @@ export const serviceSchema = z.object({
 });
 
 export type CreateServiceDto = z.infer<typeof serviceSchema>;
-export type UpdateServiceDto = Partial<CreateServiceDto>;
+
+export const updateServiceSchema = serviceSchema.partial();
+
+export type UpdateServiceDto = z.infer<typeof updateServiceSchema>;
