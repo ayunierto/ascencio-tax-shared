@@ -1,15 +1,9 @@
-import { PaginatedResponse, MessageResponse } from './common.interfaces';
+import { MessageResponse } from './common.interfaces';
 
 export interface UserTokenResponse {
   access_token: string;
-  user: BasicUser;
+  user: SimpleUser;
 }
-
-export interface UserMessageResponse extends MessageResponse {
-  user?: BasicUser;
-}
-
-export interface OnlyMessageResponse extends MessageResponse {}
 
 // Full User Entity
 export interface User {
@@ -37,7 +31,7 @@ export interface User {
 }
 
 // User without sensitive fields
-export type BasicUser = Omit<
+export type SimpleUser = Omit<
   User,
   | 'password'
   | 'verificationCode'
@@ -46,4 +40,28 @@ export type BasicUser = Omit<
   | 'passwordResetExpiresAt'
 >;
 
-export type UsersResponse = PaginatedResponse<BasicUser>;
+export type SignInResponse = UserTokenResponse;
+export type SignUpResponse = {
+  message: string;
+  user: Omit<
+    SimpleUser,
+    | 'roles'
+    | 'isActive'
+    | 'isEmailVerified'
+    | 'deletedAt'
+    | 'lastLoginAt'
+    | 'verificationCode'
+    | 'passwordResetCode'
+    | 'verificationCodeExpiresAt'
+    | 'passwordResetExpiresAt'
+  >;
+};
+export type VerifyEmailResponse = UserTokenResponse;
+export type ResendEmailCodeResponse = MessageResponse;
+export type ForgotPasswordResponse = MessageResponse;
+export type ResetPasswordResponse = UserTokenResponse;
+export type ResendResetPasswordCodeResponse = MessageResponse;
+export type CheckStatusResponse = UserTokenResponse;
+export type ChangePasswordResponse = UserTokenResponse;
+export type UpdateProfileResponse = SimpleUser;
+export type DeleteAccountResponse = MessageResponse;

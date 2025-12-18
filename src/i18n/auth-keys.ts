@@ -10,6 +10,8 @@ export const AuthMessages = {
   FIRST_NAME_REQUIRED: CommonMessages.FIRST_NAME_REQUIRED,
   LAST_NAME_REQUIRED: CommonMessages.LAST_NAME_REQUIRED,
   TIMEZONE_REQUIRED: CommonMessages.TIMEZONE_REQUIRED,
+
+  GOOGLE_PROFILE_MISSING_EMAIL: 'googleProfileMissingEmail',
 } as const;
 
 export type AuthMessageKey = (typeof AuthMessages)[keyof typeof AuthMessages];
