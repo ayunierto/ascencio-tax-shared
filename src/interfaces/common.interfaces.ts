@@ -1,0 +1,28 @@
+/**
+ * Common interfaces and types used across all modules
+ */
+
+export interface PaginatedResponse<T> {
+  total: number;
+  pages: number;
+  items: T[];
+}
+
+export interface MessageResponse {
+  message: string;
+  statusCode?: number;
+  error?: string;
+}
+
+export interface SuccessResponse<T> {
+  success: boolean;
+  data?: T;
+  message?: string;
+}
+
+export interface ErrorResponse {
+  success: false;
+  error: string;
+  statusCode: number;
+  details?: Record<string, any>;
+}
