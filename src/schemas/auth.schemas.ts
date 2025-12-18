@@ -36,6 +36,9 @@ export const signUpSchema = z.object({
 export type SignUpDto = z.infer<typeof signUpSchema>;
 
 export const verifyEmailCodeSchema = z.object({
+  email: z.email({ error: AuthMessages.INVALID_EMAIL }).nonempty({
+    error: AuthMessages.EMAIL_REQUIRED,
+  }),
   code: z.string().length(6).nonempty(),
 });
 
