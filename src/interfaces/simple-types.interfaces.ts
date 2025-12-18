@@ -4,23 +4,16 @@
  * They contain all fields EXCEPT relations/arrays
  */
 
+import { User } from './auth.interfaces';
+
 // SimpleUser - from User interface
-export interface SimpleUser {
-  id: string;
-  firstName: string;
-  lastName: string;
-  imageUrl?: string | null;
-  email: string;
-  countryCode?: string;
-  phoneNumber?: string;
-  locale?: string;
-  timeZone: string;
-  isActive: boolean;
-  isEmailVerified: boolean;
-  lastLoginAt?: Date;
-  createdAt: Date;
-  updatedAt?: Date;
-}
+export type SimpleUser = Omit<
+  User,
+  | 'verificationCode'
+  | 'passwordResetCode'
+  | 'verificationCodeExpiresAt'
+  | 'passwordResetExpiresAt'
+>;
 
 // SimpleService - from Service interface
 export interface SimpleService {
