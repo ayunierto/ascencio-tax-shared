@@ -8,6 +8,8 @@ export const CommonMessages = {
   SERVICE_NAME_REQUIRED: 'serviceNameRequired',
   DURATION_INVALID: 'durationInvalid',
   START_TIME_INVALID: 'startTimeInvalid',
+  CODE_LENGTH: 'codeLength',
+  CODE_REQUIRED: 'codeRequired',
 } as const;
 
 export type CommonMessageKey =

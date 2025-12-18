@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { AuthMessages } from '../i18n';
+import { AuthMessages, CommonMessages } from '../i18n';
 
 export const signinSchema = z.object({
   email: z.email({ error: AuthMessages.INVALID_EMAIL }).nonempty({
@@ -39,7 +39,10 @@ export const verifyEmailCodeSchema = z.object({
   email: z.email({ error: AuthMessages.INVALID_EMAIL }).nonempty({
     error: AuthMessages.EMAIL_REQUIRED,
   }),
-  code: z.string().length(6).nonempty(),
+  code: z
+    .string()
+    .length(6, { error: CommonMessages.CODE_LENGTH })
+    .nonempty({ error: CommonMessages.CODE_REQUIRED }),
 });
 
 export type VerifyEmailCodeDto = z.infer<typeof verifyEmailCodeSchema>;
@@ -84,7 +87,7 @@ export type ChangePasswordDto = z.infer<typeof changePasswordSchema>;
 export const deleteAccountSchema = z.object({
   password: z
     .string()
-    .min(6)
+    .min(6, { error: AuthMessages.PASSWORD_REQUIRED })
     .nonempty({ error: AuthMessages.PASSWORD_REQUIRED }),
 });
 
@@ -106,7 +109,7 @@ export const resendEmailVerificationCodeSchema = z.object({
   }),
 });
 
-export type ResendEmailVerificationCodeDto = z.infer<
+export type ResendEmailCodeDto = z.infer<
   typeof resendEmailVerificationCodeSchema
 >;
 
