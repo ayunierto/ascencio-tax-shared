@@ -1,3 +1,4 @@
+import { Appointment } from './bookings.interfaces';
 import { PaginatedResponse } from './common.interfaces';
 import {
   SimpleStaffMember,
@@ -18,7 +19,7 @@ export interface Service {
   updatedAt: string;
   deletedAt?: string;
   staffMembers?: SimpleStaffMember[];
-  appointments?: SimpleAppointment[];
+  appointments?: Appointment[];
 }
 
 // Response type (Create/Update DTOs are in schemas)
