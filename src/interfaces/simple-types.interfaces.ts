@@ -5,6 +5,7 @@
  */
 
 import { User } from './auth.interfaces';
+import { Appointment } from './bookings.interfaces';
 
 // SimpleUser - from User interface
 export type SimpleUser = Omit<
@@ -70,18 +71,7 @@ export interface SimplePost {
 }
 
 // SimpleAppointment - from Appointment interface
-export interface SimpleAppointment {
-  id: string;
-  start: Date;
-  end: Date;
-  timeZone: string;
-  status: 'pending' | 'confirmed' | 'cancelled' | 'completed';
-  serviceId: string;
-  userId: string;
-  staffMemberId: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
+export type SimpleAppointment = Appointment;
 
 // SimpleSchedule - from Schedule interface
 export interface SimpleSchedule {
