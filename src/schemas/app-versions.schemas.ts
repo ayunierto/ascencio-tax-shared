@@ -1,13 +1,20 @@
 import { z } from 'zod';
+import { AppVersionsMessages } from '../i18n';
 
 // App Versions
-export const appPlatformEnum = z.enum(['IOS', 'ANDROID', 'WEB']);
+export const appPlatformEnum = z.enum(['IOS', 'ANDROID', 'WEB'], {
+  error: AppVersionsMessages.PLATFORM_REQUIRED,
+});
 
 export const createAppVersionSchema = z.object({
   platform: appPlatformEnum,
-  minSupportedVersion: z.string(),
-  latestVersion: z.string(),
-  forceUpdate: z.boolean(),
+  minSupportedVersion: z
+    .string({ error: AppVersionsMessages.MIN_SUPPORTED_REQUIRED })
+    .min(1, { error: AppVersionsMessages.MIN_SUPPORTED_REQUIRED }),
+  latestVersion: z
+    .string({ error: AppVersionsMessages.LATEST_REQUIRED })
+    .min(1, { error: AppVersionsMessages.LATEST_REQUIRED }),
+  forceUpdate: z.boolean({ error: AppVersionsMessages.FORCE_UPDATE_REQUIRED }),
   releaseNotes: z.string().optional(),
 });
 

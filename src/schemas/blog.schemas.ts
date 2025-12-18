@@ -1,9 +1,12 @@
 import { z } from 'zod';
+import { BlogMessages } from '../i18n';
 
 // Blog Posts
 export const createPostSchema = z.object({
-  title: z.string().min(1),
-  url: z.url(),
+  title: z
+    .string({ error: BlogMessages.TITLE_REQUIRED })
+    .min(1, { error: BlogMessages.TITLE_REQUIRED }),
+  url: z.url({ error: BlogMessages.URL_INVALID }),
 });
 
 export type CreatePostDto = z.infer<typeof createPostSchema>;

@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { ZoomMessages } from '../i18n';
 
 // Zoom Meeting Settings
 export const zoomMeetingSettingsSchema = z.object({
@@ -16,10 +17,22 @@ export type ZoomMeetingSettingsDto = z.infer<typeof zoomMeetingSettingsSchema>;
 // Zoom Meeting
 export const createZoomMeetingSchema = z.object({
   agenda: z.string().optional(),
-  topic: z.string(),
-  type: z.number().int().optional().default(2),
-  start_time: z.string().optional(),
-  duration: z.number().int().optional(),
+  topic: z
+    .string({ error: ZoomMessages.TOPIC_REQUIRED })
+    .min(1, { error: ZoomMessages.TOPIC_REQUIRED }),
+  type: z
+    .number({ error: ZoomMessages.TYPE_INVALID })
+    .int({ error: ZoomMessages.TYPE_INVALID })
+    .optional()
+    .default(2),
+  start_time: z
+    .string({ error: ZoomMessages.START_TIME_INVALID })
+    .min(1, { error: ZoomMessages.START_TIME_INVALID })
+    .optional(),
+  duration: z
+    .number({ error: ZoomMessages.DURATION_INVALID })
+    .int({ error: ZoomMessages.DURATION_INVALID })
+    .optional(),
   timezone: z.string().optional(),
   password: z.string().optional(),
   default_password: z.boolean().optional(),

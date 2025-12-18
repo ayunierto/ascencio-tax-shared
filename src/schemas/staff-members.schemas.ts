@@ -1,10 +1,15 @@
-import z from 'zod';
+import { z } from 'zod';
+import { StaffMembersMessages } from '../i18n';
 
 // Staff Members
 export const staffMemberSchema = z.object({
-  firstName: z.string().min(3),
-  lastName: z.string().min(3),
-  isActive: z.boolean(),
+  firstName: z
+    .string({ error: StaffMembersMessages.FIRST_NAME_REQUIRED })
+    .min(3, { error: StaffMembersMessages.FIRST_NAME_REQUIRED }),
+  lastName: z
+    .string({ error: StaffMembersMessages.LAST_NAME_REQUIRED })
+    .min(3, { error: StaffMembersMessages.LAST_NAME_REQUIRED }),
+  isActive: z.boolean({ error: StaffMembersMessages.IS_ACTIVE_REQUIRED }),
   services: z.array(z.string()).optional(),
   schedules: z.array(z.string()).optional(),
 });
