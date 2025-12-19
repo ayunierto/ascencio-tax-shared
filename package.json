@@ -6,18 +6,22 @@
   "exports": {
     ".": {
       "import": "./dist/index.js",
+      "require": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
     "./interfaces": {
       "import": "./dist/interfaces/index.js",
+      "require": "./dist/interfaces/index.js",
       "types": "./dist/interfaces/index.d.ts"
     },
     "./schemas": {
       "import": "./dist/schemas/index.js",
+      "require": "./dist/schemas/index.js",
       "types": "./dist/schemas/index.d.ts"
     },
     "./i18n": {
       "import": "./dist/i18n/index.js",
+      "require": "./dist/i18n/index.js",
       "types": "./dist/i18n/index.d.ts"
     }
   },

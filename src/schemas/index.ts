@@ -9,7 +9,6 @@ export * from './app-versions.schemas';
 export * from './notification.schemas';
 export * from './system-settings.schemas';
 export * from './zoom.schemas';
-
 export * from './blog.schemas';
 export * from './logs.schemas';
 export * from './notification.schemas';
