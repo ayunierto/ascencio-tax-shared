@@ -26,3 +26,9 @@ export interface ErrorResponse {
   statusCode: number;
   details?: Record<string, any>;
 }
+
+export interface ServerException {
+  message: string;
+  error: string;
+  statusCode?: number;
+}
