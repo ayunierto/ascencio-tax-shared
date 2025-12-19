@@ -10,6 +10,8 @@ export const CommonMessages = {
   START_TIME_INVALID: 'startTimeInvalid',
   CODE_LENGTH: 'codeLength',
   CODE_REQUIRED: 'codeRequired',
+  INTERNAL_SERVER_ERROR: 'internalServerError',
+  USER_NOT_FOUND: 'userNotFound',
 } as const;
 
 export type CommonMessageKey =
