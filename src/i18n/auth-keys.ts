@@ -18,6 +18,8 @@ export const AuthMessages = {
   ACCOUNT_LOCKED: 'accountLocked',
   EMAIL_NOT_VERIFIED: 'emailNotVerified',
 
+  CODE_NOT_FOUND: 'codeNotFound',
+
   EMAIL_ALREADY_EXISTS: 'emailAlreadyExists',
   EMAIL_ALREADY_VERIFIED: 'emailAlreadyVerified',
   CODE_EXPIRED: 'codeExpired',
