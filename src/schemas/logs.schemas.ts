@@ -1,11 +1,10 @@
 import { z } from 'zod';
-import { LogsMessages } from '../i18n';
+import { CommonMessages } from '../i18n';
 
-// Logs
 export const createLogSchema = z.object({
   description: z
-    .string({ error: LogsMessages.DESCRIPTION_REQUIRED })
-    .min(1, { error: LogsMessages.DESCRIPTION_REQUIRED }),
+    .string({ error: CommonMessages.VALIDATION_STRING })
+    .nonempty({ error: CommonMessages.VALIDATION_REQUIRED }),
 });
 
-export type CreateLogDto = z.infer<typeof createLogSchema>;
+export type CreateLogRequest = z.infer<typeof createLogSchema>;

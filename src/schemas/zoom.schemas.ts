@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { ZoomMessages } from '../i18n';
+import { CommonMessages } from '../i18n';
 
 // Zoom Meeting Settings
 export const zoomMeetingSettingsSchema = z.object({
@@ -12,26 +12,28 @@ export const zoomMeetingSettingsSchema = z.object({
   auto_recording: z.string().optional(),
 });
 
-export type ZoomMeetingSettingsDto = z.infer<typeof zoomMeetingSettingsSchema>;
+export type ZoomMeetingSettingsRequest = z.infer<
+  typeof zoomMeetingSettingsSchema
+>;
 
 // Zoom Meeting
 export const createZoomMeetingSchema = z.object({
   agenda: z.string().optional(),
   topic: z
-    .string({ error: ZoomMessages.TOPIC_REQUIRED })
-    .min(1, { error: ZoomMessages.TOPIC_REQUIRED }),
+    .string({ error: CommonMessages.VALIDATION_STRING })
+    .min(1, { error: CommonMessages.VALIDATION_REQUIRED }),
   type: z
-    .number({ error: ZoomMessages.TYPE_INVALID })
-    .int({ error: ZoomMessages.TYPE_INVALID })
+    .number({ error: CommonMessages.VALIDATION_NUMBER })
+    .int({ error: CommonMessages.VALIDATION_NUMBER })
     .optional()
     .default(2),
   start_time: z
-    .string({ error: ZoomMessages.START_TIME_INVALID })
-    .min(1, { error: ZoomMessages.START_TIME_INVALID })
+    .string({ error: CommonMessages.VALIDATION_STRING })
+    .min(1, { error: CommonMessages.VALIDATION_REQUIRED })
     .optional(),
   duration: z
-    .number({ error: ZoomMessages.DURATION_INVALID })
-    .int({ error: ZoomMessages.DURATION_INVALID })
+    .number({ error: CommonMessages.VALIDATION_NUMBER })
+    .int({ error: CommonMessages.VALIDATION_NUMBER })
     .optional(),
   timezone: z.string().optional(),
   password: z.string().optional(),
@@ -39,8 +41,8 @@ export const createZoomMeetingSchema = z.object({
   settings: zoomMeetingSettingsSchema.optional(),
 });
 
-export type CreateZoomMeetingDto = z.infer<typeof createZoomMeetingSchema>;
+export type CreateZoomMeetingRequest = z.infer<typeof createZoomMeetingSchema>;
 
 export const updateZoomMeetingSchema = createZoomMeetingSchema.partial();
 
-export type UpdateZoomMeetingDto = z.infer<typeof updateZoomMeetingSchema>;
+export type UpdateZoomMeetingRequest = z.infer<typeof updateZoomMeetingSchema>;

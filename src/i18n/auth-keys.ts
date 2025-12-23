@@ -1,25 +1,12 @@
 import { CommonMessages } from './common-keys';
 
 export const AuthMessages = {
-  EMAIL_REQUIRED: CommonMessages.EMAIL_REQUIRED,
-  PASSWORD_REQUIRED: CommonMessages.PASSWORD_REQUIRED,
-  FIRST_NAME_REQUIRED: CommonMessages.FIRST_NAME_REQUIRED,
-  LAST_NAME_REQUIRED: CommonMessages.LAST_NAME_REQUIRED,
-  TIMEZONE_REQUIRED: CommonMessages.TIMEZONE_REQUIRED,
-
   INVALID_CREDENTIALS: 'invalidCredentials',
-  INVALID_EMAIL: CommonMessages.INVALID_EMAIL,
-  INVALID_CODE: 'invalidCode',
-  INVALID_PASSWORD: 'invalidPassword',
-
   LOGIN_SUCCESS: 'loginSuccess',
   SIGN_UP_SUCCESS: 'signUpSuccess',
-
   ACCOUNT_LOCKED: 'accountLocked',
   EMAIL_NOT_VERIFIED: 'emailNotVerified',
-
   CODE_NOT_FOUND: 'codeNotFound',
-
   EMAIL_ALREADY_EXISTS: 'emailAlreadyExists',
   EMAIL_ALREADY_VERIFIED: 'emailAlreadyVerified',
   CODE_EXPIRED: 'codeExpired',

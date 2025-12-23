@@ -2,7 +2,7 @@ export * from './common.interfaces';
 export * from './enums';
 export * from './simple-types.interfaces';
 export * from './auth.interfaces';
-export * from './accounting.interfaces';
+export * from './accounting';
 export * from './categories.interfaces';
 export * from './expenses.interfaces';
 export * from './services.interfaces';

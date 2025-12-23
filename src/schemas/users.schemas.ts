@@ -1,37 +1,40 @@
 import { z } from 'zod';
-import { UsersMessages } from '../i18n';
+import { CommonMessages, UsersMessages } from '../i18n';
+import {
+  countryCodeSchema,
+  firstNameSchema,
+  lastNameSchema,
+  phoneNumberSchema,
+} from './common.schemas';
+import { emailSchema, passwordSchema } from './auth';
 
 // Users
 export const createUserSchema = z.object({
-  firstName: z
-    .string({ error: UsersMessages.FIRST_NAME_REQUIRED })
-    .min(3, { error: UsersMessages.FIRST_NAME_REQUIRED }),
-  lastName: z
-    .string({ error: UsersMessages.LAST_NAME_REQUIRED })
-    .min(3, { error: UsersMessages.LAST_NAME_REQUIRED }),
-  email: z
-    .email({ error: UsersMessages.INVALID_EMAIL })
-    .nonempty({ error: UsersMessages.EMAIL_REQUIRED }),
-  countryCode: z.string().optional(),
-  phoneNumber: z.string().optional(),
-  timeZone: z
-    .string({ error: UsersMessages.TIMEZONE_REQUIRED })
-    .min(1, { error: UsersMessages.TIMEZONE_REQUIRED }),
+  firstName: firstNameSchema,
+  lastName: lastNameSchema,
+  email: emailSchema,
+  countryCode: countryCodeSchema,
+  phoneNumber: phoneNumberSchema,
   locale: z.string().optional(),
-  password: z
-    .string({ error: UsersMessages.PASSWORD_REQUIRED })
-    .min(6, { error: UsersMessages.PASSWORD_MIN_LENGTH })
-    .max(100, { error: UsersMessages.PASSWORD_MAX_LENGTH }),
-  confirmPassword: z
-    .string({ error: UsersMessages.CONFIRM_PASSWORD_REQUIRED })
-    .min(6, { error: UsersMessages.PASSWORD_MIN_LENGTH })
-    .max(100, { error: UsersMessages.PASSWORD_MAX_LENGTH }),
-  roles: z.array(z.string()).optional(),
-  isActive: z.boolean().optional(),
+  password: passwordSchema,
+  roles: z
+    .array(z.string(), { error: CommonMessages.VALIDATION_ARRAY })
+    .optional(),
+  isActive: z.boolean({ error: CommonMessages.VALIDATION_BOOLEAN }).optional(),
 });
 
-export type CreateUserDto = z.infer<typeof createUserSchema>;
+export type CreateUserRequest = z.infer<typeof createUserSchema>;
 
 export const updateUserSchema = createUserSchema.partial();
 
-export type UpdateUserDto = z.infer<typeof updateUserSchema>;
+export type UpdateUserRequest = z.infer<typeof updateUserSchema>;
+
+export const updateProfileSchema = z.object({
+  firstName: firstNameSchema,
+  lastName: lastNameSchema,
+  countryCode: countryCodeSchema,
+  phoneNumber: phoneNumberSchema.optional(),
+  password: passwordSchema.optional(),
+});
+
+export type UpdateProfileRequest = z.infer<typeof updateProfileSchema>;

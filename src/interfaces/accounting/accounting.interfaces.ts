@@ -1,5 +1,5 @@
-import { PaginatedResponse } from './common.interfaces';
-import { SimpleUser } from './simple-types.interfaces';
+import { PaginatedResponse } from '../common.interfaces';
+import { SimpleUser } from '../simple-types.interfaces';
 
 // Re-export from categories to avoid duplication
 export type {
@@ -9,14 +9,38 @@ export type {
   SubcategoryResponse,
   CategoriesResponse,
   SubcategoriesResponse,
-} from './categories.interfaces';
+} from '../categories.interfaces';
 
 // Re-export from expenses
 export type {
   Expense,
   ExpenseResponse,
   ExpensesResponse,
-} from './expenses.interfaces';
+} from '../expenses.interfaces';
+
+// Company Entity
+export interface Company {
+  id: string;
+  name: string;
+  legalName?: string;
+  businessNumber?: string;
+  address?: string;
+  city?: string;
+  province?: string;
+  postalCode?: string;
+  phone?: string;
+  email?: string;
+  payrollAccountNumber?: string;
+  logoUrl?: string;
+  userId: string;
+  createdAt: Date;
+  updatedAt: Date;
+  deletedAt?: Date;
+  user?: SimpleUser;
+}
+
+export type CompanyResponse = Omit<Company, 'user'>;
+export type CompaniesResponse = PaginatedResponse<CompanyResponse>;
 
 // Reports Entity
 export interface Report {

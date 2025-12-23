@@ -1,21 +1,25 @@
 import { z } from 'zod';
-import { SystemSettingsMessages } from '../i18n';
+import { CommonMessages } from '../i18n';
 
 // System Settings
 export const createSystemSettingSchema = z.object({
   key: z
-    .string({ error: SystemSettingsMessages.KEY_REQUIRED })
-    .min(1, { error: SystemSettingsMessages.KEY_REQUIRED }),
+    .string({ error: CommonMessages.VALIDATION_STRING })
+    .nonempty({ error: CommonMessages.VALIDATION_REQUIRED }),
   value: z
-    .string({ error: SystemSettingsMessages.VALUE_REQUIRED })
-    .min(1, { error: SystemSettingsMessages.VALUE_REQUIRED }),
+    .string({ error: CommonMessages.VALIDATION_STRING })
+    .nonempty({ error: CommonMessages.VALIDATION_REQUIRED }),
   type: z
-    .string({ error: SystemSettingsMessages.TYPE_REQUIRED })
-    .min(1, { error: SystemSettingsMessages.TYPE_REQUIRED }),
+    .string({ error: CommonMessages.VALIDATION_STRING })
+    .nonempty({ error: CommonMessages.VALIDATION_REQUIRED }),
 });
 
-export type CreateSystemSettingDto = z.infer<typeof createSystemSettingSchema>;
+export type CreateSystemSettingRequest = z.infer<
+  typeof createSystemSettingSchema
+>;
 
 export const updateSystemSettingSchema = createSystemSettingSchema.partial();
 
-export type UpdateSystemSettingDto = z.infer<typeof updateSystemSettingSchema>;
+export type UpdateSystemSettingRequest = z.infer<
+  typeof updateSystemSettingSchema
+>;

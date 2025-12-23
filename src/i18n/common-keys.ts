@@ -1,17 +1,28 @@
 export const CommonMessages = {
-  FIRST_NAME_REQUIRED: 'firstNameRequired',
-  LAST_NAME_REQUIRED: 'lastNameRequired',
-  TIMEZONE_REQUIRED: 'timezoneRequired',
-  EMAIL_REQUIRED: 'emailRequired',
-  INVALID_EMAIL: 'invalidEmail',
-  PASSWORD_REQUIRED: 'passwordRequired',
-  SERVICE_NAME_REQUIRED: 'serviceNameRequired',
-  DURATION_INVALID: 'durationInvalid',
-  START_TIME_INVALID: 'startTimeInvalid',
-  CODE_LENGTH: 'codeLength',
-  CODE_REQUIRED: 'codeRequired',
+  // Validation messages
+  VALIDATION_REQUIRED: 'validationRequired',
+  VALIDATION_INVALID_FORMAT: 'validationInvalidFormat',
+  VALIDATION_MIN_LENGTH: 'validationMinLength',
+  VALIDATION_MAX_LENGTH: 'validationMaxLength',
+  VALIDATION_EMAIL: 'validationEmail',
+  VALIDATION_NUMBER: 'validationNumber',
+  VALIDATION_MIN_VALUE: 'validationMinValue',
+  VALIDATION_MAX_VALUE: 'validationMaxValue',
+  VALIDATION_MUST_MATCH: 'validationMustMatch',
+  VALIDATION_URL: 'validationUrl',
+  VALIDATION_UUID: 'validationUuid',
+  VALIDATION_ISO_DATETIME: 'validationIsoDatetime', // YYYY-MM-DDTHH:mm:ss.sssZ
+  VALIDATION_DATE: 'validationIsoDate', // YYYY-MM-DD
+  VALIDATION_BOOLEAN: 'validationBoolean', // true or false
+  VALIDATION_TIME: 'validationTime', // HH:mm format
+  VALIDATION_STRING: 'validationString',
+  VALIDATION_ARRAY: 'validationArray',
+  VALIDATION_INVALID_ENUM: 'validationEnum',
+
+  // General messages
   INTERNAL_SERVER_ERROR: 'internalServerError',
   USER_NOT_FOUND: 'userNotFound',
+  INVALID_CODE: 'invalidCode',
 } as const;
 
 export type CommonMessageKey =

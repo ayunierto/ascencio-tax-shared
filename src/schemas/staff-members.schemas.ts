@@ -1,21 +1,21 @@
 import { z } from 'zod';
-import { StaffMembersMessages } from '../i18n';
+import { CommonMessages } from '../i18n';
 
 // Staff Members
 export const staffMemberSchema = z.object({
   firstName: z
-    .string({ error: StaffMembersMessages.FIRST_NAME_REQUIRED })
-    .min(3, { error: StaffMembersMessages.FIRST_NAME_REQUIRED }),
+    .string({ error: CommonMessages.VALIDATION_STRING })
+    .nonempty({ error: CommonMessages.VALIDATION_REQUIRED }),
   lastName: z
-    .string({ error: StaffMembersMessages.LAST_NAME_REQUIRED })
-    .min(3, { error: StaffMembersMessages.LAST_NAME_REQUIRED }),
-  isActive: z.boolean({ error: StaffMembersMessages.IS_ACTIVE_REQUIRED }),
+    .string({ error: CommonMessages.VALIDATION_STRING })
+    .nonempty({ error: CommonMessages.VALIDATION_REQUIRED }),
+  isActive: z.boolean({ error: CommonMessages.VALIDATION_BOOLEAN }),
   services: z.array(z.string()).optional(),
   schedules: z.array(z.string()).optional(),
 });
 
-export type CreateStaffMemberDto = z.infer<typeof staffMemberSchema>;
+export type CreateStaffMemberRequest = z.infer<typeof staffMemberSchema>;
 
 export const updateStaffMemberSchema = staffMemberSchema.partial();
 
-export type UpdateStaffMemberDto = z.infer<typeof updateStaffMemberSchema>;
+export type UpdateStaffMemberRequest = z.infer<typeof updateStaffMemberSchema>;

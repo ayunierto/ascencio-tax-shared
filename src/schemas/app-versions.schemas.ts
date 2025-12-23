@@ -1,25 +1,24 @@
 import { z } from 'zod';
-import { AppVersionsMessages } from '../i18n';
+import { AppVersionsMessages, CommonMessages } from '../i18n';
 
-// App Versions
 export const appPlatformEnum = z.enum(['IOS', 'ANDROID', 'WEB'], {
-  error: AppVersionsMessages.PLATFORM_REQUIRED,
+  error: CommonMessages.VALIDATION_INVALID_ENUM,
 });
 
 export const createAppVersionSchema = z.object({
   platform: appPlatformEnum,
   minSupportedVersion: z
-    .string({ error: AppVersionsMessages.MIN_SUPPORTED_REQUIRED })
-    .min(1, { error: AppVersionsMessages.MIN_SUPPORTED_REQUIRED }),
+    .number({ error: CommonMessages.VALIDATION_NUMBER })
+    .min(1, { error: CommonMessages.VALIDATION_MIN_VALUE }),
   latestVersion: z
-    .string({ error: AppVersionsMessages.LATEST_REQUIRED })
-    .min(1, { error: AppVersionsMessages.LATEST_REQUIRED }),
-  forceUpdate: z.boolean({ error: AppVersionsMessages.FORCE_UPDATE_REQUIRED }),
+    .string({ error: CommonMessages.VALIDATION_REQUIRED })
+    .min(1, { error: CommonMessages.VALIDATION_MIN_LENGTH }),
+  forceUpdate: z.boolean({ error: CommonMessages.VALIDATION_BOOLEAN }),
   releaseNotes: z.string().optional(),
 });
 
-export type CreateAppVersionDto = z.infer<typeof createAppVersionSchema>;
+export type CreateAppVersionRequest = z.infer<typeof createAppVersionSchema>;
 
 export const updateAppVersionSchema = createAppVersionSchema.partial();
 
-export type UpdateAppVersionDto = z.infer<typeof updateAppVersionSchema>;
+export type UpdateAppVersionRequest = z.infer<typeof updateAppVersionSchema>;

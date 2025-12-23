@@ -1,30 +1,30 @@
 import { z } from 'zod';
-import { ServicesMessages } from '../i18n';
+import { CommonMessages } from '../i18n';
 
 export const serviceSchema = z.object({
   name: z
-    .string({ error: ServicesMessages.NAME_REQUIRED })
-    .min(3, { error: ServicesMessages.NAME_REQUIRED }),
+    .string({ error: CommonMessages.VALIDATION_STRING })
+    .nonempty({ error: CommonMessages.VALIDATION_REQUIRED }),
   description: z.string().optional(),
   address: z.string().optional(),
   durationMinutes: z
-    .number({ error: ServicesMessages.DURATION_INVALID })
-    .int({ error: ServicesMessages.DURATION_INVALID })
+    .number({ error: CommonMessages.VALIDATION_NUMBER })
+    .int({ error: CommonMessages.VALIDATION_NUMBER })
     .optional(),
   isAvailableOnline: z.boolean({
-    error: ServicesMessages.AVAILABLE_ONLINE_REQUIRED,
+    error: CommonMessages.VALIDATION_BOOLEAN,
   }),
-  imageUrl: z.url({ error: ServicesMessages.IMAGE_URL_INVALID }).optional(),
-  isActive: z.boolean({ error: ServicesMessages.ACTIVE_FLAG_REQUIRED }),
+  imageUrl: z.url({ error: CommonMessages.VALIDATION_URL }).optional(),
+  isActive: z.boolean({ error: CommonMessages.VALIDATION_BOOLEAN }),
   staffIds: z
-    .array(z.uuid({ error: ServicesMessages.STAFF_ID_INVALID }), {
-      error: ServicesMessages.STAFFIDS_REQUIRED,
+    .array(z.uuid({ error: CommonMessages.VALIDATION_UUID }), {
+      error: CommonMessages.VALIDATION_REQUIRED,
     })
-    .nonempty({ error: ServicesMessages.STAFFIDS_REQUIRED }),
+    .nonempty({ error: CommonMessages.VALIDATION_REQUIRED }),
 });
 
-export type CreateServiceDto = z.infer<typeof serviceSchema>;
+export type CreateServiceRequest = z.infer<typeof serviceSchema>;
 
 export const updateServiceSchema = serviceSchema.partial();
 
-export type UpdateServiceDto = z.infer<typeof updateServiceSchema>;
+export type UpdateServiceRequest = z.infer<typeof updateServiceSchema>;

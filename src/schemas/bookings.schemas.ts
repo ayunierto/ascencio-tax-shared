@@ -1,72 +1,66 @@
 import { z } from 'zod';
-import { BookingsMessages } from '../i18n';
+import { BookingsMessages, CommonMessages } from '../i18n';
 
 // Appointments
 export const createAppointmentSchema = z.object({
-  serviceId: z.uuid({ error: BookingsMessages.SERVICE_ID_REQUIRED }),
-  staffId: z.uuid({ error: BookingsMessages.STAFF_ID_REQUIRED }),
-  start: z
-    .string({ error: BookingsMessages.START_REQUIRED })
-    .datetime({ error: BookingsMessages.START_REQUIRED }),
-  end: z
-    .string({ error: BookingsMessages.END_REQUIRED })
-    .datetime({ error: BookingsMessages.END_REQUIRED }),
-  timeZone: z
-    .string({ error: BookingsMessages.TIMEZONE_REQUIRED })
-    .min(1, { error: BookingsMessages.TIMEZONE_REQUIRED }),
+  serviceId: z.uuid({ error: CommonMessages.VALIDATION_UUID }),
+  staffId: z.uuid({ error: CommonMessages.VALIDATION_UUID }),
+  start: z.iso.datetime({ error: CommonMessages.VALIDATION_ISO_DATETIME }),
+  end: z.iso.datetime({ error: CommonMessages.VALIDATION_ISO_DATETIME }),
+  timeZone: z.string().nonempty({ error: CommonMessages.VALIDATION_REQUIRED }),
   comments: z.string().optional(),
   source: z.enum(['app', 'admin', 'imported', 'api']).optional(),
 });
 
-export type CreateAppointmentDto = z.infer<typeof createAppointmentSchema>;
+export type CreateAppointmentRequest = z.infer<typeof createAppointmentSchema>;
 
 export const updateAppointmentSchema = createAppointmentSchema.partial();
 
-export type UpdateAppointmentDto = z.infer<typeof updateAppointmentSchema>;
+export type UpdateAppointmentRequest = z.infer<typeof updateAppointmentSchema>;
 
 export const cancelAppointmentSchema = z.object({
   cancellationReason: z
-    .string({ error: BookingsMessages.CANCELLATION_REASON_REQUIRED })
-    .min(1, { error: BookingsMessages.CANCELLATION_REASON_REQUIRED }),
+    .string()
+    .nonempty({ error: CommonMessages.VALIDATION_REQUIRED }),
 });
 
-export type CancelAppointmentDto = z.infer<typeof cancelAppointmentSchema>;
+export type CancelAppointmentRequest = z.infer<typeof cancelAppointmentSchema>;
 
-// Schedules
 export const scheduleSchema = z.object({
   dayOfWeek: z
-    .number({ error: BookingsMessages.DAY_OF_WEEK_INVALID })
-    .int({ error: BookingsMessages.DAY_OF_WEEK_INVALID })
-    .min(0, { error: BookingsMessages.DAY_OF_WEEK_INVALID })
-    .max(6, { error: BookingsMessages.DAY_OF_WEEK_INVALID }),
+    .number({ error: CommonMessages.VALIDATION_NUMBER })
+    .min(0, { error: CommonMessages.VALIDATION_MIN_VALUE })
+    .max(6, { error: CommonMessages.VALIDATION_MAX_VALUE }),
   startTime: z
-    .string({ error: BookingsMessages.START_TIME_INVALID })
+    .string({ error: CommonMessages.VALIDATION_REQUIRED })
     .regex(/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/, {
-      error: BookingsMessages.START_TIME_INVALID,
+      error: CommonMessages.VALIDATION_INVALID_FORMAT,
     }),
   endTime: z
-    .string({ error: BookingsMessages.END_TIME_INVALID })
+    .string({ error: CommonMessages.VALIDATION_REQUIRED })
     .regex(/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/, {
-      error: BookingsMessages.END_TIME_INVALID,
+      error: CommonMessages.VALIDATION_INVALID_FORMAT,
     }),
 });
 
-export type CreateScheduleDto = z.infer<typeof scheduleSchema>;
+export type CreateScheduleRequest = z.infer<typeof scheduleSchema>;
 
 export const updateScheduleSchema = scheduleSchema.partial();
 
-export type UpdateScheduleDto = z.infer<typeof updateScheduleSchema>;
+export type UpdateScheduleRequest = z.infer<typeof updateScheduleSchema>;
 
 // Availability
 export const searchAvailabilitySchema = z.object({
-  serviceId: z.uuid({ error: BookingsMessages.SERVICE_ID_REQUIRED }),
-  staffId: z.uuid({ error: BookingsMessages.STAFF_ID_REQUIRED }).optional(),
+  serviceId: z.uuid({ error: CommonMessages.VALIDATION_UUID }),
+  staffId: z.uuid({ error: CommonMessages.VALIDATION_UUID }).optional(),
   date: z
-    .string({ error: BookingsMessages.DATE_REQUIRED })
-    .min(1, { error: BookingsMessages.DATE_REQUIRED }),
+    .string({ error: CommonMessages.VALIDATION_STRING })
+    .nonempty({ error: CommonMessages.VALIDATION_REQUIRED }),
   timeZone: z
-    .string({ error: BookingsMessages.TIMEZONE_REQUIRED })
-    .min(1, { error: BookingsMessages.TIMEZONE_REQUIRED }),
+    .string({ error: CommonMessages.VALIDATION_STRING })
+    .nonempty({ error: CommonMessages.VALIDATION_REQUIRED }),
 });
 
-export type SearchAvailabilityDto = z.infer<typeof searchAvailabilitySchema>;
+export type SearchAvailabilityRequest = z.infer<
+  typeof searchAvailabilitySchema
+>;

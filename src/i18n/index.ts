@@ -1,6 +1,6 @@
 export * from './auth-keys';
 export * from './common-keys';
-export * from './accounting-keys';
+export * from './accounting';
 export * from './bookings-keys';
 export * from './services-keys';
 export * from './users-keys';
