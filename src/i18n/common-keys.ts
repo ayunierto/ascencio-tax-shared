@@ -23,6 +23,8 @@ export const CommonMessages = {
   INTERNAL_SERVER_ERROR: 'internalServerError',
   USER_NOT_FOUND: 'userNotFound',
   INVALID_CODE: 'invalidCode',
+  RESOURCE_NOT_FOUND: 'resourceNotFound',
+  ACCESS_DENIED: 'accessDenied',
 } as const;
 
 export type CommonMessageKey =
