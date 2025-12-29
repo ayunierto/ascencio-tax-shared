@@ -5,6 +5,7 @@ import { buildZodMessage } from '../../utils';
 export const verificationCodeSchema = z
   .string()
   .length(6, buildZodMessage(CommonMessages.VALIDATION_MIN_LENGTH, { min: 6 }))
+  .max(6, buildZodMessage(CommonMessages.VALIDATION_MAX_LENGTH, { max: 6 }))
   .nonempty(buildZodMessage(CommonMessages.VALIDATION_REQUIRED));
 
 export const passwordSchema = z
