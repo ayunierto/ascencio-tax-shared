@@ -1,5 +1,4 @@
 import z from 'zod';
-import { CompaniesMessages } from '../../i18n/accounting';
 import { CommonMessages } from '../../i18n';
 import { emailSchema } from '../auth';
 import { phoneNumberSchema } from '../common.schemas';
@@ -18,6 +17,7 @@ export const createCompanySchema = z.object({
     .string()
     .trim()
     .regex(/^\d{9}[A-Za-z]{2}\d{4}$/, {
+      // 123456789RC0001
       error: CommonMessages.VALIDATION_INVALID_FORMAT,
     }),
   payrollAccountNumber: z
