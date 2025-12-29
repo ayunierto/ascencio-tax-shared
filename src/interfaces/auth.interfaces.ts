@@ -47,7 +47,7 @@ export type SignUpResponse = {
     | 'passwordResetExpiresAt'
   >;
 };
-export type VerifyEmailResponse = UserTokenResponse;
+export type VerifyEmailCodeResponse = UserTokenResponse;
 export type ResendEmailCodeResponse = MessageResponse;
 export type ForgotPasswordResponse = MessageResponse;
 export type ResetPasswordResponse = UserTokenResponse;
