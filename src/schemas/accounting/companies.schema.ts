@@ -2,45 +2,46 @@ import z from 'zod';
 import { CommonMessages } from '../../i18n';
 import { emailSchema } from '../auth';
 import { phoneNumberSchema } from '../common.schemas';
+import { buildZodMessage } from '../../utils';
 
 export const createCompanySchema = z.object({
-  id: z.string().optional(),
+  id: z.string(buildZodMessage(CommonMessages.VALIDATION_STRING)).optional(),
   name: z
-    .string()
+    .string(buildZodMessage(CommonMessages.VALIDATION_STRING))
     .trim()
-    .nonempty({ error: CommonMessages.VALIDATION_REQUIRED }),
+    .nonempty(buildZodMessage(CommonMessages.VALIDATION_REQUIRED)),
   legalName: z
-    .string()
+    .string(buildZodMessage(CommonMessages.VALIDATION_STRING))
     .trim()
-    .nonempty({ error: CommonMessages.VALIDATION_REQUIRED }),
+    .nonempty(buildZodMessage(CommonMessages.VALIDATION_REQUIRED)),
   // Canadian Business Number format: 9 digits + 2 letters + 4 digits
   businessNumber: z
-    .string()
+    .string(buildZodMessage(CommonMessages.VALIDATION_STRING))
     .trim()
     .regex(/^\d{9}[A-Za-z]{2}\d{4}$/, {
       // 123456789RC0001
       error: CommonMessages.VALIDATION_INVALID_FORMAT,
     }),
   payrollAccountNumber: z
-    .string()
+    .string(buildZodMessage(CommonMessages.VALIDATION_STRING))
     .trim()
-    .nonempty({ error: CommonMessages.VALIDATION_REQUIRED }),
+    .nonempty(buildZodMessage(CommonMessages.VALIDATION_REQUIRED)),
   address: z
-    .string()
+    .string(buildZodMessage(CommonMessages.VALIDATION_STRING))
     .trim()
-    .nonempty({ error: CommonMessages.VALIDATION_REQUIRED }),
+    .nonempty(buildZodMessage(CommonMessages.VALIDATION_REQUIRED)),
   city: z
-    .string()
+    .string(buildZodMessage(CommonMessages.VALIDATION_STRING))
     .trim()
-    .nonempty({ error: CommonMessages.VALIDATION_REQUIRED }),
+    .nonempty(buildZodMessage(CommonMessages.VALIDATION_REQUIRED)),
   province: z
-    .string()
+    .string(buildZodMessage(CommonMessages.VALIDATION_STRING))
     .trim()
-    .nonempty({ error: CommonMessages.VALIDATION_REQUIRED }),
+    .nonempty(buildZodMessage(CommonMessages.VALIDATION_REQUIRED)),
   postalCode: z
-    .string()
+    .string(buildZodMessage(CommonMessages.VALIDATION_STRING))
     .trim()
-    .nonempty({ error: CommonMessages.VALIDATION_REQUIRED }),
+    .nonempty(buildZodMessage(CommonMessages.VALIDATION_REQUIRED)),
   phone: phoneNumberSchema,
   email: emailSchema,
   logoUrl: z.url(CommonMessages.VALIDATION_URL).optional(),
