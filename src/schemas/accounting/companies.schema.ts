@@ -4,6 +4,7 @@ import { emailSchema } from '../auth';
 import { phoneNumberSchema } from '../common.schemas';
 
 export const createCompanySchema = z.object({
+  id: z.string().optional(),
   name: z
     .string()
     .trim()
