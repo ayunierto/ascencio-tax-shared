@@ -43,7 +43,7 @@ export const createCompanySchema = z.object({
     .nonempty({ error: CommonMessages.VALIDATION_REQUIRED }),
   phone: phoneNumberSchema,
   email: emailSchema,
-  logoUrl: z.url().optional(),
+  logoUrl: z.url(CommonMessages.VALIDATION_URL).optional(),
 });
 
 export type CreateCompanyRequest = z.infer<typeof createCompanySchema>;
