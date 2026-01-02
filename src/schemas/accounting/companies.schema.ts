@@ -18,7 +18,10 @@ export const createCompanySchema = z.object({
   businessNumber: z
     .string()
     .trim()
-    .regex(/^\d{9}[A-Za-z]{2}\d{4}$/, buildZodMessage(CommonMessages.VALIDATION_INVALID_FORMAT)),
+    .regex(
+      /^\d{9}[A-Za-z]{2}\d{4}$/,
+      buildZodMessage(CommonMessages.VALIDATION_INVALID_FORMAT),
+    ),
   payrollAccountNumber: z
     .string()
     .trim()
@@ -41,7 +44,10 @@ export const createCompanySchema = z.object({
     .min(1, buildZodMessage(CommonMessages.VALIDATION_REQUIRED)),
   phone: phoneNumberSchema,
   email: emailSchema,
-  logoUrl: z.string().url(buildZodMessage(CommonMessages.VALIDATION_URL)).optional(),
+  logoUrl: z
+    .string()
+    .url(buildZodMessage(CommonMessages.VALIDATION_URL))
+    .optional(),
 });
 
 export type CreateCompanyRequest = z.infer<typeof createCompanySchema>;
