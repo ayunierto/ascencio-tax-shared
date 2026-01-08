@@ -21,11 +21,13 @@ export const createCompanySchema = z.object({
   postalCode: z.string().min(1, buildZodMsg(CM.VALIDATION_REQUIRED)),
   phone,
   email,
-  logoUrl: z.url(buildZodMsg(CM.VALIDATION_URL)).optional(),
+  mediaToken: z.string().optional(),
 });
 
 export type CreateCompanyRequest = z.infer<typeof createCompanySchema>;
 
-export const updateCompanySchema = createCompanySchema.partial();
+export const updateCompanySchema = createCompanySchema.partial().extend({
+  previousImageKey: z.string().optional(),
+});
 
 export type UpdateCompanyRequest = z.infer<typeof updateCompanySchema>;
