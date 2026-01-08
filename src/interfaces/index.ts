@@ -15,4 +15,5 @@ export * from './services.interfaces';
 export * from './simple-types.interfaces';
 export * from './staff-members.interfaces';
 export * from './system-settings.interfaces';
+export * from './upload-image-file.interfaces';
 export * from './users.interfaces';
