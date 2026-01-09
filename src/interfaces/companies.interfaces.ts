@@ -13,7 +13,12 @@ export interface Company {
   phone: string;
   email: string;
   payrollAccountNumber: string;
-  logoUrl: string;
+  /** The full Cloudinary URL of the company logo */
+  logoUrl?: string;
+  /** The Cloudinary public_id for cleanup operations */
+  logoPublicId?: string;
+  /** Temporary media token for image upload (not persisted) */
+  mediaToken?: string;
   createdAt: string;
   updatedAt: string;
   deletedAt?: string;

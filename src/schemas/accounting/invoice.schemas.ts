@@ -16,6 +16,7 @@ export const createInvoiceSchema = z.object({
   }),
   fromCompanyId: z.uuid({ error: CommonMessages.VALIDATION_UUID }).optional(),
   billToCompanyId: z.uuid({ error: CommonMessages.VALIDATION_UUID }).optional(),
+  billToEmployeeId: z.uuid({ error: CommonMessages.VALIDATION_UUID }).optional(),
 
   billToFullName: z.string().optional(),
   billToAddress: z.string().optional(),

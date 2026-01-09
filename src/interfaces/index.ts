@@ -8,6 +8,7 @@ export * from './categories.interfaces';
 export * from './common.interfaces';
 export * from './companies.interfaces';
 export * from './dashboard-metrics.interface';
+export * from './employees.interfaces';
 export * from './enums';
 export * from './expenses.interfaces';
 export * from './logs.interfaces';
