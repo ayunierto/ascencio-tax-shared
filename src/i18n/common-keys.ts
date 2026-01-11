@@ -18,6 +18,9 @@ export const CommonMessages = {
   VALIDATION_STRING: 'validationString',
   VALIDATION_ARRAY: 'validationArray',
   VALIDATION_INVALID_ENUM: 'validationEnum',
+  VALIDATION_POSITIVE: 'validationPositive',
+  VALIDATION_NON_NEGATIVE: 'validationNonNegative',
+  VALIDATION_MIN_ITEMS: 'validationMinItems',
 
   // General messages
   INTERNAL_SERVER_ERROR: 'internalServerError',

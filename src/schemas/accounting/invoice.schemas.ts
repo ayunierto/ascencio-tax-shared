@@ -4,32 +4,32 @@ import { CommonMessages } from '../../i18n';
 
 export const invoiceLineItemSchema = z.object({
   description: z
-    .string()
+    .string({ error: CommonMessages.VALIDATION_STRING })
     .nonempty({ error: CommonMessages.VALIDATION_REQUIRED }),
-  quantity: z.number().positive(),
-  price: z.number().nonnegative(),
+  quantity: z.number({ error: CommonMessages.VALIDATION_NUMBER }).positive({ error: CommonMessages.VALIDATION_POSITIVE }),
+  price: z.number({ error: CommonMessages.VALIDATION_NUMBER }).nonnegative({ error: CommonMessages.VALIDATION_NON_NEGATIVE }),
 });
 
 export const createInvoiceSchema = z.object({
   fromCompanyId: z.uuid({ error: CommonMessages.VALIDATION_UUID }).optional(),
 
-  billToFullName: z.string().min(1, { error: CommonMessages.VALIDATION_REQUIRED }),
-  billToAddress: z.string().optional(),
-  billToBusinessNumber: z.string().optional(),
+  billToFullName: z.string({ error: CommonMessages.VALIDATION_STRING }).min(1, { error: CommonMessages.VALIDATION_REQUIRED }),
+  billToAddress: z.string({ error: CommonMessages.VALIDATION_STRING }).optional(),
+  billToBusinessNumber: z.string({ error: CommonMessages.VALIDATION_STRING }).optional(),
   billToEmail: z.email({ error: CommonMessages.VALIDATION_EMAIL }).optional().or(z.literal('')),
-  billToPhone: z.string().optional(),
+  billToPhone: z.string({ error: CommonMessages.VALIDATION_STRING }).optional(),
 
-  issueDate: z.string(),
-  dueDate: z.string(),
+  issueDate: z.string({ error: CommonMessages.VALIDATION_DATE }),
+  dueDate: z.string({ error: CommonMessages.VALIDATION_DATE }),
 
-  taxRate: z.number().default(13),
-  description: z.string().optional(),
-  notes: z.string().optional(),
-  logoUrl: z.string().url().optional().or(z.literal('')),
+  taxRate: z.number({ error: CommonMessages.VALIDATION_NUMBER }).default(13),
+  description: z.string({ error: CommonMessages.VALIDATION_STRING }).optional(),
+  notes: z.string({ error: CommonMessages.VALIDATION_STRING }).optional(),
+  logoUrl: z.string({ error: CommonMessages.VALIDATION_STRING }).url({ error: CommonMessages.VALIDATION_URL }).optional().or(z.literal('')),
 
-  lineItems: z.array(invoiceLineItemSchema).min(1),
-  status: z.enum(InvoiceStatus).optional(),
-  stripeInvoiceId: z.string().optional(),
+  lineItems: z.array(invoiceLineItemSchema, { error: CommonMessages.VALIDATION_ARRAY }).min(1, { error: CommonMessages.VALIDATION_MIN_ITEMS }),
+  status: z.enum(InvoiceStatus, { error: CommonMessages.VALIDATION_INVALID_ENUM }).optional(),
+  stripeInvoiceId: z.string({ error: CommonMessages.VALIDATION_STRING }).optional(),
 });
 
 export type CreateInvoiceRequest = z.infer<typeof createInvoiceSchema>;
