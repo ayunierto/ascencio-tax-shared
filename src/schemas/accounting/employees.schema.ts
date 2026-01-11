@@ -4,6 +4,11 @@ import { emailSchema as email } from '../auth';
 import { phoneNumberSchema as phone } from '../common.schemas';
 import { buildZodMessage as buildZodMsg } from '../../utils';
 
+// Validate regex: 123-456-789
+const sinSchema = z
+  .string()
+  .regex(/^\d{3}-\d{3}-\d{3}$/, buildZodMsg(CM.VALIDATION_INVALID_FORMAT));
+
 export const createEmployeeSchema = z.object({
   id: z.string().optional(),
   companyId: z.uuid().optional().nullable(),
@@ -18,7 +23,7 @@ export const createEmployeeSchema = z.object({
   position: z.string().optional(),
   hourlyRate: z.number().min(0).optional().nullable(),
   salary: z.number().min(0).optional().nullable(),
-  sin: z.string().optional(), // Social Insurance Number
+  sin: sinSchema.optional(), // Social Insurance Number
   startDate: z.string().optional().nullable(),
   endDate: z.string().optional().nullable(),
   isActive: z.boolean().default(true),
@@ -28,7 +33,7 @@ export const createEmployeeSchema = z.object({
 export type CreateEmployeeRequest = z.infer<typeof createEmployeeSchema>;
 
 export const updateEmployeeSchema = createEmployeeSchema.partial().extend({
-  id: z.string().uuid(),
+  id: z.uuid(),
 });
 
 export type UpdateEmployeeRequest = z.infer<typeof updateEmployeeSchema>;

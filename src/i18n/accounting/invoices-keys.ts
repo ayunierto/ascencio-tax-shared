@@ -5,7 +5,7 @@ export const InvoicesMessages = {
   INVOICE_CREATED_SUCCESSFULLY: 'invoiceCreatedSuccessfully',
   INVOICE_UPDATED_SUCCESSFULLY: 'invoiceUpdatedSuccessfully',
   INVOICE_DELETED_SUCCESSFULLY: 'invoiceDeletedSuccessfully',
-  
+
   // Invoice fields
   INVOICE_NUMBER: 'invoiceNumber',
   INVOICE_DATE: 'invoiceDate',
@@ -15,7 +15,7 @@ export const InvoicesMessages = {
   FROM_COMPANY: 'fromCompany',
   DESCRIPTION: 'description',
   NOTES: 'notes',
-  
+
   // Financial fields
   SUBTOTAL: 'subtotal',
   TAX_RATE: 'taxRate',
@@ -23,12 +23,12 @@ export const InvoicesMessages = {
   TOTAL: 'total',
   AMOUNT_PAID: 'amountPaid',
   BALANCE_DUE: 'balanceDue',
-  
+
   // Line items
   LINE_ITEMS: 'lineItems',
   QUANTITY: 'quantity',
   PRICE: 'price',
-  
+
   // Status
   STATUS_PENDING: 'pending',
   STATUS_PAID: 'paid',

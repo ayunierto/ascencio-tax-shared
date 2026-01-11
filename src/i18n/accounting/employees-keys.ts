@@ -5,7 +5,7 @@ export const EmployeesMessages = {
   EMPLOYEE_CREATED_SUCCESSFULLY: 'employeeCreatedSuccessfully',
   EMPLOYEE_UPDATED_SUCCESSFULLY: 'employeeUpdatedSuccessfully',
   EMPLOYEE_DELETED_SUCCESSFULLY: 'employeeDeletedSuccessfully',
-  
+
   // Employee fields
   FIRST_NAME: 'firstName',
   LAST_NAME: 'lastName',
