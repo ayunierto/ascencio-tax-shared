@@ -1,8 +1,4 @@
 import { Company } from '../companies.interfaces';
-import { Employee } from '../employees.interfaces';
-
-export const BillToType = ['company', 'employee', 'custom'] as const;
-export type BillToType = (typeof BillToType)[number];
 
 export const InvoiceStatus = ['pending', 'paid', 'overdue', 'canceled'] as const;
 export type InvoiceStatus = (typeof InvoiceStatus)[number];
@@ -26,15 +22,8 @@ export interface Invoice {
   fromCompanyId?: string;
   fromCompany?: Company;
 
-  /** Bill To type: company, employee, or custom */
-  billToType: BillToType;
-  billToCompanyId?: string;
-  billToCompany?: Company;
-  billToEmployeeId?: string;
-  billToEmployee?: Employee;
-
-  /** Custom Bill To fields (when billToType is 'custom') */
-  billToFullName?: string;
+  /** Bill To fields */
+  billToFullName: string;
   billToAddress?: string;
   billToBusinessNumber?: string;
   billToEmail?: string;
@@ -62,6 +51,7 @@ export interface Invoice {
   description?: string;
   notes?: string;
   logoUrl?: string;
+  pdfUrl?: string;
 
   createdAt: string;
   updatedAt: string;

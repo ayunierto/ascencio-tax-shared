@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { BillToType, InvoiceStatus } from '../../interfaces';
+import { InvoiceStatus } from '../../interfaces';
 import { CommonMessages } from '../../i18n';
 
 export const invoiceLineItemSchema = z.object({
@@ -11,17 +11,12 @@ export const invoiceLineItemSchema = z.object({
 });
 
 export const createInvoiceSchema = z.object({
-  billToType: z.enum(BillToType, {
-    error: CommonMessages.VALIDATION_INVALID_ENUM,
-  }),
   fromCompanyId: z.uuid({ error: CommonMessages.VALIDATION_UUID }).optional(),
-  billToCompanyId: z.uuid({ error: CommonMessages.VALIDATION_UUID }).optional(),
-  billToEmployeeId: z.uuid({ error: CommonMessages.VALIDATION_UUID }).optional(),
 
-  billToFullName: z.string().optional(),
+  billToFullName: z.string().min(1, { error: CommonMessages.VALIDATION_REQUIRED }),
   billToAddress: z.string().optional(),
   billToBusinessNumber: z.string().optional(),
-  billToEmail: z.email({ error: CommonMessages.VALIDATION_EMAIL }).optional(),
+  billToEmail: z.email({ error: CommonMessages.VALIDATION_EMAIL }).optional().or(z.literal('')),
   billToPhone: z.string().optional(),
 
   issueDate: z.string(),
@@ -30,7 +25,7 @@ export const createInvoiceSchema = z.object({
   taxRate: z.number().default(13),
   description: z.string().optional(),
   notes: z.string().optional(),
-  logoUrl: z.string().url().optional(),
+  logoUrl: z.string().url().optional().or(z.literal('')),
 
   lineItems: z.array(invoiceLineItemSchema).min(1),
   status: z.enum(InvoiceStatus).optional(),
