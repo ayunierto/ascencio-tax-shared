@@ -3,9 +3,7 @@ import { InvoiceStatus } from '../../interfaces';
 import { CommonMessages } from '../../i18n';
 
 export const invoiceLineItemSchema = z.object({
-  description: z
-    .string({ error: CommonMessages.VALIDATION_STRING })
-    .nonempty({ error: CommonMessages.VALIDATION_REQUIRED }),
+  description: z.string({ error: CommonMessages.VALIDATION_STRING }),
   quantity: z.number({ error: CommonMessages.VALIDATION_NUMBER }).positive({ error: CommonMessages.VALIDATION_POSITIVE }),
   price: z.number({ error: CommonMessages.VALIDATION_NUMBER }).nonnegative({ error: CommonMessages.VALIDATION_NON_NEGATIVE }),
 });
