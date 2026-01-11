@@ -11,25 +11,37 @@ export const invoiceLineItemSchema = z.object({
 });
 
 export const createInvoiceSchema = z.object({
-  fromCompanyId: z.uuid({ error: CommonMessages.VALIDATION_UUID }).optional(),
+  fromCompanyId: z.union([
+    z.uuid({ error: CommonMessages.VALIDATION_UUID }),
+    z.literal(''),
+    z.undefined(),
+  ]).transform(val => val === '' ? undefined : val).optional(),
 
   billToFullName: z.string({ error: CommonMessages.VALIDATION_STRING }).min(1, { error: CommonMessages.VALIDATION_REQUIRED }),
-  billToAddress: z.string({ error: CommonMessages.VALIDATION_STRING }).optional(),
-  billToBusinessNumber: z.string({ error: CommonMessages.VALIDATION_STRING }).optional(),
-  billToEmail: z.email({ error: CommonMessages.VALIDATION_EMAIL }).optional().or(z.literal('')),
-  billToPhone: z.string({ error: CommonMessages.VALIDATION_STRING }).optional(),
+  billToAddress: z.string({ error: CommonMessages.VALIDATION_STRING }).optional().or(z.literal('')),
+  billToBusinessNumber: z.string({ error: CommonMessages.VALIDATION_STRING }).optional().or(z.literal('')),
+  billToEmail: z.union([
+    z.email({ error: CommonMessages.VALIDATION_EMAIL }),
+    z.literal(''),
+    z.undefined(),
+  ]).optional(),
+  billToPhone: z.string({ error: CommonMessages.VALIDATION_STRING }).optional().or(z.literal('')),
 
   issueDate: z.string({ error: CommonMessages.VALIDATION_DATE }),
   dueDate: z.string({ error: CommonMessages.VALIDATION_DATE }),
 
   taxRate: z.number({ error: CommonMessages.VALIDATION_NUMBER }).default(13),
-  description: z.string({ error: CommonMessages.VALIDATION_STRING }).optional(),
-  notes: z.string({ error: CommonMessages.VALIDATION_STRING }).optional(),
-  logoUrl: z.string({ error: CommonMessages.VALIDATION_STRING }).url({ error: CommonMessages.VALIDATION_URL }).optional().or(z.literal('')),
+  description: z.string({ error: CommonMessages.VALIDATION_STRING }).optional().or(z.literal('')),
+  notes: z.string({ error: CommonMessages.VALIDATION_STRING }).optional().or(z.literal('')),
+  logoUrl: z.union([
+    z.string({ error: CommonMessages.VALIDATION_STRING }).url({ error: CommonMessages.VALIDATION_URL }),
+    z.literal(''),
+    z.undefined(),
+  ]).optional(),
 
   lineItems: z.array(invoiceLineItemSchema, { error: CommonMessages.VALIDATION_ARRAY }).min(1, { error: CommonMessages.VALIDATION_MIN_ITEMS }),
   status: z.enum(InvoiceStatus, { error: CommonMessages.VALIDATION_INVALID_ENUM }).default('pending'),
-  stripeInvoiceId: z.string({ error: CommonMessages.VALIDATION_STRING }).optional(),
+  stripeInvoiceId: z.string({ error: CommonMessages.VALIDATION_STRING }).optional().or(z.literal('')),
 });
 
 export type CreateInvoiceRequest = z.infer<typeof createInvoiceSchema>;
