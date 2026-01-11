@@ -28,7 +28,7 @@ export const createInvoiceSchema = z.object({
   logoUrl: z.string({ error: CommonMessages.VALIDATION_STRING }).url({ error: CommonMessages.VALIDATION_URL }).optional().or(z.literal('')),
 
   lineItems: z.array(invoiceLineItemSchema, { error: CommonMessages.VALIDATION_ARRAY }).min(1, { error: CommonMessages.VALIDATION_MIN_ITEMS }),
-  status: z.enum(InvoiceStatus, { error: CommonMessages.VALIDATION_INVALID_ENUM }).optional(),
+  status: z.enum(InvoiceStatus, { error: CommonMessages.VALIDATION_INVALID_ENUM }).default('pending'),
   stripeInvoiceId: z.string({ error: CommonMessages.VALIDATION_STRING }).optional(),
 });
 
