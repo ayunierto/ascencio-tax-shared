@@ -1,8 +1,9 @@
 import z from 'zod';
-import { emailSchema, passwordSchema } from './common-auth.schemas';
+import { passwordSchema } from './common-auth.schemas';
+import { emailSchema as email } from '../common.schemas';
 
 export const signInSchema = z.object({
-  email: emailSchema,
+  email,
   password: passwordSchema,
 });
 

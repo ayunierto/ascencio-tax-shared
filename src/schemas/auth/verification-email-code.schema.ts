@@ -1,5 +1,6 @@
 import z from 'zod';
-import { emailSchema, verificationCodeSchema } from './common-auth.schemas';
+import { verificationCodeSchema } from './common-auth.schemas';
+import { emailSchema } from '../common.schemas';
 
 export const verifyEmailCodeSchema = z.object({
   email: emailSchema,

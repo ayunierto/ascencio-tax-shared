@@ -1,19 +1,21 @@
 import z from 'zod';
-import { CommonMessages as CM } from '../../i18n';
-import { emailSchema as email } from '../auth';
-import { phoneNumberSchema as phone } from '../common.schemas';
+import { ValidationMessages as ValMsgs } from '../../i18n';
+import {
+  emailSchema as email,
+  phoneNumberSchema as phone,
+} from '../common.schemas';
 import { buildZodMessage as buildZodMsg } from '../../utils';
 
 // Validate regex: 123-456-789
 const sinSchema = z
   .string()
-  .regex(/^\d{3}-\d{3}-\d{3}$/, buildZodMsg(CM.VALIDATION_INVALID_FORMAT));
+  .regex(/^\d{3}-\d{3}-\d{3}$/, buildZodMsg(ValMsgs.INVALID_FORMAT));
 
 export const createEmployeeSchema = z.object({
   id: z.string().optional(),
   companyId: z.uuid().optional().nullable(),
-  firstName: z.string().min(1, buildZodMsg(CM.VALIDATION_REQUIRED)),
-  lastName: z.string().min(1, buildZodMsg(CM.VALIDATION_REQUIRED)),
+  firstName: z.string().min(1, buildZodMsg(ValMsgs.REQUIRED)),
+  lastName: z.string().min(1, buildZodMsg(ValMsgs.REQUIRED)),
   email: email.optional().or(z.literal('')),
   phone: phone.optional().or(z.literal('')),
   address: z.string().optional(),

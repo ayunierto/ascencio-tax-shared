@@ -1,9 +1,5 @@
 import { Appointment } from './bookings.interfaces';
 import { PaginatedResponse } from './common.interfaces';
-import {
-  SimpleStaffMember,
-  SimpleAppointment,
-} from './simple-types.interfaces';
 import { StaffMember } from './staff-members.interfaces';
 
 // Service Entity

@@ -1,11 +1,11 @@
 import z from 'zod';
-import { CommonMessages } from '../../i18n';
+import { ValidationMessages } from '../../i18n';
 
 export const createSubcategorySchema = z.object({
   name: z
-    .string({ error: CommonMessages.VALIDATION_STRING })
-    .nonempty({ error: CommonMessages.VALIDATION_REQUIRED }),
-  categoryId: z.uuid({ error: CommonMessages.VALIDATION_UUID }),
+    .string({ error: ValidationMessages.STRING })
+    .nonempty({ error: ValidationMessages.REQUIRED }),
+  categoryId: z.uuid({ error: ValidationMessages.UUID }),
 });
 
 export type CreateSubcategoryRequest = z.infer<typeof createSubcategorySchema>;

@@ -1,10 +1,10 @@
 import z from 'zod';
-import { CommonMessages } from '../../i18n';
+import { ValidationMessages } from '../../i18n';
 
 export const createCategorySchema = z.object({
   name: z
-    .string({ error: CommonMessages.VALIDATION_STRING })
-    .nonempty({ error: CommonMessages.VALIDATION_MIN_LENGTH }),
+    .string({ error: ValidationMessages.STRING })
+    .nonempty({ error: ValidationMessages.MIN_LENGTH }),
   description: z.string().optional(),
 });
 

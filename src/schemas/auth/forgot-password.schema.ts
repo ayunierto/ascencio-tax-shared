@@ -1,8 +1,8 @@
 import z from 'zod';
-import { emailSchema } from './common-auth.schemas';
+import { emailSchema as email } from '../common.schemas';
 
 export const forgotPasswordSchema = z.object({
-  email: emailSchema,
+  email,
 });
 
 export type ForgotPasswordRequest = z.infer<typeof forgotPasswordSchema>;

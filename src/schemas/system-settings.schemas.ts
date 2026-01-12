@@ -1,17 +1,17 @@
 import { z } from 'zod';
-import { CommonMessages } from '../i18n';
+import { ValidationMessages } from '../i18n';
 
 // System Settings
 export const createSystemSettingSchema = z.object({
   key: z
-    .string({ error: CommonMessages.VALIDATION_STRING })
-    .nonempty({ error: CommonMessages.VALIDATION_REQUIRED }),
+    .string({ error: ValidationMessages.STRING })
+    .nonempty({ error: ValidationMessages.REQUIRED }),
   value: z
-    .string({ error: CommonMessages.VALIDATION_STRING })
-    .nonempty({ error: CommonMessages.VALIDATION_REQUIRED }),
+    .string({ error: ValidationMessages.STRING })
+    .nonempty({ error: ValidationMessages.REQUIRED }),
   type: z
-    .string({ error: CommonMessages.VALIDATION_STRING })
-    .nonempty({ error: CommonMessages.VALIDATION_REQUIRED }),
+    .string({ error: ValidationMessages.STRING })
+    .nonempty({ error: ValidationMessages.REQUIRED }),
 });
 
 export type CreateSystemSettingRequest = z.infer<

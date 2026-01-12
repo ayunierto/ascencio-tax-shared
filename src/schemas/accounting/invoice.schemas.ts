@@ -1,80 +1,61 @@
 import { z } from 'zod';
 import { InvoiceStatus } from '../../interfaces';
-import { CommonMessages } from '../../i18n';
+import { ValidationMessages as ValMsgs } from '../../i18n';
 
 export const invoiceLineItemSchema = z.object({
-  description: z.string({ error: CommonMessages.VALIDATION_STRING }),
+  description: z.string({ error: ValMsgs.STRING }),
   quantity: z
-    .number({ error: CommonMessages.VALIDATION_NUMBER })
-    .positive({ error: CommonMessages.VALIDATION_POSITIVE }),
+    .number({ error: ValMsgs.NUMBER })
+    .positive({ error: ValMsgs.POSITIVE }),
   price: z
-    .number({ error: CommonMessages.VALIDATION_NUMBER })
-    .nonnegative({ error: CommonMessages.VALIDATION_NON_NEGATIVE }),
+    .number({ error: ValMsgs.NUMBER })
+    .nonnegative({ error: ValMsgs.NON_NEGATIVE }),
 });
 
 export const createInvoiceSchema = z.object({
   fromCompanyId: z
-    .union([
-      z.uuid({ error: CommonMessages.VALIDATION_UUID }),
-      z.literal(''),
-      z.undefined(),
-    ])
+    .union([z.uuid({ error: ValMsgs.UUID }), z.literal(''), z.undefined()])
     .transform((val) => (val === '' ? undefined : val))
     .optional(),
 
   billToFullName: z
-    .string({ error: CommonMessages.VALIDATION_STRING })
-    .min(1, { error: CommonMessages.VALIDATION_REQUIRED }),
+    .string({ error: ValMsgs.STRING })
+    .min(1, { error: ValMsgs.REQUIRED }),
   billToAddress: z
-    .string({ error: CommonMessages.VALIDATION_STRING })
+    .string({ error: ValMsgs.STRING })
     .optional()
     .or(z.literal('')),
   billToBusinessNumber: z
-    .string({ error: CommonMessages.VALIDATION_STRING })
+    .string({ error: ValMsgs.STRING })
     .optional()
     .or(z.literal('')),
   billToEmail: z
-    .union([
-      z.email({ error: CommonMessages.VALIDATION_EMAIL }),
-      z.literal(''),
-      z.undefined(),
-    ])
+    .union([z.email({ error: ValMsgs.EMAIL }), z.literal(''), z.undefined()])
     .optional(),
-  billToPhone: z
-    .string({ error: CommonMessages.VALIDATION_STRING })
-    .optional()
-    .or(z.literal('')),
+  billToPhone: z.string({ error: ValMsgs.STRING }).optional().or(z.literal('')),
 
-  issueDate: z.string({ error: CommonMessages.VALIDATION_DATE }),
-  dueDate: z.string({ error: CommonMessages.VALIDATION_DATE }),
+  issueDate: z.string({ error: ValMsgs.DATE }),
+  dueDate: z.string({ error: ValMsgs.DATE }),
 
-  taxRate: z.number({ error: CommonMessages.VALIDATION_NUMBER }).default(13),
-  description: z
-    .string({ error: CommonMessages.VALIDATION_STRING })
-    .optional()
-    .or(z.literal('')),
-  notes: z
-    .string({ error: CommonMessages.VALIDATION_STRING })
-    .optional()
-    .or(z.literal('')),
+  taxRate: z.number({ error: ValMsgs.NUMBER }).default(13),
+  description: z.string({ error: ValMsgs.STRING }).optional().or(z.literal('')),
+  notes: z.string({ error: ValMsgs.STRING }).optional().or(z.literal('')),
   logoUrl: z
     .union([
-      z
-        .string({ error: CommonMessages.VALIDATION_STRING })
-        .url({ error: CommonMessages.VALIDATION_URL }),
+      z.string({ error: ValMsgs.STRING }).url({ error: ValMsgs.URL }),
       z.literal(''),
       z.undefined(),
     ])
     .optional(),
 
   lineItems: z
-    .array(invoiceLineItemSchema, { error: CommonMessages.VALIDATION_ARRAY })
-    .min(1, { error: CommonMessages.VALIDATION_MIN_ITEMS }),
+    .array(invoiceLineItemSchema, { error: ValMsgs.ARRAY })
+    .min(1, { error: ValMsgs.MIN_ITEMS }),
   status: z
-    .enum(InvoiceStatus, { error: CommonMessages.VALIDATION_INVALID_ENUM })
+    .enum(InvoiceStatus, { error: ValMsgs.INVALID_ENUM })
     .default('pending'),
   stripeInvoiceId: z
-    .string({ error: CommonMessages.VALIDATION_STRING })
+    .string({ error: ValMsgs.STRING })
     .optional()
     .or(z.literal('')),
 });

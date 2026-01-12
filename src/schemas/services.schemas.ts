@@ -1,26 +1,26 @@
 import { z } from 'zod';
-import { CommonMessages } from '../i18n';
+import { ValidationMessages } from '../i18n';
 
 export const serviceSchema = z.object({
   name: z
-    .string({ error: CommonMessages.VALIDATION_STRING })
-    .nonempty({ error: CommonMessages.VALIDATION_REQUIRED }),
+    .string({ error: ValidationMessages.STRING })
+    .nonempty({ error: ValidationMessages.REQUIRED }),
   description: z.string().optional(),
   address: z.string().optional(),
   durationMinutes: z
-    .number({ error: CommonMessages.VALIDATION_NUMBER })
-    .int({ error: CommonMessages.VALIDATION_NUMBER })
+    .number({ error: ValidationMessages.NUMBER })
+    .int({ error: ValidationMessages.NUMBER })
     .optional(),
   isAvailableOnline: z.boolean({
-    error: CommonMessages.VALIDATION_BOOLEAN,
+    error: ValidationMessages.BOOLEAN,
   }),
-  imageUrl: z.url({ error: CommonMessages.VALIDATION_URL }).optional(),
-  isActive: z.boolean({ error: CommonMessages.VALIDATION_BOOLEAN }),
+  imageUrl: z.url({ error: ValidationMessages.URL }).optional(),
+  isActive: z.boolean({ error: ValidationMessages.BOOLEAN }),
   staffIds: z
-    .array(z.uuid({ error: CommonMessages.VALIDATION_UUID }), {
-      error: CommonMessages.VALIDATION_REQUIRED,
+    .array(z.uuid({ error: ValidationMessages.UUID }), {
+      error: ValidationMessages.REQUIRED,
     })
-    .nonempty({ error: CommonMessages.VALIDATION_REQUIRED }),
+    .nonempty({ error: ValidationMessages.REQUIRED }),
 });
 
 export type CreateServiceRequest = z.infer<typeof serviceSchema>;

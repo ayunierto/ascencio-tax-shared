@@ -1,18 +1,20 @@
 import z from 'zod';
-import { CommonMessages } from '../../i18n';
-import { emailSchema, passwordSchema } from './common-auth.schemas';
-import { firstNameSchema, lastNameSchema } from '../common.schemas';
+import { ValidationMessages as ValMsgs } from '../../i18n';
+import { passwordSchema } from './common-auth.schemas';
+import {
+  emailSchema as email,
+  firstNameSchema,
+  lastNameSchema,
+} from '../common.schemas';
 import { buildZodMessage } from '../../utils';
 
 export const signUpSchema = z.object({
   firstName: firstNameSchema,
   lastName: lastNameSchema,
-  email: emailSchema,
+  email,
   countryCode: z.string().optional(),
   phoneNumber: z.string().optional(),
-  timeZone: z
-    .string()
-    .nonempty(buildZodMessage(CommonMessages.VALIDATION_REQUIRED)),
+  timeZone: z.string().nonempty(buildZodMessage(ValMsgs.REQUIRED)),
   locale: z.string().optional(),
   password: passwordSchema,
 });

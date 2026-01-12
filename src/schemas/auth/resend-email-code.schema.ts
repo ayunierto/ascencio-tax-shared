@@ -1,8 +1,8 @@
 import z from 'zod';
-import { emailSchema } from './common-auth.schemas';
+import { emailSchema as email } from '../common.schemas';
 
 export const resendEmailCodeSchema = z.object({
-  email: emailSchema,
+  email,
 });
 
 export type ResendEmailCodeRequest = z.infer<typeof resendEmailCodeSchema>;

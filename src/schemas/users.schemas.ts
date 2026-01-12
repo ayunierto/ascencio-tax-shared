@@ -1,12 +1,13 @@
 import { z } from 'zod';
-import { CommonMessages, UsersMessages } from '../i18n';
+import { ValidationMessages as ValMsgs } from '../i18n';
 import {
   countryCodeSchema,
+  emailSchema,
   firstNameSchema,
   lastNameSchema,
   phoneNumberSchema,
 } from './common.schemas';
-import { emailSchema, passwordSchema } from './auth';
+import { passwordSchema } from './auth';
 
 // Users
 export const createUserSchema = z.object({
@@ -17,10 +18,8 @@ export const createUserSchema = z.object({
   phoneNumber: phoneNumberSchema,
   locale: z.string().optional(),
   password: passwordSchema,
-  roles: z
-    .array(z.string(), { error: CommonMessages.VALIDATION_ARRAY })
-    .optional(),
-  isActive: z.boolean({ error: CommonMessages.VALIDATION_BOOLEAN }).optional(),
+  roles: z.array(z.string(), { error: ValMsgs.ARRAY }).optional(),
+  isActive: z.boolean({ error: ValMsgs.BOOLEAN }).optional(),
 });
 
 export type CreateUserRequest = z.infer<typeof createUserSchema>;

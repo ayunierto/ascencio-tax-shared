@@ -1,12 +1,9 @@
 import z from 'zod';
-import {
-  emailSchema,
-  passwordSchema,
-  verificationCodeSchema,
-} from './common-auth.schemas';
+import { passwordSchema, verificationCodeSchema } from './common-auth.schemas';
+import { emailSchema as email } from '../common.schemas';
 
 export const resetPasswordSchema = z.object({
-  email: emailSchema,
+  email,
   code: verificationCodeSchema,
   newPassword: passwordSchema,
 });

@@ -1,19 +1,19 @@
 import z from 'zod';
-import { CommonMessages } from '../../i18n';
+import { ValidationMessages as ValMsgs } from '../../i18n';
 
 export const createExpenseSchema = z.object({
-  merchant: z.string().nonempty({ error: CommonMessages.VALIDATION_REQUIRED }),
-  date: z.iso.datetime({ error: CommonMessages.VALIDATION_ISO_DATETIME }),
+  merchant: z.string().nonempty({ error: ValMsgs.REQUIRED }),
+  date: z.iso.datetime({ error: ValMsgs.ISO_DATETIME }),
   total: z
-    .number({ error: CommonMessages.VALIDATION_NUMBER })
-    .multipleOf(0.01, { error: CommonMessages.VALIDATION_NUMBER }),
+    .number({ error: ValMsgs.NUMBER })
+    .multipleOf(0.01, { error: ValMsgs.NUMBER }),
   tax: z
-    .number({ error: CommonMessages.VALIDATION_NUMBER })
-    .multipleOf(0.01, { error: CommonMessages.VALIDATION_NUMBER }),
-  imageUrl: z.url({ error: CommonMessages.VALIDATION_URL }).optional(),
+    .number({ error: ValMsgs.NUMBER })
+    .multipleOf(0.01, { error: ValMsgs.NUMBER }),
+  imageUrl: z.url({ error: ValMsgs.URL }).optional(),
   notes: z.string().optional(),
-  categoryId: z.uuid({ error: CommonMessages.VALIDATION_UUID }),
-  subcategoryId: z.uuid({ error: CommonMessages.VALIDATION_UUID }).optional(),
+  categoryId: z.uuid({ error: ValMsgs.UUID }),
+  subcategoryId: z.uuid({ error: ValMsgs.UUID }).optional(),
 });
 
 export type CreateExpenseRequest = z.infer<typeof createExpenseSchema>;

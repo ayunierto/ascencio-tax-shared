@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { CommonMessages } from '../i18n';
+import { ValidationMessages as ValMsgs } from '../i18n';
 
 // Zoom Meeting Settings
 export const zoomMeetingSettingsSchema = z.object({
@@ -20,20 +20,20 @@ export type ZoomMeetingSettingsRequest = z.infer<
 export const createZoomMeetingSchema = z.object({
   agenda: z.string().optional(),
   topic: z
-    .string({ error: CommonMessages.VALIDATION_STRING })
-    .min(1, { error: CommonMessages.VALIDATION_REQUIRED }),
+    .string({ error: ValMsgs.STRING })
+    .min(1, { error: ValMsgs.REQUIRED }),
   type: z
-    .number({ error: CommonMessages.VALIDATION_NUMBER })
-    .int({ error: CommonMessages.VALIDATION_NUMBER })
+    .number({ error: ValMsgs.NUMBER })
+    .int({ error: ValMsgs.NUMBER })
     .optional()
     .default(2),
   start_time: z
-    .string({ error: CommonMessages.VALIDATION_STRING })
-    .min(1, { error: CommonMessages.VALIDATION_REQUIRED })
+    .string({ error: ValMsgs.STRING })
+    .min(1, { error: ValMsgs.REQUIRED })
     .optional(),
   duration: z
-    .number({ error: CommonMessages.VALIDATION_NUMBER })
-    .int({ error: CommonMessages.VALIDATION_NUMBER })
+    .number({ error: ValMsgs.NUMBER })
+    .int({ error: ValMsgs.NUMBER })
     .optional(),
   timezone: z.string().optional(),
   password: z.string().optional(),

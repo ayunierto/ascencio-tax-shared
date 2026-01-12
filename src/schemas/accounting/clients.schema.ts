@@ -21,7 +21,7 @@ const postalCodeSchema = z
   .string()
   .regex(
     /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/,
-    buildZodMsg(ValMsgs.INVALID_FORMAT),
+    buildZodMsg(ValMsgs.INVALID_FORMAT)
   );
 
 export const createClientSchema = z.object({
