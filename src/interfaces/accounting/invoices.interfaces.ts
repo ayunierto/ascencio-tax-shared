@@ -1,6 +1,11 @@
 import { Company } from '../companies.interfaces';
 
-export const InvoiceStatus = ['pending', 'paid', 'overdue', 'canceled'] as const;
+export const InvoiceStatus = [
+  'pending',
+  'paid',
+  'overdue',
+  'canceled',
+] as const;
 export type InvoiceStatus = (typeof InvoiceStatus)[number];
 
 export interface InvoiceLineItem {

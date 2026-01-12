@@ -3,9 +3,10 @@ export type ZodIssueMessage = {
   params?: Record<string, any>;
 };
 
+/* Builds a Zod-compatible message string that encodes a message key and optional parameters. */
 export const buildZodMessage = (
   messageKey: string,
-  params?: Record<string, any>,
+  params?: Record<string, any>
 ) => ({
   message: JSON.stringify({
     messageKey,

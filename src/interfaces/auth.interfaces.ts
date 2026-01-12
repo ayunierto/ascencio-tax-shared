@@ -15,19 +15,19 @@ export interface User {
   email: string;
   countryCode?: string;
   phoneNumber?: string;
-  locale?: string;
-  timeZone: string;
-  roles: string[];
-  lastLoginAt?: Date;
-  createdAt: Date;
-  updatedAt?: Date;
   password?: string; // Should not be exposed in responses
+  timeZone: string;
+  locale?: string;
   isActive: boolean;
+  roles: string[];
   isEmailVerified: boolean;
   verificationCode?: string | null;
   verificationCodeExpiresAt?: Date | null;
   passwordResetCode?: string | null;
   passwordResetExpiresAt?: Date | null;
+  lastLoginAt?: Date;
+  createdAt: Date;
+  updatedAt?: Date;
   deletedAt?: Date | null;
 }
 
