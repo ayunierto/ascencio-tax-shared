@@ -1,5 +1,6 @@
 export * from './accounting.schema';
 export * from './categories.schema';
+export * from './clients.schema';
 export * from './companies.schema';
 export * from './employees.schema';
 export * from './expenses.schema';

@@ -26,8 +26,6 @@ export const createCompanySchema = z.object({
 
 export type CreateCompanyRequest = z.infer<typeof createCompanySchema>;
 
-export const updateCompanySchema = createCompanySchema.partial().extend({
-  previousImageKey: z.string().optional(),
-});
+export const updateCompanySchema = createCompanySchema.partial();
 
 export type UpdateCompanyRequest = z.infer<typeof updateCompanySchema>;
