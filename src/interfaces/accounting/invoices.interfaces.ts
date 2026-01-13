@@ -1,4 +1,5 @@
 import { Company } from '../companies.interfaces';
+import { Client } from './client.interfaces';
 
 export const InvoiceStatus = [
   'pending',
@@ -27,12 +28,9 @@ export interface Invoice {
   fromCompanyId?: string;
   fromCompany?: Company;
 
-  /** Bill To fields */
-  billToFullName: string;
-  billToAddress?: string;
-  billToBusinessNumber?: string;
-  billToEmail?: string;
-  billToPhone?: string;
+  /** Client receiving the invoice (Bill To) */
+  billToClientId: string;
+  billToClient?: Client;
 
   invoiceNumber: string;
   invoiceYear: number;

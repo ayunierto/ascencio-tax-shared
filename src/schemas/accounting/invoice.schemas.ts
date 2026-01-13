@@ -18,21 +18,8 @@ export const createInvoiceSchema = z.object({
     .transform((val) => (val === '' ? undefined : val))
     .optional(),
 
-  billToFullName: z
-    .string({ error: ValMsgs.STRING })
-    .min(1, { error: ValMsgs.REQUIRED }),
-  billToAddress: z
-    .string({ error: ValMsgs.STRING })
-    .optional()
-    .or(z.literal('')),
-  billToBusinessNumber: z
-    .string({ error: ValMsgs.STRING })
-    .optional()
-    .or(z.literal('')),
-  billToEmail: z
-    .union([z.email({ error: ValMsgs.EMAIL }), z.literal(''), z.undefined()])
-    .optional(),
-  billToPhone: z.string({ error: ValMsgs.STRING }).optional().or(z.literal('')),
+  // Relación con cliente (reemplaza los campos billTo* individuales)
+  billToClientId: z.uuid({ error: ValMsgs.UUID }),
 
   issueDate: z.string({ error: ValMsgs.DATE }),
   dueDate: z.string({ error: ValMsgs.DATE }),
