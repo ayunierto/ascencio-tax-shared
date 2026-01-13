@@ -3,7 +3,7 @@ import { ValidationMessages as ValMsgs } from '../../i18n';
 import { emailSchema as email } from '../common.schemas';
 import { phoneNumberSchema as phone } from '../common.schemas';
 import { buildZodMessage as buildZodMsg } from '../../utils';
-import { businessNumberSchema as businessNumber } from './common-accounting.schemas';
+import { businessNumberRequiredSchema as businessNumber } from './common-accounting.schemas';
 
 export const createCompanySchema = z.object({
   id: z.string().optional(),
