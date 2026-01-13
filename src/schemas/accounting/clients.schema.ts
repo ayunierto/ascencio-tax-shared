@@ -31,11 +31,13 @@ export const createClientSchema = z.object({
   fullName: z.string().min(1, buildZodMsg(ValMsgs.REQUIRED)),
   email,
   phone,
-  address: z.string().min(1, buildZodMsg(ValMsgs.REQUIRED)),
-  city: z.string().trim().min(1, buildZodMsg(ValMsgs.REQUIRED)),
-  province: z.string().min(1, buildZodMsg(ValMsgs.REQUIRED)),
-  postalCode: postalCodeSchema,
-  country: z.string().min(1, buildZodMsg(ValMsgs.REQUIRED)),
+
+  // === Campos opcionales de dirección ===
+  address: z.string().optional(),
+  city: z.string().trim().optional(),
+  province: z.string().optional(),
+  postalCode: postalCodeSchema.optional(),
+  country: z.string().optional(),
 
   // === Campos opcionales para individuos ===
   dateOfBirth: z.string().optional(),
