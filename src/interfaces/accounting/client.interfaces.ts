@@ -3,11 +3,11 @@ export interface Client {
   fullName: string;
   email: string;
   phone: string;
-  address: string;
-  city: string;
-  province: string;
-  postalCode: string;
-  country: string;
+  address?: string;
+  city?: string;
+  province?: string;
+  postalCode?: string;
+  country?: string;
   createdAt: string;
   updatedAt: string;
   deletedAt?: string;
