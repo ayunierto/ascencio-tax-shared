@@ -3,13 +3,13 @@ import { ValidationMessages as ValMsgs } from '../../i18n';
 import { emailSchema as email } from '../common.schemas';
 import { phoneNumberSchema as phone } from '../common.schemas';
 import { buildZodMessage as buildZodMsg } from '../../utils';
-import { businessNumberRequiredSchema as businessNumber } from './common-accounting.schemas';
+import { businessNumberSchema } from './common-accounting.schemas';
 
 export const createCompanySchema = z.object({
   id: z.string().optional(),
   name: z.string().min(1, buildZodMsg(ValMsgs.REQUIRED)),
   legalName: z.string().min(1, buildZodMsg(ValMsgs.REQUIRED)),
-  businessNumber,
+  businessNumber: businessNumberSchema,
   payrollAccountNumber: z.string().optional(),
   address: z.string().min(1, buildZodMsg(ValMsgs.REQUIRED)),
   city: z.string().trim().min(1, buildZodMsg(ValMsgs.REQUIRED)),
