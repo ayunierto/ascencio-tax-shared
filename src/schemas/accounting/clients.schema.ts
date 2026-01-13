@@ -21,10 +21,10 @@ export const createClientSchema = z.object({
 
   // === Campos opcionales para individuos ===
   dateOfBirth: z.string().optional(),
-  sin: sinSchema.optional(),
+  sin: sinSchema,
 
   // === Campos opcionales para empresas ===
-  businessNumber: businessNumberSchema.optional(),
+  businessNumber: businessNumberSchema,
 });
 
 export type CreateClientRequest = z.infer<typeof createClientSchema>;
