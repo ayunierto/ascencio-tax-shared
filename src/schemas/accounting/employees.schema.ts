@@ -5,11 +5,7 @@ import {
   phoneNumberSchema as phone,
 } from '../common.schemas';
 import { buildZodMessage as buildZodMsg } from '../../utils';
-
-// Validate regex: 123-456-789
-const sinSchema = z
-  .string()
-  .regex(/^\d{3}-\d{3}-\d{3}$/, buildZodMsg(ValMsgs.INVALID_FORMAT));
+import { sinSchema } from './common-accounting.schemas';
 
 export const createEmployeeSchema = z.object({
   id: z.string().optional(),
