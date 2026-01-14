@@ -40,6 +40,10 @@ export interface Invoice {
   billToEmail?: string;
   billToPhone?: string;
   billToAddress?: string;
+  billToCity?: string;
+  billToProvince?: string;
+  billToPostalCode?: string;
+  billToCountry?: string;
 
   invoiceNumber: string;
   invoiceYear: number;

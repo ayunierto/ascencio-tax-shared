@@ -1,5 +1,6 @@
 export const ValidationMessages = {
   ARRAY: 'validationArray',
+  BILL_TO_REQUIRED: 'validationBillToRequired',
   BOOLEAN: 'validationBoolean', // true or false
   DATE: 'validationIsoDate', // YYYY-MM-DD
   EMAIL: 'validationEmail', // user@example.com

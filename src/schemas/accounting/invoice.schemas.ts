@@ -14,8 +14,11 @@ export const invoiceLineItemSchema = z.object({
 
 export const createInvoiceSchema = z
   .object({
-    // From Company (required - will auto-create "Sole Proprietor" if user has no company)
-    fromCompanyId: z.uuid({ error: ValMsgs.UUID }),
+    // From Company (optional in UI - backend auto-creates "Sole Proprietor" if empty)
+    fromCompanyId: z
+      .union([z.uuid({ error: ValMsgs.UUID }), z.literal(''), z.undefined()])
+      .transform((val) => (val === '' || !val ? undefined : val))
+      .optional(),
 
     // Client relation (optional)
     billToClientId: z
@@ -24,13 +27,17 @@ export const createInvoiceSchema = z
       .optional(),
 
     // Inline client data (used when billToClientId is not provided)
-    billToName: z.string({ error: ValMsgs.STRING }).optional(),
+    billToName: z.string({ error: ValMsgs.STRING }).min(1, { error: ValMsgs.REQUIRED }).optional(),
     billToEmail: z
       .string({ error: ValMsgs.STRING })
       .email({ error: ValMsgs.EMAIL })
       .optional(),
     billToPhone: z.string({ error: ValMsgs.STRING }).optional(),
     billToAddress: z.string({ error: ValMsgs.STRING }).optional(),
+    billToCity: z.string({ error: ValMsgs.STRING }).optional(),
+    billToProvince: z.string({ error: ValMsgs.STRING }).optional(),
+    billToPostalCode: z.string({ error: ValMsgs.STRING }).optional(),
+    billToCountry: z.string({ error: ValMsgs.STRING }).optional(),
 
     issueDate: z.string({ error: ValMsgs.DATE }),
     dueDate: z.string({ error: ValMsgs.DATE }),
@@ -59,8 +66,8 @@ export const createInvoiceSchema = z
       return data.billToClientId || data.billToName;
     },
     {
-      message: 'Either billToClientId or billToName must be provided',
-      path: ['billToClientId'],
+      message: ValMsgs.BILL_TO_REQUIRED,
+      path: ['billToName'],
     },
   );
 
