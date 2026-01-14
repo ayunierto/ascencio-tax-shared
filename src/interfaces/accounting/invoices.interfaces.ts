@@ -27,7 +27,7 @@ export interface Invoice {
   id: string;
   userId: string;
 
-  /** Company issuing the invoice (REQUIRED FOR MULTI-TENANT) */
+  /** Company issuing the invoice (auto-created as "Sole Proprietor" if user has no company) */
   fromCompanyId: string;
   fromCompany?: Company;
 

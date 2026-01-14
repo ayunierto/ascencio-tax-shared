@@ -14,6 +14,7 @@ export const invoiceLineItemSchema = z.object({
 
 export const createInvoiceSchema = z
   .object({
+    // From Company (required - will auto-create "Sole Proprietor" if user has no company)
     fromCompanyId: z.uuid({ error: ValMsgs.UUID }),
 
     // Client relation (optional)
