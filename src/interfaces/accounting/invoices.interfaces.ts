@@ -35,6 +35,12 @@ export interface Invoice {
   billToClientId?: string;
   billToClient?: Client;
 
+  /** Bill To fields (inline) - used when billToClientId is null */
+  billToName?: string;
+  billToEmail?: string;
+  billToPhone?: string;
+  billToAddress?: string;
+
   invoiceNumber: string;
   invoiceYear: number;
   issueDate: string;

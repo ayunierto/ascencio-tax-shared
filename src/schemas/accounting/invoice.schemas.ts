@@ -12,36 +12,56 @@ export const invoiceLineItemSchema = z.object({
     .nonnegative({ error: ValMsgs.NON_NEGATIVE }),
 });
 
-export const createInvoiceSchema = z.object({
-  fromCompanyId: z.uuid({ error: ValMsgs.UUID }),
+export const createInvoiceSchema = z
+  .object({
+    fromCompanyId: z.uuid({ error: ValMsgs.UUID }),
 
-  // Relación con cliente (opcional para compatibilidad con invoices existentes)
-  billToClientId: z
-    .union([z.uuid({ error: ValMsgs.UUID }), z.literal(''), z.undefined()])
-    .transform((val) => (val === '' ? undefined : val))
-    .optional(),
+    // Client relation (optional)
+    billToClientId: z
+      .union([z.uuid({ error: ValMsgs.UUID }), z.literal(''), z.undefined()])
+      .transform((val) => (val === '' ? undefined : val))
+      .optional(),
 
-  issueDate: z.string({ error: ValMsgs.DATE }),
-  dueDate: z.string({ error: ValMsgs.DATE }),
+    // Inline client data (used when billToClientId is not provided)
+    billToName: z.string({ error: ValMsgs.STRING }).optional(),
+    billToEmail: z
+      .string({ error: ValMsgs.STRING })
+      .email({ error: ValMsgs.EMAIL })
+      .optional(),
+    billToPhone: z.string({ error: ValMsgs.STRING }).optional(),
+    billToAddress: z.string({ error: ValMsgs.STRING }).optional(),
 
-  taxRate: z.number({ error: ValMsgs.NUMBER }).default(13),
-  description: z.string({ error: ValMsgs.STRING }).optional().or(z.literal('')),
-  notes: z.string({ error: ValMsgs.STRING }).optional().or(z.literal('')),
-  logoUrl: z
-    .union([
-      z.string({ error: ValMsgs.STRING }).url({ error: ValMsgs.URL }),
-      z.literal(''),
-      z.undefined(),
-    ])
-    .optional(),
+    issueDate: z.string({ error: ValMsgs.DATE }),
+    dueDate: z.string({ error: ValMsgs.DATE }),
 
-  lineItems: z
-    .array(invoiceLineItemSchema, { error: ValMsgs.ARRAY })
-    .min(1, { error: ValMsgs.MIN_ITEMS }),
-  status: z
-    .enum(InvoiceStatus, { error: ValMsgs.INVALID_ENUM })
-    .default('draft'),
-});
+    taxRate: z.number({ error: ValMsgs.NUMBER }).default(13),
+    description: z.string({ error: ValMsgs.STRING }).optional().or(z.literal('')),
+    notes: z.string({ error: ValMsgs.STRING }).optional().or(z.literal('')),
+    logoUrl: z
+      .union([
+        z.string({ error: ValMsgs.STRING }).url({ error: ValMsgs.URL }),
+        z.literal(''),
+        z.undefined(),
+      ])
+      .optional(),
+
+    lineItems: z
+      .array(invoiceLineItemSchema, { error: ValMsgs.ARRAY })
+      .min(1, { error: ValMsgs.MIN_ITEMS }),
+    status: z
+      .enum(InvoiceStatus, { error: ValMsgs.INVALID_ENUM })
+      .default('draft'),
+  })
+  .refine(
+    (data) => {
+      // Either billToClientId OR billToName must be provided
+      return data.billToClientId || data.billToName;
+    },
+    {
+      message: 'Either billToClientId or billToName must be provided',
+      path: ['billToClientId'],
+    },
+  );
 
 export type CreateInvoiceRequest = z.infer<typeof createInvoiceSchema>;
 
