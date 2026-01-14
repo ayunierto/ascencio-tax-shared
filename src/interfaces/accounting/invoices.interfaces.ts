@@ -29,7 +29,7 @@ export interface Invoice {
   fromCompany?: Company;
 
   /** Client receiving the invoice (Bill To) */
-  billToClientId: string;
+  billToClientId?: string;
   billToClient?: Client;
 
   invoiceNumber: string;

@@ -18,8 +18,11 @@ export const createInvoiceSchema = z.object({
     .transform((val) => (val === '' ? undefined : val))
     .optional(),
 
-  // Relación con cliente (reemplaza los campos billTo* individuales)
-  billToClientId: z.uuid({ error: ValMsgs.UUID }),
+  // Relación con cliente (opcional para compatibilidad con invoices existentes)
+  billToClientId: z
+    .union([z.uuid({ error: ValMsgs.UUID }), z.literal(''), z.undefined()])
+    .transform((val) => (val === '' ? undefined : val))
+    .optional(),
 
   issueDate: z.string({ error: ValMsgs.DATE }),
   dueDate: z.string({ error: ValMsgs.DATE }),
@@ -41,10 +44,6 @@ export const createInvoiceSchema = z.object({
   status: z
     .enum(InvoiceStatus, { error: ValMsgs.INVALID_ENUM })
     .default('pending'),
-  stripeInvoiceId: z
-    .string({ error: ValMsgs.STRING })
-    .optional()
-    .or(z.literal('')),
 });
 
 export type CreateInvoiceRequest = z.infer<typeof createInvoiceSchema>;
