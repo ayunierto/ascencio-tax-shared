@@ -73,7 +73,47 @@ export const createInvoiceSchema = z
 
 export type CreateInvoiceRequest = z.infer<typeof createInvoiceSchema>;
 
-export const updateInvoiceSchema = createInvoiceSchema.partial();
+// Cannot use .partial() on schemas with .refine(), so we define it manually
+export const updateInvoiceSchema = z.object({
+  fromCompanyId: z
+    .union([z.uuid({ error: ValMsgs.UUID }), z.literal(''), z.undefined()])
+    .transform((val) => (val === '' || !val ? undefined : val))
+    .optional(),
+  billToClientId: z
+    .union([z.uuid({ error: ValMsgs.UUID }), z.literal(''), z.undefined()])
+    .transform((val) => (val === '' ? undefined : val))
+    .optional(),
+  billToName: z.string({ error: ValMsgs.STRING }).min(1, { error: ValMsgs.REQUIRED }).optional(),
+  billToEmail: z
+    .string({ error: ValMsgs.STRING })
+    .email({ error: ValMsgs.EMAIL })
+    .optional(),
+  billToPhone: z.string({ error: ValMsgs.STRING }).optional(),
+  billToAddress: z.string({ error: ValMsgs.STRING }).optional(),
+  billToCity: z.string({ error: ValMsgs.STRING }).optional(),
+  billToProvince: z.string({ error: ValMsgs.STRING }).optional(),
+  billToPostalCode: z.string({ error: ValMsgs.STRING }).optional(),
+  billToCountry: z.string({ error: ValMsgs.STRING }).optional(),
+  issueDate: z.string({ error: ValMsgs.DATE }).optional(),
+  dueDate: z.string({ error: ValMsgs.DATE }).optional(),
+  taxRate: z.number({ error: ValMsgs.NUMBER }).optional(),
+  description: z.string({ error: ValMsgs.STRING }).optional().or(z.literal('')),
+  notes: z.string({ error: ValMsgs.STRING }).optional().or(z.literal('')),
+  logoUrl: z
+    .union([
+      z.string({ error: ValMsgs.STRING }).url({ error: ValMsgs.URL }),
+      z.literal(''),
+      z.undefined(),
+    ])
+    .optional(),
+  lineItems: z
+    .array(invoiceLineItemSchema, { error: ValMsgs.ARRAY })
+    .min(1, { error: ValMsgs.MIN_ITEMS })
+    .optional(),
+  status: z
+    .enum(InvoiceStatus, { error: ValMsgs.INVALID_ENUM })
+    .optional(),
+});
 
 export type UpdateInvoiceRequest = z.infer<typeof updateInvoiceSchema>;
 
