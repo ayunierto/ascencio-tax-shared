@@ -8,3 +8,4 @@ export * from './expenses.schema';
 export * from './invoice.schemas';
 export * from './reports.schema';
 export * from './subcategories.schema';
+export * from './payments.schemas';
