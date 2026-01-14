@@ -2,10 +2,13 @@ import { Company } from '../companies.interfaces';
 import { Client } from './client.interfaces';
 
 export const InvoiceStatus = [
-  'pending',
-  'paid',
-  'overdue',
-  'canceled',
+  'draft',     // Borrador - editable
+  'issued',    // Emitida - inmutable
+  'partial',   // Pagada parcialmente
+  'paid',      // Pagada completamente
+  'overdue',   // Vencida
+  'canceled',  // Cancelada antes de emitir
+  'void',      // Anulada después de emitir
 ] as const;
 export type InvoiceStatus = (typeof InvoiceStatus)[number];
 
@@ -24,8 +27,8 @@ export interface Invoice {
   id: string;
   userId: string;
 
-  /** Company issuing the invoice */
-  fromCompanyId?: string;
+  /** Company issuing the invoice (REQUIRED FOR MULTI-TENANT) */
+  fromCompanyId: string;
   fromCompany?: Company;
 
   /** Client receiving the invoice (Bill To) */
@@ -36,6 +39,9 @@ export interface Invoice {
   invoiceYear: number;
   issueDate: string;
   dueDate: string;
+
+  /** When the invoice was issued (becomes immutable) */
+  issuedAt?: string;
 
   /** Line items */
   lineItems?: InvoiceLineItem[];

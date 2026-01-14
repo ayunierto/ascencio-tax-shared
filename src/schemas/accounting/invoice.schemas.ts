@@ -13,10 +13,7 @@ export const invoiceLineItemSchema = z.object({
 });
 
 export const createInvoiceSchema = z.object({
-  fromCompanyId: z
-    .union([z.uuid({ error: ValMsgs.UUID }), z.literal(''), z.undefined()])
-    .transform((val) => (val === '' ? undefined : val))
-    .optional(),
+  fromCompanyId: z.uuid({ error: ValMsgs.UUID }),
 
   // Relación con cliente (opcional para compatibilidad con invoices existentes)
   billToClientId: z
@@ -43,7 +40,7 @@ export const createInvoiceSchema = z.object({
     .min(1, { error: ValMsgs.MIN_ITEMS }),
   status: z
     .enum(InvoiceStatus, { error: ValMsgs.INVALID_ENUM })
-    .default('pending'),
+    .default('draft'),
 });
 
 export type CreateInvoiceRequest = z.infer<typeof createInvoiceSchema>;
@@ -63,3 +60,10 @@ export const createInvoicePaymentSchema = z.object({
 export type CreateInvoicePaymentRequest = z.infer<
   typeof createInvoicePaymentSchema
 >;
+
+/** Schema for issuing an invoice (draft -> issued) */
+export const issueInvoiceSchema = z.object({
+  issueDate: z.string({ error: ValMsgs.DATE }).optional(), // If not provided, use current date
+});
+
+export type IssueInvoiceRequest = z.infer<typeof issueInvoiceSchema>;
