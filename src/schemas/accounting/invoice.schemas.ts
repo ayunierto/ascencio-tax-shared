@@ -83,22 +83,31 @@ export const updateInvoiceSchema = z.object({
     .union([z.uuid({ error: ValMsgs.UUID }), z.literal(''), z.undefined()])
     .transform((val) => (val === '' ? undefined : val))
     .optional(),
-  billToName: z.string({ error: ValMsgs.STRING }).min(1, { error: ValMsgs.REQUIRED }).optional(),
-  billToEmail: z
-    .string({ error: ValMsgs.STRING })
-    .email({ error: ValMsgs.EMAIL })
+  billToName: z
+    .union([
+      z.string({ error: ValMsgs.STRING }).min(1, { error: ValMsgs.REQUIRED }),
+      z.literal(''),
+      z.undefined(),
+    ])
     .optional(),
-  billToPhone: z.string({ error: ValMsgs.STRING }).optional(),
-  billToAddress: z.string({ error: ValMsgs.STRING }).optional(),
-  billToCity: z.string({ error: ValMsgs.STRING }).optional(),
-  billToProvince: z.string({ error: ValMsgs.STRING }).optional(),
-  billToPostalCode: z.string({ error: ValMsgs.STRING }).optional(),
-  billToCountry: z.string({ error: ValMsgs.STRING }).optional(),
-  issueDate: z.string({ error: ValMsgs.DATE }).optional(),
-  dueDate: z.string({ error: ValMsgs.DATE }).optional(),
-  taxRate: z.number({ error: ValMsgs.NUMBER }).optional(),
-  description: z.string({ error: ValMsgs.STRING }).optional().or(z.literal('')),
-  notes: z.string({ error: ValMsgs.STRING }).optional().or(z.literal('')),
+  billToEmail: z
+    .union([
+      z.string({ error: ValMsgs.STRING }).email({ error: ValMsgs.EMAIL }),
+      z.literal(''),
+      z.undefined(),
+    ])
+    .optional(),
+  billToPhone: z.union([z.string({ error: ValMsgs.STRING }), z.literal(''), z.undefined()]).optional(),
+  billToAddress: z.union([z.string({ error: ValMsgs.STRING }), z.literal(''), z.undefined()]).optional(),
+  billToCity: z.union([z.string({ error: ValMsgs.STRING }), z.literal(''), z.undefined()]).optional(),
+  billToProvince: z.union([z.string({ error: ValMsgs.STRING }), z.literal(''), z.undefined()]).optional(),
+  billToPostalCode: z.union([z.string({ error: ValMsgs.STRING }), z.literal(''), z.undefined()]).optional(),
+  billToCountry: z.union([z.string({ error: ValMsgs.STRING }), z.literal(''), z.undefined()]).optional(),
+  issueDate: z.union([z.string({ error: ValMsgs.DATE }), z.undefined()]).optional(),
+  dueDate: z.union([z.string({ error: ValMsgs.DATE }), z.undefined()]).optional(),
+  taxRate: z.union([z.number({ error: ValMsgs.NUMBER }), z.undefined()]).optional(),
+  description: z.union([z.string({ error: ValMsgs.STRING }), z.literal(''), z.undefined()]).optional(),
+  notes: z.union([z.string({ error: ValMsgs.STRING }), z.literal(''), z.undefined()]).optional(),
   logoUrl: z
     .union([
       z.string({ error: ValMsgs.STRING }).url({ error: ValMsgs.URL }),
@@ -107,11 +116,13 @@ export const updateInvoiceSchema = z.object({
     ])
     .optional(),
   lineItems: z
-    .array(invoiceLineItemSchema, { error: ValMsgs.ARRAY })
-    .min(1, { error: ValMsgs.MIN_ITEMS })
+    .union([
+      z.array(invoiceLineItemSchema, { error: ValMsgs.ARRAY }).min(1, { error: ValMsgs.MIN_ITEMS }),
+      z.undefined(),
+    ])
     .optional(),
   status: z
-    .enum(InvoiceStatus, { error: ValMsgs.INVALID_ENUM })
+    .union([z.enum(InvoiceStatus, { error: ValMsgs.INVALID_ENUM }), z.undefined()])
     .optional(),
 });
 
