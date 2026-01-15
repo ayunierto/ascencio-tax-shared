@@ -1,7 +1,4 @@
-import {
-  createInvoiceSchema,
-  updateInvoiceSchema,
-} from './invoice.schemas';
+import { createInvoiceSchema, updateInvoiceSchema } from './invoice.schemas';
 
 console.log('Testing Invoice Schemas...\n');
 
@@ -154,7 +151,12 @@ console.log('\nTest 8: Invalid - taxRate as string');
 const updateTest7 = updateInvoiceSchema.safeParse({
   taxRate: '13', // Should be number, not string
 });
-console.log('Result:', updateTest7.success ? '❌ FAIL (should reject)' : '✅ PASS (correctly rejected)');
+console.log(
+  'Result:',
+  updateTest7.success
+    ? '❌ FAIL (should reject)'
+    : '✅ PASS (correctly rejected)'
+);
 
 // Test 9: Update with lineItems having invalid quantity
 console.log('\nTest 9: Invalid - negative quantity');
@@ -167,4 +169,9 @@ const updateTest8 = updateInvoiceSchema.safeParse({
     },
   ],
 });
-console.log('Result:', updateTest8.success ? '❌ FAIL (should reject)' : '✅ PASS (correctly rejected)');
+console.log(
+  'Result:',
+  updateTest8.success
+    ? '❌ FAIL (should reject)'
+    : '✅ PASS (correctly rejected)'
+);

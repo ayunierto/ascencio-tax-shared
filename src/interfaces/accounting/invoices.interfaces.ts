@@ -2,13 +2,13 @@ import { Company } from '../companies.interfaces';
 import { Client } from './client.interfaces';
 
 export const InvoiceStatus = [
-  'draft',     // Borrador - editable
-  'issued',    // Emitida - inmutable
-  'partial',   // Pagada parcialmente
-  'paid',      // Pagada completamente
-  'overdue',   // Vencida
-  'canceled',  // Cancelada antes de emitir
-  'void',      // Anulada después de emitir
+  'draft', // Borrador - editable
+  'issued', // Emitida - inmutable
+  'partial', // Pagada parcialmente
+  'paid', // Pagada completamente
+  'overdue', // Vencida
+  'canceled', // Cancelada antes de emitir
+  'void', // Anulada después de emitir
 ] as const;
 export type InvoiceStatus = (typeof InvoiceStatus)[number];
 

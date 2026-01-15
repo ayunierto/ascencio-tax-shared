@@ -4,7 +4,9 @@ import { PaymentMethod } from '../../interfaces';
 
 export const createPaymentSchema = z.object({
   accountReceivableId: z.uuid({ error: ValMsgs.UUID }),
-  amount: z.number({ error: ValMsgs.NUMBER }).positive({ error: ValMsgs.POSITIVE }),
+  amount: z
+    .number({ error: ValMsgs.NUMBER })
+    .positive({ error: ValMsgs.POSITIVE }),
   paymentDate: z.string({ error: ValMsgs.DATE }),
   paymentMethod: z.enum(PaymentMethod, { error: ValMsgs.INVALID_ENUM }),
   reference: z.string({ error: ValMsgs.STRING }).optional(),
