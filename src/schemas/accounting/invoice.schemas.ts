@@ -43,8 +43,8 @@ export const createInvoiceSchema = z
     billToBusinessNumber: z.string({ error: ValMsgs.STRING }).optional(),
 
     // Invoice details
-    issueDate: z.string({ error: ValMsgs.DATE }), //
-    dueDate: z.string({ error: ValMsgs.DATE }),
+    issueDate: z.date({ error: ValMsgs.DATE }), //
+    dueDate: z.date({ error: ValMsgs.DATE }),
     taxRate: z.number({ error: ValMsgs.NUMBER }).default(13),
     notes: z.string({ error: ValMsgs.STRING }).optional().or(z.literal('')),
     logoUrl: z
