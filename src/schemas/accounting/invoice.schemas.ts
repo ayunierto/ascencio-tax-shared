@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { InvoiceStatus } from '../../interfaces';
 import { ValidationMessages as ValMsgs } from '../../i18n';
 
+// Schema for individual line items in an invoice
 export const invoiceLineItemSchema = z.object({
   description: z.string({ error: ValMsgs.STRING }),
   quantity: z
@@ -27,36 +28,27 @@ export const createInvoiceSchema = z
       .optional(),
 
     // Inline client data (used when billToClientId is not provided)
-    billToName: z
+    billToFullName: z
       .string({ error: ValMsgs.STRING })
       .min(1, { error: ValMsgs.REQUIRED })
       .optional(),
-    billToEmail: z
-      .string({ error: ValMsgs.STRING })
-      .email({ error: ValMsgs.EMAIL })
-      .optional(),
+    billToEmail: z.email({ error: ValMsgs.EMAIL }).optional(),
     billToPhone: z.string({ error: ValMsgs.STRING }).optional(),
     billToAddress: z.string({ error: ValMsgs.STRING }).optional(),
     billToCity: z.string({ error: ValMsgs.STRING }).optional(),
     billToProvince: z.string({ error: ValMsgs.STRING }).optional(),
     billToPostalCode: z.string({ error: ValMsgs.STRING }).optional(),
     billToCountry: z.string({ error: ValMsgs.STRING }).optional(),
+    billToSIN: z.string({ error: ValMsgs.STRING }).optional(),
+    billToBusinessNumber: z.string({ error: ValMsgs.STRING }).optional(),
 
-    issueDate: z.string({ error: ValMsgs.DATE }),
+    // Invoice details
+    issueDate: z.string({ error: ValMsgs.DATE }), //
     dueDate: z.string({ error: ValMsgs.DATE }),
-
     taxRate: z.number({ error: ValMsgs.NUMBER }).default(13),
-    description: z
-      .string({ error: ValMsgs.STRING })
-      .optional()
-      .or(z.literal('')),
     notes: z.string({ error: ValMsgs.STRING }).optional().or(z.literal('')),
     logoUrl: z
-      .union([
-        z.string({ error: ValMsgs.STRING }).url({ error: ValMsgs.URL }),
-        z.literal(''),
-        z.undefined(),
-      ])
+      .union([z.url({ error: ValMsgs.URL }), z.literal(''), z.undefined()])
       .optional(),
 
     lineItems: z
@@ -66,16 +58,35 @@ export const createInvoiceSchema = z
       .enum(InvoiceStatus, { error: ValMsgs.INVALID_ENUM })
       .default('draft'),
   })
-  .refine(
-    (data) => {
-      // Either billToClientId OR billToName must be provided
-      return data.billToClientId || data.billToName;
-    },
-    {
-      message: ValMsgs.BILL_TO_REQUIRED,
-      path: ['billToName'],
+  .superRefine((data, ctx) => {
+    // Si hay billToClientId, no validamos nada más
+    if (data.billToClientId) return;
+
+    // Si NO hay billToClientId, estos campos son obligatorios
+    if (!data.billToFullName) {
+      ctx.addIssue({
+        path: ['billToFullName'],
+        message: ValMsgs.REQUIRED,
+        code: 'custom',
+      });
     }
-  );
+
+    if (!data.billToEmail) {
+      ctx.addIssue({
+        path: ['billToEmail'],
+        message: ValMsgs.REQUIRED,
+        code: 'custom',
+      });
+    }
+
+    if (!data.billToPhone) {
+      ctx.addIssue({
+        path: ['billToPhone'],
+        message: ValMsgs.REQUIRED,
+        code: 'custom',
+      });
+    }
+  });
 
 export type CreateInvoiceRequest = z.infer<typeof createInvoiceSchema>;
 
@@ -89,7 +100,7 @@ export const updateInvoiceSchema = z.object({
     .union([z.uuid({ error: ValMsgs.UUID }), z.literal(''), z.undefined()])
     .transform((val) => (val === '' ? undefined : val))
     .optional(),
-  billToName: z
+  billToFullName: z
     .union([
       z.string({ error: ValMsgs.STRING }).min(1, { error: ValMsgs.REQUIRED }),
       z.literal(''),

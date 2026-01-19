@@ -20,7 +20,6 @@ export const createClientSchema = z.object({
   country: z.string().optional(),
 
   // === Campos opcionales para individuos ===
-  dateOfBirth: z.string().optional(),
   sin: sinSchema.optional(),
 
   // === Campos opcionales para empresas ===
