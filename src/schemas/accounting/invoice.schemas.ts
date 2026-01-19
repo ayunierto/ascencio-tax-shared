@@ -92,14 +92,18 @@ export type CreateInvoiceRequest = z.infer<typeof createInvoiceSchema>;
 
 // Cannot use .partial() on schemas with .refine(), so we define it manually
 export const updateInvoiceSchema = z.object({
+  // From Company (optional in UI - backend auto-creates "Sole Proprietor" if empty)
   fromCompanyId: z
     .union([z.uuid({ error: ValMsgs.UUID }), z.literal(''), z.undefined()])
     .transform((val) => (val === '' || !val ? undefined : val))
     .optional(),
+
+  // Client relation (optional)
   billToClientId: z
     .union([z.uuid({ error: ValMsgs.UUID }), z.literal(''), z.undefined()])
     .transform((val) => (val === '' ? undefined : val))
     .optional(),
+
   billToFullName: z
     .union([
       z.string({ error: ValMsgs.STRING }).min(1, { error: ValMsgs.REQUIRED }),
@@ -133,16 +137,11 @@ export const updateInvoiceSchema = z.object({
     .union([z.string({ error: ValMsgs.STRING }), z.literal(''), z.undefined()])
     .optional(),
   issueDate: z
-    .union([z.string({ error: ValMsgs.DATE }), z.undefined()])
+    .union([z.date({ error: ValMsgs.DATE }), z.undefined()])
     .optional(),
-  dueDate: z
-    .union([z.string({ error: ValMsgs.DATE }), z.undefined()])
-    .optional(),
+  dueDate: z.union([z.date({ error: ValMsgs.DATE }), z.undefined()]).optional(),
   taxRate: z
     .union([z.number({ error: ValMsgs.NUMBER }), z.undefined()])
-    .optional(),
-  description: z
-    .union([z.string({ error: ValMsgs.STRING }), z.literal(''), z.undefined()])
     .optional(),
   notes: z
     .union([z.string({ error: ValMsgs.STRING }), z.literal(''), z.undefined()])
