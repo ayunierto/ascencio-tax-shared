@@ -43,8 +43,8 @@ export const createInvoiceSchema = z
     billToBusinessNumber: z.string({ error: ValMsgs.STRING }).optional(),
 
     // Invoice details
-    issueDate: z.date({ error: ValMsgs.DATE }), //
-    dueDate: z.date({ error: ValMsgs.DATE }),
+    issueDate: z.string({ error: ValMsgs.STRING }), //
+    dueDate: z.string({ error: ValMsgs.STRING }),
     taxRate: z.number({ error: ValMsgs.NUMBER }).default(13),
     notes: z.string({ error: ValMsgs.STRING }).optional().or(z.literal('')),
     logoUrl: z
@@ -137,9 +137,11 @@ export const updateInvoiceSchema = z.object({
     .union([z.string({ error: ValMsgs.STRING }), z.literal(''), z.undefined()])
     .optional(),
   issueDate: z
-    .union([z.date({ error: ValMsgs.DATE }), z.undefined()])
+    .union([z.string({ error: ValMsgs.STRING }), z.undefined()])
     .optional(),
-  dueDate: z.union([z.date({ error: ValMsgs.DATE }), z.undefined()]).optional(),
+  dueDate: z
+    .union([z.string({ error: ValMsgs.STRING }), z.undefined()])
+    .optional(),
   taxRate: z
     .union([z.number({ error: ValMsgs.NUMBER }), z.undefined()])
     .optional(),
