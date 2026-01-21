@@ -29,11 +29,25 @@ export const createInvoiceSchema = z
 
     // Inline client data (used when billToClientId is not provided)
     billToFullName: z
-      .string({ error: ValMsgs.STRING })
-      .min(1, { error: ValMsgs.REQUIRED })
+      .union([
+        z.string({ error: ValMsgs.STRING }).min(1, { error: ValMsgs.REQUIRED }),
+        z.literal(''),
+        z.undefined(),
+      ])
+      .transform((val) => (val === '' ? undefined : val))
       .optional(),
-    billToEmail: z.email({ error: ValMsgs.EMAIL }).optional(),
-    billToPhone: z.string({ error: ValMsgs.STRING }).optional(),
+    billToEmail: z
+      .union([
+        z.string({ error: ValMsgs.STRING }).email({ error: ValMsgs.EMAIL }),
+        z.literal(''),
+        z.undefined(),
+      ])
+      .transform((val) => (val === '' ? undefined : val))
+      .optional(),
+    billToPhone: z
+      .union([z.string({ error: ValMsgs.STRING }), z.literal(''), z.undefined()])
+      .transform((val) => (val === '' ? undefined : val))
+      .optional(),
     billToAddress: z.string({ error: ValMsgs.STRING }).optional(),
     billToCity: z.string({ error: ValMsgs.STRING }).optional(),
     billToProvince: z.string({ error: ValMsgs.STRING }).optional(),
