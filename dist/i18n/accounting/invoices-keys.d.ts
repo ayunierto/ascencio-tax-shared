@@ -1,0 +1,30 @@
+export declare const InvoicesMessages: {
+    readonly INVOICE_NOT_FOUND: "invoiceNotFound";
+    readonly INVOICE_ALREADY_EXISTS: "invoiceAlreadyExists";
+    readonly INVOICE_CREATED_SUCCESSFULLY: "invoiceCreatedSuccessfully";
+    readonly INVOICE_UPDATED_SUCCESSFULLY: "invoiceUpdatedSuccessfully";
+    readonly INVOICE_DELETED_SUCCESSFULLY: "invoiceDeletedSuccessfully";
+    readonly INVOICE_NUMBER: "invoiceNumber";
+    readonly INVOICE_DATE: "invoiceDate";
+    readonly DUE_DATE: "dueDate";
+    readonly ISSUE_DATE: "issueDate";
+    readonly BILL_TO: "billTo";
+    readonly FROM_COMPANY: "fromCompany";
+    readonly DESCRIPTION: "description";
+    readonly NOTES: "notes";
+    readonly SUBTOTAL: "subtotal";
+    readonly TAX_RATE: "taxRate";
+    readonly TAX_AMOUNT: "taxAmount";
+    readonly TOTAL: "total";
+    readonly AMOUNT_PAID: "amountPaid";
+    readonly BALANCE_DUE: "balanceDue";
+    readonly LINE_ITEMS: "lineItems";
+    readonly QUANTITY: "quantity";
+    readonly PRICE: "price";
+    readonly STATUS_PENDING: "pending";
+    readonly STATUS_PAID: "paid";
+    readonly STATUS_OVERDUE: "overdue";
+    readonly STATUS_CANCELED: "canceled";
+};
+export type InvoicesMessageKey = (typeof InvoicesMessages)[keyof typeof InvoicesMessages];
+//# sourceMappingURL=invoices-keys.d.ts.map

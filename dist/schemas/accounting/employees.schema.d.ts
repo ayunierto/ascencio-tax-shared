@@ -1,0 +1,44 @@
+import z from 'zod';
+export declare const createEmployeeSchema: z.ZodObject<{
+    id: z.ZodOptional<z.ZodString>;
+    companyId: z.ZodNullable<z.ZodOptional<z.ZodUUID>>;
+    firstName: z.ZodString;
+    lastName: z.ZodString;
+    email: z.ZodUnion<[z.ZodOptional<z.ZodEmail>, z.ZodLiteral<"">]>;
+    phone: z.ZodUnion<[z.ZodOptional<z.ZodString>, z.ZodLiteral<"">]>;
+    address: z.ZodOptional<z.ZodString>;
+    city: z.ZodOptional<z.ZodString>;
+    province: z.ZodOptional<z.ZodString>;
+    postalCode: z.ZodOptional<z.ZodString>;
+    position: z.ZodOptional<z.ZodString>;
+    hourlyRate: z.ZodNullable<z.ZodOptional<z.ZodNumber>>;
+    salary: z.ZodNullable<z.ZodOptional<z.ZodNumber>>;
+    sin: z.ZodOptional<z.ZodString>;
+    startDate: z.ZodNullable<z.ZodOptional<z.ZodString>>;
+    endDate: z.ZodNullable<z.ZodOptional<z.ZodString>>;
+    isActive: z.ZodDefault<z.ZodBoolean>;
+    notes: z.ZodOptional<z.ZodString>;
+}, z.core.$strip>;
+export type CreateEmployeeRequest = z.infer<typeof createEmployeeSchema>;
+export declare const updateEmployeeSchema: z.ZodObject<{
+    companyId: z.ZodOptional<z.ZodNullable<z.ZodOptional<z.ZodUUID>>>;
+    firstName: z.ZodOptional<z.ZodString>;
+    lastName: z.ZodOptional<z.ZodString>;
+    email: z.ZodOptional<z.ZodUnion<[z.ZodOptional<z.ZodEmail>, z.ZodLiteral<"">]>>;
+    phone: z.ZodOptional<z.ZodUnion<[z.ZodOptional<z.ZodString>, z.ZodLiteral<"">]>>;
+    address: z.ZodOptional<z.ZodOptional<z.ZodString>>;
+    city: z.ZodOptional<z.ZodOptional<z.ZodString>>;
+    province: z.ZodOptional<z.ZodOptional<z.ZodString>>;
+    postalCode: z.ZodOptional<z.ZodOptional<z.ZodString>>;
+    position: z.ZodOptional<z.ZodOptional<z.ZodString>>;
+    hourlyRate: z.ZodOptional<z.ZodNullable<z.ZodOptional<z.ZodNumber>>>;
+    salary: z.ZodOptional<z.ZodNullable<z.ZodOptional<z.ZodNumber>>>;
+    sin: z.ZodOptional<z.ZodOptional<z.ZodString>>;
+    startDate: z.ZodOptional<z.ZodNullable<z.ZodOptional<z.ZodString>>>;
+    endDate: z.ZodOptional<z.ZodNullable<z.ZodOptional<z.ZodString>>>;
+    isActive: z.ZodOptional<z.ZodDefault<z.ZodBoolean>>;
+    notes: z.ZodOptional<z.ZodOptional<z.ZodString>>;
+    id: z.ZodUUID;
+}, z.core.$strip>;
+export type UpdateEmployeeRequest = z.infer<typeof updateEmployeeSchema>;
+//# sourceMappingURL=employees.schema.d.ts.map

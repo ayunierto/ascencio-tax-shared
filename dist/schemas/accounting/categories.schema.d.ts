@@ -1,0 +1,12 @@
+import z from 'zod';
+export declare const createCategorySchema: z.ZodObject<{
+    name: z.ZodString;
+    description: z.ZodOptional<z.ZodString>;
+}, z.core.$strip>;
+export type CreateCategoryRequest = z.infer<typeof createCategorySchema>;
+export declare const updateCategorySchema: z.ZodObject<{
+    name: z.ZodOptional<z.ZodString>;
+    description: z.ZodOptional<z.ZodOptional<z.ZodString>>;
+}, z.core.$strip>;
+export type UpdateCategoryRequest = z.infer<typeof updateCategorySchema>;
+//# sourceMappingURL=categories.schema.d.ts.map
