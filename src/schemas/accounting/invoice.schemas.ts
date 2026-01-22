@@ -5,10 +5,10 @@ import { ValidationMessages as ValMsgs } from '../../i18n';
 // Schema for individual line items in an invoice
 export const invoiceLineItemSchema = z.object({
   description: z.string({ error: ValMsgs.STRING }),
-  quantity: z
+  quantity: z.coerce
     .number({ error: ValMsgs.NUMBER })
     .positive({ error: ValMsgs.POSITIVE }),
-  price: z
+  price: z.coerce
     .number({ error: ValMsgs.NUMBER })
     .nonnegative({ error: ValMsgs.NON_NEGATIVE }),
 });
@@ -59,7 +59,7 @@ export const createInvoiceSchema = z
     // Invoice details
     issueDate: z.string({ error: ValMsgs.STRING }), //
     dueDate: z.string({ error: ValMsgs.STRING }),
-    taxRate: z.number({ error: ValMsgs.NUMBER }).default(13),
+    taxRate: z.coerce.number({ error: ValMsgs.NUMBER }).default(13),
     notes: z.string({ error: ValMsgs.STRING }).optional().or(z.literal('')),
     logoUrl: z
       .union([z.url({ error: ValMsgs.URL }), z.literal(''), z.undefined()])
@@ -188,7 +188,7 @@ export const updateInvoiceSchema = z.object({
 export type UpdateInvoiceRequest = z.infer<typeof updateInvoiceSchema>;
 
 export const createInvoicePaymentSchema = z.object({
-  amount: z.number().positive(),
+  amount: z.coerce.number().positive(),
   paidAt: z.string(),
   method: z.string().optional(),
   reference: z.string().optional(),
