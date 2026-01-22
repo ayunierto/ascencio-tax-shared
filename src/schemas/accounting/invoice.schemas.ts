@@ -45,7 +45,11 @@ export const createInvoiceSchema = z
       .transform((val) => (val === '' ? undefined : val))
       .optional(),
     billToPhone: z
-      .union([z.string({ error: ValMsgs.STRING }), z.literal(''), z.undefined()])
+      .union([
+        z.string({ error: ValMsgs.STRING }),
+        z.literal(''),
+        z.undefined(),
+      ])
       .transform((val) => (val === '' ? undefined : val))
       .optional(),
     billToAddress: z.string({ error: ValMsgs.STRING }).optional(),
