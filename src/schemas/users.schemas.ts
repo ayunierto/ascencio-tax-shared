@@ -31,7 +31,7 @@ export type UpdateUserRequest = z.infer<typeof updateUserSchema>;
 export const updateProfileSchema = z.object({
   firstName: firstNameSchema,
   lastName: lastNameSchema,
-  countryCode: countryCodeSchema,
+  countryCode: countryCodeSchema.optional(),
   phoneNumber: phoneNumberSchema.optional(),
   password: z
     .string()
