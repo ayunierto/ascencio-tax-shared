@@ -1,22 +1,22 @@
-import z from 'zod';
-import { ValidationMessages as ValMsgs } from '../../i18n';
-import { emailSchema as email } from '../common.schemas';
-import { phoneNumberSchema as phone } from '../common.schemas';
-import { buildZodMessage as buildZodMsg } from '../../utils';
-import { businessNumberSchema } from './common-accounting.schemas';
+import z from "zod";
+import { ValidationMessages as ValMsgs } from "../../i18n";
+import { emailSchema } from "../common.schemas";
+import { phoneNumberSchema } from "../common.schemas";
+import { buildZodMessage as buildZodMsg } from "../../utils";
+import { businessNumberSchema } from "./common-accounting.schemas";
 
 export const createCompanySchema = z.object({
   id: z.string().optional(),
   name: z.string().min(1, buildZodMsg(ValMsgs.REQUIRED)),
   legalName: z.string().min(1, buildZodMsg(ValMsgs.REQUIRED)),
-  businessNumber: businessNumberSchema,
+  businessNumber: businessNumberSchema.optional(),
   payrollAccountNumber: z.string().optional(),
-  address: z.string().min(1, buildZodMsg(ValMsgs.REQUIRED)),
-  city: z.string().trim().min(1, buildZodMsg(ValMsgs.REQUIRED)),
-  province: z.string().min(1, buildZodMsg(ValMsgs.REQUIRED)),
-  postalCode: z.string().min(1, buildZodMsg(ValMsgs.REQUIRED)),
-  phone,
-  email,
+  address: z.string().min(1, buildZodMsg(ValMsgs.REQUIRED)).optional(),
+  city: z.string().trim().min(1, buildZodMsg(ValMsgs.REQUIRED)).optional(),
+  province: z.string().min(1, buildZodMsg(ValMsgs.REQUIRED)).optional(),
+  postalCode: z.string().min(1, buildZodMsg(ValMsgs.REQUIRED)).optional(),
+  phone: phoneNumberSchema,
+  email: emailSchema,
   mediaToken: z.string().optional(),
 });
 
