@@ -1,6 +1,6 @@
-import { z } from 'zod';
-import { InvoiceStatus } from '../../interfaces';
-import { ValidationMessages as ValMsgs } from '../../i18n';
+import { z } from "zod";
+import { InvoiceStatus } from "../../interfaces";
+import { ValidationMessages as ValMsgs } from "../../i18n";
 
 // Schema for individual line items in an invoice
 export const invoiceLineItemSchema = z.object({
@@ -17,40 +17,36 @@ export const createInvoiceSchema = z
   .object({
     // From Company (optional in UI - backend auto-creates "Sole Proprietor" if empty)
     fromCompanyId: z
-      .union([z.uuid({ error: ValMsgs.UUID }), z.literal(''), z.undefined()])
-      .transform((val) => (val === '' || !val ? undefined : val))
+      .union([z.uuid({ error: ValMsgs.UUID }), z.literal(""), z.undefined()])
+      .transform((val) => (val === "" || !val ? undefined : val))
       .optional(),
 
     // Client relation (optional)
     billToClientId: z
-      .union([z.uuid({ error: ValMsgs.UUID }), z.literal(''), z.undefined()])
-      .transform((val) => (val === '' ? undefined : val))
+      .union([z.uuid({ error: ValMsgs.UUID }), z.literal(""), z.undefined()])
+      .transform((val) => (val === "" ? undefined : val))
       .optional(),
 
     // Inline client data (used when billToClientId is not provided)
     billToFullName: z
       .union([
         z.string({ error: ValMsgs.STRING }).min(1, { error: ValMsgs.REQUIRED }),
-        z.literal(''),
+        z.literal(""),
         z.undefined(),
       ])
-      .transform((val) => (val === '' ? undefined : val))
+      .transform((val) => (val === "" ? undefined : val))
       .optional(),
     billToEmail: z
-      .union([
-        z.string({ error: ValMsgs.STRING }).email({ error: ValMsgs.EMAIL }),
-        z.literal(''),
-        z.undefined(),
-      ])
-      .transform((val) => (val === '' ? undefined : val))
+      .union([z.email({ error: ValMsgs.EMAIL }), z.literal(""), z.undefined()])
+      .transform((val) => (val === "" ? undefined : val))
       .optional(),
     billToPhone: z
       .union([
         z.string({ error: ValMsgs.STRING }),
-        z.literal(''),
+        z.literal(""),
         z.undefined(),
       ])
-      .transform((val) => (val === '' ? undefined : val))
+      .transform((val) => (val === "" ? undefined : val))
       .optional(),
     billToAddress: z.string({ error: ValMsgs.STRING }).optional(),
     billToCity: z.string({ error: ValMsgs.STRING }).optional(),
@@ -64,9 +60,9 @@ export const createInvoiceSchema = z
     issueDate: z.string({ error: ValMsgs.STRING }), //
     dueDate: z.string({ error: ValMsgs.STRING }),
     taxRate: z.coerce.number({ error: ValMsgs.NUMBER }).default(13),
-    notes: z.string({ error: ValMsgs.STRING }).optional().or(z.literal('')),
+    notes: z.string({ error: ValMsgs.STRING }).optional().or(z.literal("")),
     logoUrl: z
-      .union([z.url({ error: ValMsgs.URL }), z.literal(''), z.undefined()])
+      .union([z.url({ error: ValMsgs.URL }), z.literal(""), z.undefined()])
       .optional(),
 
     lineItems: z
@@ -74,7 +70,7 @@ export const createInvoiceSchema = z
       .min(1, { error: ValMsgs.MIN_ITEMS }),
     status: z
       .enum(InvoiceStatus, { error: ValMsgs.INVALID_ENUM })
-      .default('draft'),
+      .default("draft"),
   })
   .superRefine((data, ctx) => {
     // Si hay billToClientId, no validamos nada más
@@ -83,25 +79,25 @@ export const createInvoiceSchema = z
     // Si NO hay billToClientId, estos campos son obligatorios
     if (!data.billToFullName) {
       ctx.addIssue({
-        path: ['billToFullName'],
+        path: ["billToFullName"],
         message: ValMsgs.REQUIRED,
-        code: 'custom',
+        code: "custom",
       });
     }
 
     if (!data.billToEmail) {
       ctx.addIssue({
-        path: ['billToEmail'],
+        path: ["billToEmail"],
         message: ValMsgs.REQUIRED,
-        code: 'custom',
+        code: "custom",
       });
     }
 
     if (!data.billToPhone) {
       ctx.addIssue({
-        path: ['billToPhone'],
+        path: ["billToPhone"],
         message: ValMsgs.REQUIRED,
-        code: 'custom',
+        code: "custom",
       });
     }
   });
@@ -112,47 +108,47 @@ export type CreateInvoiceRequest = z.infer<typeof createInvoiceSchema>;
 export const updateInvoiceSchema = z.object({
   // From Company (optional in UI - backend auto-creates "Sole Proprietor" if empty)
   fromCompanyId: z
-    .union([z.uuid({ error: ValMsgs.UUID }), z.literal(''), z.undefined()])
-    .transform((val) => (val === '' || !val ? undefined : val))
+    .union([z.uuid({ error: ValMsgs.UUID }), z.literal(""), z.undefined()])
+    .transform((val) => (val === "" || !val ? undefined : val))
     .optional(),
 
   // Client relation (optional)
   billToClientId: z
-    .union([z.uuid({ error: ValMsgs.UUID }), z.literal(''), z.undefined()])
-    .transform((val) => (val === '' ? undefined : val))
+    .union([z.uuid({ error: ValMsgs.UUID }), z.literal(""), z.undefined()])
+    .transform((val) => (val === "" ? undefined : val))
     .optional(),
 
   billToFullName: z
     .union([
       z.string({ error: ValMsgs.STRING }).min(1, { error: ValMsgs.REQUIRED }),
-      z.literal(''),
+      z.literal(""),
       z.undefined(),
     ])
     .optional(),
   billToEmail: z
     .union([
       z.string({ error: ValMsgs.STRING }).email({ error: ValMsgs.EMAIL }),
-      z.literal(''),
+      z.literal(""),
       z.undefined(),
     ])
     .optional(),
   billToPhone: z
-    .union([z.string({ error: ValMsgs.STRING }), z.literal(''), z.undefined()])
+    .union([z.string({ error: ValMsgs.STRING }), z.literal(""), z.undefined()])
     .optional(),
   billToAddress: z
-    .union([z.string({ error: ValMsgs.STRING }), z.literal(''), z.undefined()])
+    .union([z.string({ error: ValMsgs.STRING }), z.literal(""), z.undefined()])
     .optional(),
   billToCity: z
-    .union([z.string({ error: ValMsgs.STRING }), z.literal(''), z.undefined()])
+    .union([z.string({ error: ValMsgs.STRING }), z.literal(""), z.undefined()])
     .optional(),
   billToProvince: z
-    .union([z.string({ error: ValMsgs.STRING }), z.literal(''), z.undefined()])
+    .union([z.string({ error: ValMsgs.STRING }), z.literal(""), z.undefined()])
     .optional(),
   billToPostalCode: z
-    .union([z.string({ error: ValMsgs.STRING }), z.literal(''), z.undefined()])
+    .union([z.string({ error: ValMsgs.STRING }), z.literal(""), z.undefined()])
     .optional(),
   billToCountry: z
-    .union([z.string({ error: ValMsgs.STRING }), z.literal(''), z.undefined()])
+    .union([z.string({ error: ValMsgs.STRING }), z.literal(""), z.undefined()])
     .optional(),
   issueDate: z
     .union([z.string({ error: ValMsgs.STRING }), z.undefined()])
@@ -164,12 +160,12 @@ export const updateInvoiceSchema = z.object({
     .union([z.number({ error: ValMsgs.NUMBER }), z.undefined()])
     .optional(),
   notes: z
-    .union([z.string({ error: ValMsgs.STRING }), z.literal(''), z.undefined()])
+    .union([z.string({ error: ValMsgs.STRING }), z.literal(""), z.undefined()])
     .optional(),
   logoUrl: z
     .union([
       z.string({ error: ValMsgs.STRING }).url({ error: ValMsgs.URL }),
-      z.literal(''),
+      z.literal(""),
       z.undefined(),
     ])
     .optional(),
