@@ -1,13 +1,13 @@
-import { z } from "zod";
-import { ValidationMessages as ValMsgs } from "../i18n";
+import { z } from 'zod';
+import { ValidationMessages as ValMsgs } from '../i18n';
 import {
   countryCodeSchema,
   emailSchema,
   firstNameSchema,
   lastNameSchema,
   phoneNumberSchema,
-} from "./common.schemas";
-import { passwordSchema } from "./auth";
+} from './common.schemas';
+import { passwordSchema } from './auth';
 
 // Users
 export const createUserSchema = z.object({
