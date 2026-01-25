@@ -12,12 +12,8 @@ const utils_1 = require("../../utils");
 const common_accounting_schemas_1 = require("./common-accounting.schemas");
 exports.createCompanySchema = zod_1.default.object({
     id: zod_1.default.string().optional(),
-    name: zod_1.default
-        .union([zod_1.default.string().min(1, (0, utils_1.buildZodMessage)(i18n_1.ValidationMessages.REQUIRED)), zod_1.default.literal("")])
-        .optional(),
-    legalName: zod_1.default
-        .union([zod_1.default.string().min(1, (0, utils_1.buildZodMessage)(i18n_1.ValidationMessages.REQUIRED)), zod_1.default.literal("")])
-        .optional(),
+    name: zod_1.default.string().min(1, (0, utils_1.buildZodMessage)(i18n_1.ValidationMessages.REQUIRED)),
+    legalName: zod_1.default.z.string().min(1, (0, utils_1.buildZodMessage)(i18n_1.ValidationMessages.REQUIRED)),
     businessNumber: zod_1.default.union([common_accounting_schemas_1.businessNumberSchema, zod_1.default.literal("")]).optional(),
     payrollAccountNumber: zod_1.default.string().optional(),
     address: zod_1.default
@@ -35,8 +31,8 @@ exports.createCompanySchema = zod_1.default.object({
     postalCode: zod_1.default
         .union([zod_1.default.string().min(1, (0, utils_1.buildZodMessage)(i18n_1.ValidationMessages.REQUIRED)), zod_1.default.literal("")])
         .optional(),
-    phone: zod_1.default.union([common_schemas_2.phoneNumberSchema, zod_1.default.literal("")]).optional(),
-    email: zod_1.default.union([common_schemas_1.emailSchema, zod_1.default.literal("")]).optional(),
+    phone: common_schemas_2.phoneNumberSchema,
+    email: common_schemas_1.emailSchema,
     mediaToken: zod_1.default.string().optional(),
 });
 exports.updateCompanySchema = exports.createCompanySchema.partial();
