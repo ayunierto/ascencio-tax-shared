@@ -26,7 +26,7 @@ export type UpdateUserRequest = z.infer<typeof updateUserSchema>;
 export declare const updateProfileSchema: z.ZodObject<{
     firstName: z.ZodString;
     lastName: z.ZodString;
-    countryCode: z.ZodString;
+    countryCode: z.ZodOptional<z.ZodString>;
     phoneNumber: z.ZodOptional<z.ZodString>;
     password: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;

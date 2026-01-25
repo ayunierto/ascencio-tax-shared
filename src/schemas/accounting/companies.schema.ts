@@ -7,16 +7,31 @@ import { businessNumberSchema } from "./common-accounting.schemas";
 
 export const createCompanySchema = z.object({
   id: z.string().optional(),
-  name: z.string().min(1, buildZodMsg(ValMsgs.REQUIRED)),
-  legalName: z.string().min(1, buildZodMsg(ValMsgs.REQUIRED)),
-  businessNumber: businessNumberSchema.optional(),
+  name: z
+    .union([z.string().min(1, buildZodMsg(ValMsgs.REQUIRED)), z.literal("")])
+    .optional(),
+  legalName: z
+    .union([z.string().min(1, buildZodMsg(ValMsgs.REQUIRED)), z.literal("")])
+    .optional(),
+  businessNumber: z.union([businessNumberSchema, z.literal("")]).optional(),
   payrollAccountNumber: z.string().optional(),
-  address: z.string().min(1, buildZodMsg(ValMsgs.REQUIRED)).optional(),
-  city: z.string().trim().min(1, buildZodMsg(ValMsgs.REQUIRED)).optional(),
-  province: z.string().min(1, buildZodMsg(ValMsgs.REQUIRED)).optional(),
-  postalCode: z.string().min(1, buildZodMsg(ValMsgs.REQUIRED)).optional(),
-  phone: phoneNumberSchema,
-  email: emailSchema,
+  address: z
+    .union([z.string().min(1, buildZodMsg(ValMsgs.REQUIRED)), z.literal("")])
+    .optional(),
+  city: z
+    .union([
+      z.string().trim().min(1, buildZodMsg(ValMsgs.REQUIRED)),
+      z.literal(""),
+    ])
+    .optional(),
+  province: z
+    .union([z.string().min(1, buildZodMsg(ValMsgs.REQUIRED)), z.literal("")])
+    .optional(),
+  postalCode: z
+    .union([z.string().min(1, buildZodMsg(ValMsgs.REQUIRED)), z.literal("")])
+    .optional(),
+  phone: z.union([phoneNumberSchema, z.literal("")]).optional(),
+  email: z.union([emailSchema, z.literal("")]).optional(),
   mediaToken: z.string().optional(),
 });
 

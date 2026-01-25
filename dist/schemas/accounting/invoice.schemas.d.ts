@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from "zod";
 export declare const invoiceLineItemSchema: z.ZodObject<{
     description: z.ZodString;
     quantity: z.ZodCoercedNumber<unknown>;
@@ -8,7 +8,7 @@ export declare const createInvoiceSchema: z.ZodObject<{
     fromCompanyId: z.ZodOptional<z.ZodPipe<z.ZodUnion<readonly [z.ZodUUID, z.ZodLiteral<"">, z.ZodUndefined]>, z.ZodTransform<string | undefined, string | undefined>>>;
     billToClientId: z.ZodOptional<z.ZodPipe<z.ZodUnion<readonly [z.ZodUUID, z.ZodLiteral<"">, z.ZodUndefined]>, z.ZodTransform<string | undefined, string | undefined>>>;
     billToFullName: z.ZodOptional<z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodLiteral<"">, z.ZodUndefined]>, z.ZodTransform<string | undefined, string | undefined>>>;
-    billToEmail: z.ZodOptional<z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodLiteral<"">, z.ZodUndefined]>, z.ZodTransform<string | undefined, string | undefined>>>;
+    billToEmail: z.ZodOptional<z.ZodPipe<z.ZodUnion<readonly [z.ZodEmail, z.ZodLiteral<"">, z.ZodUndefined]>, z.ZodTransform<string | undefined, string | undefined>>>;
     billToPhone: z.ZodOptional<z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodLiteral<"">, z.ZodUndefined]>, z.ZodTransform<string | undefined, string | undefined>>>;
     billToAddress: z.ZodOptional<z.ZodString>;
     billToCity: z.ZodOptional<z.ZodString>;
