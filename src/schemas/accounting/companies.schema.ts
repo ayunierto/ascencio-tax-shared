@@ -7,12 +7,9 @@ import { businessNumberSchema } from "./common-accounting.schemas";
 
 export const createCompanySchema = z.object({
   id: z.string().optional(),
-  name: z
-    .union([z.string().min(1, buildZodMsg(ValMsgs.REQUIRED)), z.literal("")])
-    .optional(),
+  name: z.string().min(1, buildZodMsg(ValMsgs.REQUIRED)),
   legalName: z
-    .union([z.string().min(1, buildZodMsg(ValMsgs.REQUIRED)), z.literal("")])
-    .optional(),
+    .z.string().min(1, buildZodMsg(ValMsgs.REQUIRED)),
   businessNumber: z.union([businessNumberSchema, z.literal("")]).optional(),
   payrollAccountNumber: z.string().optional(),
   address: z
@@ -30,11 +27,10 @@ export const createCompanySchema = z.object({
   postalCode: z
     .union([z.string().min(1, buildZodMsg(ValMsgs.REQUIRED)), z.literal("")])
     .optional(),
-  phone: z.union([phoneNumberSchema, z.literal("")]).optional(),
-  email: z.union([emailSchema, z.literal("")]).optional(),
+  phone: phoneNumberSchema,
+  email:emailSchema),
   mediaToken: z.string().optional(),
 });
-
 export type CreateCompanyRequest = z.infer<typeof createCompanySchema>;
 
 export const updateCompanySchema = createCompanySchema.partial();
