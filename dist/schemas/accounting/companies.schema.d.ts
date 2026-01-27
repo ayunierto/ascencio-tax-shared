@@ -2,7 +2,7 @@ import z from "zod";
 export declare const createCompanySchema: z.ZodObject<{
     id: z.ZodOptional<z.ZodString>;
     name: z.ZodString;
-    legalName: any;
+    legalName: z.ZodString;
     businessNumber: z.ZodOptional<z.ZodUnion<readonly [z.ZodString, z.ZodLiteral<"">]>>;
     payrollAccountNumber: z.ZodOptional<z.ZodString>;
     address: z.ZodOptional<z.ZodUnion<readonly [z.ZodString, z.ZodLiteral<"">]>>;
@@ -17,7 +17,7 @@ export type CreateCompanyRequest = z.infer<typeof createCompanySchema>;
 export declare const updateCompanySchema: z.ZodObject<{
     id: z.ZodOptional<z.ZodOptional<z.ZodString>>;
     name: z.ZodOptional<z.ZodString>;
-    legalName: z.ZodOptional<any>;
+    legalName: z.ZodOptional<z.ZodString>;
     businessNumber: z.ZodOptional<z.ZodOptional<z.ZodUnion<readonly [z.ZodString, z.ZodLiteral<"">]>>>;
     payrollAccountNumber: z.ZodOptional<z.ZodOptional<z.ZodString>>;
     address: z.ZodOptional<z.ZodOptional<z.ZodUnion<readonly [z.ZodString, z.ZodLiteral<"">]>>>;

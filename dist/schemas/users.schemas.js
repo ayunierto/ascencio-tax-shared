@@ -23,9 +23,5 @@ exports.updateProfileSchema = zod_1.z.object({
     lastName: common_schemas_1.lastNameSchema,
     countryCode: common_schemas_1.countryCodeSchema.optional(),
     phoneNumber: common_schemas_1.phoneNumberSchema.optional(),
-    password: zod_1.z
-        .string()
-        .min(8, i18n_1.ValidationMessages.MIN_LENGTH)
-        .max(100, i18n_1.ValidationMessages.MAX_LENGTH)
-        .optional(),
+    password: auth_1.passwordSchema.optional(),
 });

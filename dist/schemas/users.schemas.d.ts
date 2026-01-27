@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from "zod";
 export declare const createUserSchema: z.ZodObject<{
     firstName: z.ZodString;
     lastName: z.ZodString;
