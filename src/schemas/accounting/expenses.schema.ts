@@ -2,6 +2,7 @@ import z from 'zod';
 import { ValidationMessages as ValMsgs } from '../../i18n';
 
 export const createExpenseSchema = z.object({
+  id: z.string().optional(),
   merchant: z.string().nonempty({ error: ValMsgs.REQUIRED }),
   date: z.iso.datetime({ error: ValMsgs.ISO_DATETIME }),
   total: z
