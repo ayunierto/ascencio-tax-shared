@@ -14,6 +14,7 @@ export const createExpenseSchema = z.object({
   notes: z.string().optional(),
   categoryId: z
     .string({ error: ValMsgs.REQUIRED })
+    .nonempty({ error: ValMsgs.REQUIRED })
     .pipe(z.uuid({ error: ValMsgs.UUID })),
   subcategoryId: z.uuid({ error: ValMsgs.UUID }).optional(),
 });
