@@ -12,7 +12,9 @@ export const createExpenseSchema = z.object({
     .multipleOf(0.01, { error: ValMsgs.NUMBER }),
   imageUrl: z.url({ error: ValMsgs.URL }).optional(),
   notes: z.string().optional(),
-  categoryId: z.uuid({ error: ValMsgs.UUID }),
+  categoryId: z
+    .uuid({ error: ValMsgs.UUID })
+    .min(1, { error: ValMsgs.REQUIRED }),
   subcategoryId: z.uuid({ error: ValMsgs.UUID }).optional(),
 });
 
