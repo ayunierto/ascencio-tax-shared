@@ -2,7 +2,7 @@ import { MessageResponse } from './common.interfaces';
 
 export interface UserTokenResponse {
   access_token: string;
-  user: User;
+  user: SimpleUser;
 }
 
 // Full User Entity
