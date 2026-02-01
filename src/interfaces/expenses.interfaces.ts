@@ -1,15 +1,12 @@
+import { User } from './auth.interfaces';
+import { Category, Subcategory } from './categories.interfaces';
 import { PaginatedResponse } from './common.interfaces';
-import {
-  SimpleCategory,
-  SimpleSubcategory,
-  SimpleUser,
-} from './simple-types.interfaces';
 
 // Expense Entity
 export interface Expense {
   id: string;
   merchant: string;
-  date: Date;
+  date: string;
   total: number;
   tax: number;
   imageUrl?: string | null;
@@ -17,11 +14,11 @@ export interface Expense {
   categoryId: string;
   subcategoryId?: string;
   userId: string;
-  createdAt: Date;
-  updatedAt: Date;
-  category?: SimpleCategory;
-  subcategory?: SimpleSubcategory;
-  user?: SimpleUser;
+  createdAt: string;
+  updatedAt: string;
+  category?: Category;
+  subcategory?: Subcategory;
+  user?: User;
 }
 
 // Response types
