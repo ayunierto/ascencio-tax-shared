@@ -32,11 +32,8 @@ export interface User {
 
 export interface SimpleUser extends Omit<
   User,
-  | 'roles'
-  | 'isActive'
   | 'isEmailVerified'
   | 'deletedAt'
-  | 'lastLoginAt'
   | 'verificationCode'
   | 'passwordResetCode'
   | 'verificationCodeExpiresAt'
