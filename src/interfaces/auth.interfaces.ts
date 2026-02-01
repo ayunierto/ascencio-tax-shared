@@ -30,6 +30,20 @@ export interface User {
   deletedAt?: string;
 }
 
+export interface SimpleUser extends Omit<
+  User,
+  | 'roles'
+  | 'isActive'
+  | 'isEmailVerified'
+  | 'deletedAt'
+  | 'lastLoginAt'
+  | 'verificationCode'
+  | 'passwordResetCode'
+  | 'verificationCodeExpiresAt'
+  | 'passwordResetExpiresAt'
+  | 'password'
+> {}
+
 export type SignInResponse = UserTokenResponse;
 export type SignUpResponse = {
   message: string;

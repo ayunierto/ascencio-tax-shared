@@ -9,6 +9,6 @@ export interface AppVersion {
   latestVersion: string;
   forceUpdate: boolean;
   releaseNotes?: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt?: string;
+  updatedAt?: string;
 }
