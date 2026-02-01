@@ -1,16 +1,14 @@
+import { User } from './auth.interfaces';
 import { PaginatedResponse } from './common.interfaces';
 import { AppointmentStatus, AppointmentSource } from './enums';
-import {
-  SimpleUser,
-  SimpleService,
-  SimpleStaffMember,
-} from './simple-types.interfaces';
+import { Service } from './services.interfaces';
+import { StaffMember } from './staff-members.interfaces';
 
 // Appointments Entity
 export interface Appointment {
   id: string;
-  start: Date;
-  end: Date;
+  start: string;
+  end: string;
   timeZone: string;
   status: AppointmentStatus;
   comments?: string;
@@ -19,17 +17,17 @@ export interface Appointment {
   zoomMeetingLink?: string;
   source: AppointmentSource;
   cancellationReason?: string;
-  cancelledAt?: Date;
+  cancelledAt?: string;
   cancelledBy?: string;
   serviceId: string;
   userId: string;
   staffMemberId: string;
-  createdAt: Date;
-  updatedAt: Date;
-  deletedAt?: Date;
-  service?: SimpleService;
-  user?: SimpleUser;
-  staffMember?: SimpleStaffMember;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt?: string;
+  service?: Service;
+  user?: User;
+  staffMember?: StaffMember;
 }
 
 // Response types (Create/Update DTOs are in schemas)
@@ -41,8 +39,8 @@ export type AppointmentsResponse = PaginatedResponse<AppointmentResponse>;
 
 // Availability Response
 export interface AvailabilitySlot {
-  startTime: Date;
-  endTime: Date;
+  startTime: string;
+  endTime: string;
   staffMemberId: string;
   staffName: string;
 }

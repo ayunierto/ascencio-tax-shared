@@ -1,13 +1,13 @@
+import { User } from './auth.interfaces';
 import { PaginatedResponse } from './common.interfaces';
-import { SimpleUser } from './simple-types.interfaces';
 
 // Logs Entity
 export interface Log {
   id: string;
   description: string;
   userId: string;
-  createdAt: Date;
-  user?: SimpleUser;
+  createdAt: string;
+  user?: User;
 }
 
 // Response types (Create DTOs are in schemas)

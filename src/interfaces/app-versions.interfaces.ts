@@ -12,6 +12,3 @@ export interface AppVersion {
   createdAt?: Date;
   updatedAt?: Date;
 }
-
-// Response type (Create/Update DTOs are in schemas)
-export type AppVersionsResponse = PaginatedResponse<AppVersion>;

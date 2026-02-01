@@ -6,9 +6,5 @@ export interface SystemSetting {
   key: string;
   value?: string | null;
   type: string;
-  updatedAt: Date;
+  updatedAt: string;
 }
-
-// Response type (Create/Update DTOs are in schemas)
-export type SystemSettingResponse = SystemSetting;
-export type SystemSettingsResponse = PaginatedResponse<SystemSettingResponse>;

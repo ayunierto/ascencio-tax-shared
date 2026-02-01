@@ -7,8 +7,8 @@ export interface CalendarEvent {
   summary: string;
   description?: string;
   location?: string;
-  start: Date;
-  end: Date;
+  start: string;
+  end: string;
   timeZone: string;
   staffMemberId?: string;
   serviceId?: string;
@@ -16,8 +16,8 @@ export interface CalendarEvent {
   sourceId?: string;
   externalEventId?: string;
   status: CalendarStatus;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 }
 
 // Response type (Create/Update DTOs are in schemas)

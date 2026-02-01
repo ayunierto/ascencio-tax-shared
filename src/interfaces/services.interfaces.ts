@@ -18,7 +18,3 @@ export interface Service {
   staffMembers?: StaffMember[];
   appointments?: Appointment[];
 }
-
-// Response type (Create/Update DTOs are in schemas)
-export type ServiceResponse = Service;
-export type ServicesResponse = PaginatedResponse<ServiceResponse>;

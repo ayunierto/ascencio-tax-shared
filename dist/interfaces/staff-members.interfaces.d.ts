@@ -1,5 +1,6 @@
+import { Appointment } from './bookings.interfaces';
 import { PaginatedResponse } from './common.interfaces';
-import { SimpleService, SimpleAppointment } from './simple-types.interfaces';
+import { Service } from './services.interfaces';
 export interface StaffMember {
     id: string;
     firstName: string;
@@ -8,17 +9,17 @@ export interface StaffMember {
     createdAt: string;
     updatedAt: string;
     deletedAt?: string;
-    services?: SimpleService[];
+    services?: Service[];
     schedules?: Schedule[];
-    appointments?: SimpleAppointment[];
+    appointments?: Appointment[];
 }
 export interface Schedule {
     id: string;
     dayOfWeek: number;
     startTime: string;
     endTime: string;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: string;
+    updatedAt: string;
 }
 export type StaffMemberResponse = Omit<StaffMember, 'services' | 'schedules' | 'appointments'>;
 export type StaffMembersResponse = PaginatedResponse<StaffMemberResponse>;

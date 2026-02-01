@@ -1,9 +1,8 @@
 import { MessageResponse } from './common.interfaces';
-import { SimpleUser } from './simple-types.interfaces';
 
 export interface UserTokenResponse {
   access_token: string;
-  user: SimpleUser;
+  user: User;
 }
 
 // Full User Entity
@@ -21,21 +20,21 @@ export interface User {
   isActive: boolean;
   roles: string[];
   isEmailVerified: boolean;
-  verificationCode?: string | null;
-  verificationCodeExpiresAt?: Date | null;
-  passwordResetCode?: string | null;
-  passwordResetExpiresAt?: Date | null;
-  lastLoginAt?: Date;
-  createdAt: Date;
-  updatedAt?: Date;
-  deletedAt?: Date | null;
+  verificationCode?: string;
+  verificationCodeExpiresAt?: string;
+  passwordResetCode?: string;
+  passwordResetExpiresAt?: string;
+  lastLoginAt?: string;
+  createdAt: string;
+  updatedAt?: string;
+  deletedAt?: string;
 }
 
 export type SignInResponse = UserTokenResponse;
 export type SignUpResponse = {
   message: string;
   user: Omit<
-    SimpleUser,
+    User,
     | 'roles'
     | 'isActive'
     | 'isEmailVerified'
@@ -54,5 +53,5 @@ export type ResetPasswordResponse = UserTokenResponse;
 export type ResendResetPasswordCodeResponse = MessageResponse;
 export type CheckStatusResponse = UserTokenResponse;
 export type ChangePasswordResponse = UserTokenResponse;
-export type UpdateProfileResponse = SimpleUser;
+export type UpdateProfileResponse = User;
 export type DeleteAccountResponse = MessageResponse;

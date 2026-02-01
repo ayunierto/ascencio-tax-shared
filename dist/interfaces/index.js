@@ -29,8 +29,6 @@ __exportStar(require("./enums"), exports);
 __exportStar(require("./expenses.interfaces"), exports);
 __exportStar(require("./logs.interfaces"), exports);
 __exportStar(require("./services.interfaces"), exports);
-__exportStar(require("./simple-types.interfaces"), exports);
 __exportStar(require("./staff-members.interfaces"), exports);
 __exportStar(require("./system-settings.interfaces"), exports);
 __exportStar(require("./upload-image-file.interfaces"), exports);
-__exportStar(require("./users.interfaces"), exports);

@@ -1,23 +1,26 @@
 import z from 'zod';
+export declare const imageUrlSchema: z.ZodOptional<z.ZodUnion<readonly [z.ZodURL, z.ZodString]>>;
 export declare const createExpenseSchema: z.ZodObject<{
+    id: z.ZodOptional<z.ZodString>;
     merchant: z.ZodString;
     date: z.ZodISODateTime;
     total: z.ZodNumber;
     tax: z.ZodNumber;
-    imageUrl: z.ZodOptional<z.ZodURL>;
+    imageUrl: z.ZodOptional<z.ZodUnion<readonly [z.ZodURL, z.ZodString]>>;
     notes: z.ZodOptional<z.ZodString>;
-    categoryId: z.ZodUUID;
+    categoryId: z.ZodPipe<z.ZodString, z.ZodUUID>;
     subcategoryId: z.ZodOptional<z.ZodUUID>;
 }, z.core.$strip>;
 export type CreateExpenseRequest = z.infer<typeof createExpenseSchema>;
 export declare const updateExpenseSchema: z.ZodObject<{
+    id: z.ZodOptional<z.ZodOptional<z.ZodString>>;
     merchant: z.ZodOptional<z.ZodString>;
     date: z.ZodOptional<z.ZodISODateTime>;
     total: z.ZodOptional<z.ZodNumber>;
     tax: z.ZodOptional<z.ZodNumber>;
-    imageUrl: z.ZodOptional<z.ZodOptional<z.ZodURL>>;
+    imageUrl: z.ZodOptional<z.ZodOptional<z.ZodUnion<readonly [z.ZodURL, z.ZodString]>>>;
     notes: z.ZodOptional<z.ZodOptional<z.ZodString>>;
-    categoryId: z.ZodOptional<z.ZodUUID>;
+    categoryId: z.ZodOptional<z.ZodPipe<z.ZodString, z.ZodUUID>>;
     subcategoryId: z.ZodOptional<z.ZodOptional<z.ZodUUID>>;
 }, z.core.$strip>;
 export type UpdateExpenseRequest = z.infer<typeof updateExpenseSchema>;

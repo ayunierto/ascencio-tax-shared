@@ -1,5 +1,5 @@
+import { User } from './auth.interfaces';
 import { PaginatedResponse } from './common.interfaces';
-import { SimpleUser } from './simple-types.interfaces';
 
 // Blog Posts - Entity
 export interface Post {
@@ -7,11 +7,7 @@ export interface Post {
   title: string;
   url: string;
   userId: string;
-  createdAt: Date;
-  updatedAt: Date;
-  user?: SimpleUser;
+  createdAt: string;
+  updatedAt: string;
+  user?: User;
 }
-
-// Response types (Create/Update DTOs are in schemas)
-export type PostResponse = Omit<Post, 'user'>;
-export type PostsResponse = PaginatedResponse<PostResponse>;

@@ -1,5 +1,6 @@
+import { Appointment } from './bookings.interfaces';
 import { PaginatedResponse } from './common.interfaces';
-import { SimpleService, SimpleAppointment } from './simple-types.interfaces';
+import { Service } from './services.interfaces';
 
 // StaffMember Entity
 export interface StaffMember {
@@ -10,9 +11,9 @@ export interface StaffMember {
   createdAt: string;
   updatedAt: string;
   deletedAt?: string;
-  services?: SimpleService[];
+  services?: Service[];
   schedules?: Schedule[];
-  appointments?: SimpleAppointment[];
+  appointments?: Appointment[];
 }
 
 // Simple types without relations
@@ -21,8 +22,8 @@ export interface Schedule {
   dayOfWeek: number; // 0=Sunday, 6=Saturday
   startTime: string; // HH:mm
   endTime: string; // HH:mm
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 }
 
 // Response types
