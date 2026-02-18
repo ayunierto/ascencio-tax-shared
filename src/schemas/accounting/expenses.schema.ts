@@ -38,7 +38,11 @@ export const createExpenseSchema = z.object({
   subcategoryId: z.uuid({ error: ValMsgs.UUID }).optional(),
 });
 
-export type CreateExpenseRequest = z.infer<typeof createExpenseSchema>;
+// Input type (accepts string or number)
+export type CreateExpenseInput = z.input<typeof createExpenseSchema>;
+
+// Output type (after coercion, always numbers)
+export type CreateExpenseRequest = z.output<typeof createExpenseSchema>;
 
 export const updateExpenseSchema = createExpenseSchema.partial();
 

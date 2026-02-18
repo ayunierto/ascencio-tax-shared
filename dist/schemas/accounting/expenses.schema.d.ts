@@ -11,7 +11,8 @@ export declare const createExpenseSchema: z.ZodObject<{
     categoryId: z.ZodPipe<z.ZodString, z.ZodUUID>;
     subcategoryId: z.ZodOptional<z.ZodUUID>;
 }, z.core.$strip>;
-export type CreateExpenseRequest = z.infer<typeof createExpenseSchema>;
+export type CreateExpenseInput = z.input<typeof createExpenseSchema>;
+export type CreateExpenseRequest = z.output<typeof createExpenseSchema>;
 export declare const updateExpenseSchema: z.ZodObject<{
     id: z.ZodOptional<z.ZodOptional<z.ZodString>>;
     merchant: z.ZodOptional<z.ZodString>;
