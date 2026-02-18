@@ -19,11 +19,19 @@ exports.createExpenseSchema = zod_1.default.object({
     merchant: zod_1.default.string().nonempty({ error: i18n_1.ValidationMessages.REQUIRED }),
     date: zod_1.default.iso.datetime({ error: i18n_1.ValidationMessages.ISO_DATETIME }),
     total: zod_1.default
-        .number({ error: i18n_1.ValidationMessages.NUMBER })
-        .multipleOf(0.01, { error: i18n_1.ValidationMessages.NUMBER }),
+        .union([zod_1.default.number(), zod_1.default.string()])
+        .pipe(zod_1.default.coerce.number({ error: i18n_1.ValidationMessages.NUMBER }))
+        .refine((val) => !isNaN(val), { error: i18n_1.ValidationMessages.NUMBER })
+        .refine((val) => Math.round(val * 100) === val * 100, {
+        error: i18n_1.ValidationMessages.NUMBER,
+    }),
     tax: zod_1.default
-        .number({ error: i18n_1.ValidationMessages.NUMBER })
-        .multipleOf(0.01, { error: i18n_1.ValidationMessages.NUMBER }),
+        .union([zod_1.default.number(), zod_1.default.string()])
+        .pipe(zod_1.default.coerce.number({ error: i18n_1.ValidationMessages.NUMBER }))
+        .refine((val) => !isNaN(val), { error: i18n_1.ValidationMessages.NUMBER })
+        .refine((val) => Math.round(val * 100) === val * 100, {
+        error: i18n_1.ValidationMessages.NUMBER,
+    }),
     imageUrl: exports.imageUrlSchema,
     notes: zod_1.default.string().optional(),
     categoryId: zod_1.default

@@ -16,11 +16,19 @@ export const createExpenseSchema = z.object({
   merchant: z.string().nonempty({ error: ValMsgs.REQUIRED }),
   date: z.iso.datetime({ error: ValMsgs.ISO_DATETIME }),
   total: z
-    .number({ error: ValMsgs.NUMBER })
-    .multipleOf(0.01, { error: ValMsgs.NUMBER }),
+    .union([z.number(), z.string()])
+    .pipe(z.coerce.number({ error: ValMsgs.NUMBER }))
+    .refine((val) => !isNaN(val), { error: ValMsgs.NUMBER })
+    .refine((val) => Math.round(val * 100) === val * 100, {
+      error: ValMsgs.NUMBER,
+    }),
   tax: z
-    .number({ error: ValMsgs.NUMBER })
-    .multipleOf(0.01, { error: ValMsgs.NUMBER }),
+    .union([z.number(), z.string()])
+    .pipe(z.coerce.number({ error: ValMsgs.NUMBER }))
+    .refine((val) => !isNaN(val), { error: ValMsgs.NUMBER })
+    .refine((val) => Math.round(val * 100) === val * 100, {
+      error: ValMsgs.NUMBER,
+    }),
   imageUrl: imageUrlSchema,
   notes: z.string().optional(),
   categoryId: z

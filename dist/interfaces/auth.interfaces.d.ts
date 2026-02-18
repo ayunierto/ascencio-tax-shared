@@ -1,7 +1,7 @@
 import { MessageResponse } from './common.interfaces';
 export interface UserTokenResponse {
     access_token: string;
-    user: User;
+    user: SimpleUser;
 }
 export interface User {
     id: string;
@@ -25,6 +25,8 @@ export interface User {
     createdAt: string;
     updatedAt?: string;
     deletedAt?: string;
+}
+export interface SimpleUser extends Omit<User, 'isEmailVerified' | 'deletedAt' | 'verificationCode' | 'passwordResetCode' | 'verificationCodeExpiresAt' | 'passwordResetExpiresAt' | 'password'> {
 }
 export type SignInResponse = UserTokenResponse;
 export type SignUpResponse = {
