@@ -1,0 +1,61 @@
+/**
+ * Translation keys for subscription and paywall features
+ */
+export declare const subscriptionKeys: {
+    readonly subscriptionStatus: "subscription.status";
+    readonly freeTier: "subscription.tier.free";
+    readonly premiumTier: "subscription.tier.premium";
+    readonly enterpriseTier: "subscription.tier.enterprise";
+    readonly trialActive: "subscription.trial.active";
+    readonly trialDaysRemaining: "subscription.trial.daysRemaining";
+    readonly trialExpired: "subscription.trial.expired";
+    readonly trialEndsOn: "subscription.trial.endsOn";
+    readonly limitReached: "subscription.limit.reached";
+    readonly limitRemaining: "subscription.limit.remaining";
+    readonly unlimitedAccess: "subscription.limit.unlimited";
+    readonly paywallTitle: "subscription.paywall.title";
+    readonly paywallSubtitle: "subscription.paywall.subtitle";
+    readonly paywallDescription: "subscription.paywall.description";
+    readonly unlockFeatures: "subscription.paywall.unlockFeatures";
+    readonly startFreeTrial: "subscription.paywall.startFreeTrial";
+    readonly subscribeToContinue: "subscription.paywall.subscribeToContinue";
+    readonly viewPlans: "subscription.paywall.viewPlans";
+    readonly benefitsTitle: "subscription.benefits.title";
+    readonly benefitUnlimitedCompanies: "subscription.benefits.unlimitedCompanies";
+    readonly benefitUnlimitedClients: "subscription.benefits.unlimitedClients";
+    readonly benefitUnlimitedExpenses: "subscription.benefits.unlimitedExpenses";
+    readonly benefitUnlimitedInvoices: "subscription.benefits.unlimitedInvoices";
+    readonly benefitAdvancedReports: "subscription.benefits.advancedReports";
+    readonly benefitPrioritySupport: "subscription.benefits.prioritySupport";
+    readonly benefitNoAds: "subscription.benefits.noAds";
+    readonly monthlyPlan: "subscription.plans.monthly";
+    readonly yearlyPlan: "subscription.plans.yearly";
+    readonly lifetimePlan: "subscription.plans.lifetime";
+    readonly perMonth: "subscription.plans.perMonth";
+    readonly perYear: "subscription.plans.perYear";
+    readonly oneTime: "subscription.plans.oneTime";
+    readonly mostPopular: "subscription.plans.mostPopular";
+    readonly bestValue: "subscription.plans.bestValue";
+    readonly selectPlan: "subscription.plans.select";
+    readonly currentPlan: "subscription.plans.current";
+    readonly subscribe: "subscription.actions.subscribe";
+    readonly upgrade: "subscription.actions.upgrade";
+    readonly manageSubscription: "subscription.actions.manage";
+    readonly restorePurchases: "subscription.actions.restore";
+    readonly cancelAnytime: "subscription.actions.cancelAnytime";
+    readonly subscriptionActive: "subscription.messages.active";
+    readonly subscriptionExpired: "subscription.messages.expired";
+    readonly purchaseSuccess: "subscription.messages.purchaseSuccess";
+    readonly purchaseError: "subscription.messages.purchaseError";
+    readonly restoreSuccess: "subscription.messages.restoreSuccess";
+    readonly restoreError: "subscription.messages.restoreError";
+    readonly featureLocked: "subscription.feature.locked";
+    readonly featureUnlocked: "subscription.feature.unlocked";
+    readonly upgradeToUnlock: "subscription.feature.upgradeToUnlock";
+    readonly securePayment: "subscription.footer.securePayment";
+    readonly instantAccess: "subscription.footer.instantAccess";
+    readonly termsAndConditions: "subscription.footer.termsAndConditions";
+    readonly privacyPolicy: "subscription.footer.privacyPolicy";
+};
+export type SubscriptionKey = (typeof subscriptionKeys)[keyof typeof subscriptionKeys];
+//# sourceMappingURL=subscription-keys.d.ts.map
