@@ -1,15 +1,15 @@
 import { z } from 'zod';
 import { ValidationMessages as ValMsgs } from '../i18n';
 
-export const appPlatformEnum = z.enum(['IOS', 'ANDROID', 'WEB'], {
+export const appPlatformEnum = z.enum(['ios', 'android', 'web', 'all'], {
   error: ValMsgs.INVALID_ENUM,
 });
 
 export const createAppVersionSchema = z.object({
   platform: appPlatformEnum,
   minSupportedVersion: z
-    .number({ error: ValMsgs.NUMBER })
-    .min(1, { error: ValMsgs.MIN_VALUE }),
+    .string({ error: ValMsgs.REQUIRED })
+    .min(1, { error: ValMsgs.MIN_LENGTH }),
   latestVersion: z
     .string({ error: ValMsgs.REQUIRED })
     .min(1, { error: ValMsgs.MIN_LENGTH }),
