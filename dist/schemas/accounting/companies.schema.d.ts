@@ -1,4 +1,4 @@
-import z from "zod";
+import z from 'zod';
 export declare const createCompanySchema: z.ZodObject<{
     id: z.ZodOptional<z.ZodString>;
     name: z.ZodString;

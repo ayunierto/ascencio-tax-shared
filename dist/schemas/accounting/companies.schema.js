@@ -14,22 +14,22 @@ exports.createCompanySchema = zod_1.default.object({
     id: zod_1.default.string().optional(),
     name: zod_1.default.string().min(1, (0, utils_1.buildZodMessage)(i18n_1.ValidationMessages.REQUIRED)),
     legalName: zod_1.default.string().min(1, (0, utils_1.buildZodMessage)(i18n_1.ValidationMessages.REQUIRED)),
-    businessNumber: zod_1.default.union([common_accounting_schemas_1.businessNumberSchema, zod_1.default.literal("")]).optional(),
+    businessNumber: zod_1.default.union([common_accounting_schemas_1.businessNumberSchema, zod_1.default.literal('')]).optional(),
     payrollAccountNumber: zod_1.default.string().optional(),
     address: zod_1.default
-        .union([zod_1.default.string().min(1, (0, utils_1.buildZodMessage)(i18n_1.ValidationMessages.REQUIRED)), zod_1.default.literal("")])
+        .union([zod_1.default.string().min(1, (0, utils_1.buildZodMessage)(i18n_1.ValidationMessages.REQUIRED)), zod_1.default.literal('')])
         .optional(),
     city: zod_1.default
         .union([
         zod_1.default.string().trim().min(1, (0, utils_1.buildZodMessage)(i18n_1.ValidationMessages.REQUIRED)),
-        zod_1.default.literal(""),
+        zod_1.default.literal(''),
     ])
         .optional(),
     province: zod_1.default
-        .union([zod_1.default.string().min(1, (0, utils_1.buildZodMessage)(i18n_1.ValidationMessages.REQUIRED)), zod_1.default.literal("")])
+        .union([zod_1.default.string().min(1, (0, utils_1.buildZodMessage)(i18n_1.ValidationMessages.REQUIRED)), zod_1.default.literal('')])
         .optional(),
     postalCode: zod_1.default
-        .union([zod_1.default.string().min(1, (0, utils_1.buildZodMessage)(i18n_1.ValidationMessages.REQUIRED)), zod_1.default.literal("")])
+        .union([zod_1.default.string().min(1, (0, utils_1.buildZodMessage)(i18n_1.ValidationMessages.REQUIRED)), zod_1.default.literal('')])
         .optional(),
     phone: common_schemas_2.phoneNumberSchema,
     email: common_schemas_1.emailSchema,
