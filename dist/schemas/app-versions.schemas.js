@@ -3,14 +3,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateAppVersionSchema = exports.createAppVersionSchema = exports.appPlatformEnum = void 0;
 const zod_1 = require("zod");
 const i18n_1 = require("../i18n");
-exports.appPlatformEnum = zod_1.z.enum(['IOS', 'ANDROID', 'WEB'], {
+exports.appPlatformEnum = zod_1.z.enum(['ios', 'android', 'web', 'all'], {
     error: i18n_1.ValidationMessages.INVALID_ENUM,
 });
 exports.createAppVersionSchema = zod_1.z.object({
     platform: exports.appPlatformEnum,
     minSupportedVersion: zod_1.z
-        .number({ error: i18n_1.ValidationMessages.NUMBER })
-        .min(1, { error: i18n_1.ValidationMessages.MIN_VALUE }),
+        .string({ error: i18n_1.ValidationMessages.REQUIRED })
+        .min(1, { error: i18n_1.ValidationMessages.MIN_LENGTH }),
     latestVersion: zod_1.z
         .string({ error: i18n_1.ValidationMessages.REQUIRED })
         .min(1, { error: i18n_1.ValidationMessages.MIN_LENGTH }),

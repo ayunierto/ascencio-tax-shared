@@ -33,6 +33,6 @@ exports.createCompanySchema = zod_1.default.object({
         .optional(),
     phone: common_schemas_2.phoneNumberSchema,
     email: common_schemas_1.emailSchema,
-    mediaToken: zod_1.default.string().optional(),
+    mediaToken: zod_1.default.string().nullish(),
 });
 exports.updateCompanySchema = exports.createCompanySchema.partial();

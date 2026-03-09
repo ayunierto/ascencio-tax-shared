@@ -11,7 +11,7 @@ export declare const createCompanySchema: z.ZodObject<{
     postalCode: z.ZodOptional<z.ZodUnion<readonly [z.ZodString, z.ZodLiteral<"">]>>;
     phone: z.ZodString;
     email: z.ZodEmail;
-    mediaToken: z.ZodOptional<z.ZodString>;
+    mediaToken: z.ZodOptional<z.ZodNullable<z.ZodString>>;
 }, z.core.$strip>;
 export type CreateCompanyRequest = z.infer<typeof createCompanySchema>;
 export declare const updateCompanySchema: z.ZodObject<{
@@ -26,7 +26,7 @@ export declare const updateCompanySchema: z.ZodObject<{
     postalCode: z.ZodOptional<z.ZodOptional<z.ZodUnion<readonly [z.ZodString, z.ZodLiteral<"">]>>>;
     phone: z.ZodOptional<z.ZodString>;
     email: z.ZodOptional<z.ZodEmail>;
-    mediaToken: z.ZodOptional<z.ZodOptional<z.ZodString>>;
+    mediaToken: z.ZodOptional<z.ZodOptional<z.ZodNullable<z.ZodString>>>;
 }, z.core.$strip>;
 export type UpdateCompanyRequest = z.infer<typeof updateCompanySchema>;
 //# sourceMappingURL=companies.schema.d.ts.map

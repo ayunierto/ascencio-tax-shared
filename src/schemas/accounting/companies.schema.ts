@@ -28,7 +28,7 @@ export const createCompanySchema = z.object({
     .optional(),
   phone: phoneNumberSchema,
   email: emailSchema,
-  mediaToken: z.string().optional(),
+  mediaToken: z.string().nullish(),
 });
 export type CreateCompanyRequest = z.infer<typeof createCompanySchema>;
 
