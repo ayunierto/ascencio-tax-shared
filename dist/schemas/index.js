@@ -25,6 +25,7 @@ __exportStar(require("./logs.schemas"), exports);
 __exportStar(require("./notification.schemas"), exports);
 __exportStar(require("./notification.schemas"), exports);
 __exportStar(require("./services.schemas"), exports);
+__exportStar(require("./staff-members.schemas"), exports);
 __exportStar(require("./system-settings.schemas"), exports);
 __exportStar(require("./system-settings.schemas"), exports);
 __exportStar(require("./users.schemas"), exports);

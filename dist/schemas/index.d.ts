@@ -9,6 +9,7 @@ export * from './logs.schemas';
 export * from './notification.schemas';
 export * from './notification.schemas';
 export * from './services.schemas';
+export * from './staff-members.schemas';
 export * from './system-settings.schemas';
 export * from './system-settings.schemas';
 export * from './users.schemas';

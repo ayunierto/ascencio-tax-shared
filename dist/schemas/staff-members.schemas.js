@@ -7,10 +7,10 @@ const i18n_1 = require("../i18n");
 exports.staffMemberSchema = zod_1.z.object({
     firstName: zod_1.z
         .string({ error: i18n_1.ValidationMessages.STRING })
-        .nonempty({ error: i18n_1.ValidationMessages.REQUIRED }),
+        .min(3, { error: i18n_1.ValidationMessages.MIN_LENGTH }),
     lastName: zod_1.z
         .string({ error: i18n_1.ValidationMessages.STRING })
-        .nonempty({ error: i18n_1.ValidationMessages.REQUIRED }),
+        .min(3, { error: i18n_1.ValidationMessages.MIN_LENGTH }),
     isActive: zod_1.z.boolean({ error: i18n_1.ValidationMessages.BOOLEAN }),
     services: zod_1.z.array(zod_1.z.string()).optional(),
     schedules: zod_1.z.array(zod_1.z.string()).optional(),

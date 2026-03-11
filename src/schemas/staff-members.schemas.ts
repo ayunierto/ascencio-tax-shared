@@ -5,10 +5,10 @@ import { ValidationMessages as ValMsgs } from '../i18n';
 export const staffMemberSchema = z.object({
   firstName: z
     .string({ error: ValMsgs.STRING })
-    .nonempty({ error: ValMsgs.REQUIRED }),
+    .min(3, { error: ValMsgs.MIN_LENGTH }),
   lastName: z
     .string({ error: ValMsgs.STRING })
-    .nonempty({ error: ValMsgs.REQUIRED }),
+    .min(3, { error: ValMsgs.MIN_LENGTH }),
   isActive: z.boolean({ error: ValMsgs.BOOLEAN }),
   services: z.array(z.string()).optional(),
   schedules: z.array(z.string()).optional(),
