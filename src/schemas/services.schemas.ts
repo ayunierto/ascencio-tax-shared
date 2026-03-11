@@ -4,7 +4,7 @@ import { ValidationMessages } from '../i18n';
 export const serviceSchema = z.object({
   name: z
     .string({ error: ValidationMessages.STRING })
-    .nonempty({ error: ValidationMessages.REQUIRED }),
+    .min(3, { error: ValidationMessages.MIN_LENGTH }),
   description: z.string().optional(),
   address: z.string().optional(),
   durationMinutes: z
@@ -14,7 +14,8 @@ export const serviceSchema = z.object({
   isAvailableOnline: z.boolean({
     error: ValidationMessages.BOOLEAN,
   }),
-  imageUrl: z.url({ error: ValidationMessages.URL }).optional(),
+  // TODO: Remplace with actual Cloudinary URL validation if needed
+  imageUrl: z.string({ error: ValidationMessages.STRING }).optional(),
   isActive: z.boolean({ error: ValidationMessages.BOOLEAN }),
   staffIds: z
     .array(z.uuid({ error: ValidationMessages.UUID }), {

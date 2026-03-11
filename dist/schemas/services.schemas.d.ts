@@ -5,7 +5,7 @@ export declare const serviceSchema: z.ZodObject<{
     address: z.ZodOptional<z.ZodString>;
     durationMinutes: z.ZodOptional<z.ZodNumber>;
     isAvailableOnline: z.ZodBoolean;
-    imageUrl: z.ZodOptional<z.ZodURL>;
+    imageUrl: z.ZodOptional<z.ZodString>;
     isActive: z.ZodBoolean;
     staffIds: z.ZodArray<z.ZodUUID>;
 }, z.core.$strip>;
@@ -16,7 +16,7 @@ export declare const updateServiceSchema: z.ZodObject<{
     address: z.ZodOptional<z.ZodOptional<z.ZodString>>;
     durationMinutes: z.ZodOptional<z.ZodOptional<z.ZodNumber>>;
     isAvailableOnline: z.ZodOptional<z.ZodBoolean>;
-    imageUrl: z.ZodOptional<z.ZodOptional<z.ZodURL>>;
+    imageUrl: z.ZodOptional<z.ZodOptional<z.ZodString>>;
     isActive: z.ZodOptional<z.ZodBoolean>;
     staffIds: z.ZodOptional<z.ZodArray<z.ZodUUID>>;
 }, z.core.$strip>;

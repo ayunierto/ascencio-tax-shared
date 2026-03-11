@@ -6,7 +6,7 @@ const i18n_1 = require("../i18n");
 exports.serviceSchema = zod_1.z.object({
     name: zod_1.z
         .string({ error: i18n_1.ValidationMessages.STRING })
-        .nonempty({ error: i18n_1.ValidationMessages.REQUIRED }),
+        .min(3, { error: i18n_1.ValidationMessages.MIN_LENGTH }),
     description: zod_1.z.string().optional(),
     address: zod_1.z.string().optional(),
     durationMinutes: zod_1.z
@@ -16,7 +16,8 @@ exports.serviceSchema = zod_1.z.object({
     isAvailableOnline: zod_1.z.boolean({
         error: i18n_1.ValidationMessages.BOOLEAN,
     }),
-    imageUrl: zod_1.z.url({ error: i18n_1.ValidationMessages.URL }).optional(),
+    // TODO: Remplace with actual Cloudinary URL validation if needed
+    imageUrl: zod_1.z.string({ error: i18n_1.ValidationMessages.STRING }).optional(),
     isActive: zod_1.z.boolean({ error: i18n_1.ValidationMessages.BOOLEAN }),
     staffIds: zod_1.z
         .array(zod_1.z.uuid({ error: i18n_1.ValidationMessages.UUID }), {
