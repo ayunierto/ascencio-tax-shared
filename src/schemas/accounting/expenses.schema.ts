@@ -11,24 +11,26 @@ export const imageUrlSchema = z
   .union([z.url({ error: ValMsgs.URL }), cloudinaryPublicId])
   .optional();
 
+const moneySchema = z
+  .union([z.number(), z.string()])
+  .transform((value) => {
+    if (typeof value === 'string') {
+      return value.trim().replace(',', '.');
+    }
+    return value;
+  })
+  .pipe(z.coerce.number({ error: ValMsgs.NUMBER }))
+  .refine((val) => Number.isFinite(val), { error: ValMsgs.NUMBER })
+  .refine((val) => Math.abs(val * 100 - Math.round(val * 100)) < 1e-8, {
+    error: ValMsgs.NUMBER,
+  });
+
 export const createExpenseSchema = z.object({
   id: z.string().optional(),
   merchant: z.string().nonempty({ error: ValMsgs.REQUIRED }),
   date: z.iso.datetime({ error: ValMsgs.ISO_DATETIME }),
-  total: z
-    .union([z.number(), z.string()])
-    .pipe(z.coerce.number({ error: ValMsgs.NUMBER }))
-    .refine((val) => !isNaN(val), { error: ValMsgs.NUMBER })
-    .refine((val) => Math.round(val * 100) === val * 100, {
-      error: ValMsgs.NUMBER,
-    }),
-  tax: z
-    .union([z.number(), z.string()])
-    .pipe(z.coerce.number({ error: ValMsgs.NUMBER }))
-    .refine((val) => !isNaN(val), { error: ValMsgs.NUMBER })
-    .refine((val) => Math.round(val * 100) === val * 100, {
-      error: ValMsgs.NUMBER,
-    }),
+  total: moneySchema,
+  tax: moneySchema,
   imageUrl: imageUrlSchema,
   notes: z.string().optional(),
   categoryId: z

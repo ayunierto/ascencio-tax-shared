@@ -4,8 +4,8 @@ export declare const createExpenseSchema: z.ZodObject<{
     id: z.ZodOptional<z.ZodString>;
     merchant: z.ZodString;
     date: z.ZodISODateTime;
-    total: z.ZodPipe<z.ZodUnion<readonly [z.ZodNumber, z.ZodString]>, z.ZodCoercedNumber<string | number>>;
-    tax: z.ZodPipe<z.ZodUnion<readonly [z.ZodNumber, z.ZodString]>, z.ZodCoercedNumber<string | number>>;
+    total: z.ZodPipe<z.ZodPipe<z.ZodUnion<readonly [z.ZodNumber, z.ZodString]>, z.ZodTransform<string | number, string | number>>, z.ZodCoercedNumber<string | number>>;
+    tax: z.ZodPipe<z.ZodPipe<z.ZodUnion<readonly [z.ZodNumber, z.ZodString]>, z.ZodTransform<string | number, string | number>>, z.ZodCoercedNumber<string | number>>;
     imageUrl: z.ZodOptional<z.ZodUnion<readonly [z.ZodURL, z.ZodString]>>;
     notes: z.ZodOptional<z.ZodString>;
     categoryId: z.ZodPipe<z.ZodString, z.ZodUUID>;
@@ -17,8 +17,8 @@ export declare const updateExpenseSchema: z.ZodObject<{
     id: z.ZodOptional<z.ZodOptional<z.ZodString>>;
     merchant: z.ZodOptional<z.ZodString>;
     date: z.ZodOptional<z.ZodISODateTime>;
-    total: z.ZodOptional<z.ZodPipe<z.ZodUnion<readonly [z.ZodNumber, z.ZodString]>, z.ZodCoercedNumber<string | number>>>;
-    tax: z.ZodOptional<z.ZodPipe<z.ZodUnion<readonly [z.ZodNumber, z.ZodString]>, z.ZodCoercedNumber<string | number>>>;
+    total: z.ZodOptional<z.ZodPipe<z.ZodPipe<z.ZodUnion<readonly [z.ZodNumber, z.ZodString]>, z.ZodTransform<string | number, string | number>>, z.ZodCoercedNumber<string | number>>>;
+    tax: z.ZodOptional<z.ZodPipe<z.ZodPipe<z.ZodUnion<readonly [z.ZodNumber, z.ZodString]>, z.ZodTransform<string | number, string | number>>, z.ZodCoercedNumber<string | number>>>;
     imageUrl: z.ZodOptional<z.ZodOptional<z.ZodUnion<readonly [z.ZodURL, z.ZodString]>>>;
     notes: z.ZodOptional<z.ZodOptional<z.ZodString>>;
     categoryId: z.ZodOptional<z.ZodPipe<z.ZodString, z.ZodUUID>>;

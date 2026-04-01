@@ -14,24 +14,25 @@ const cloudinaryPublicId = zod_1.default
 exports.imageUrlSchema = zod_1.default
     .union([zod_1.default.url({ error: i18n_1.ValidationMessages.URL }), cloudinaryPublicId])
     .optional();
+const moneySchema = zod_1.default
+    .union([zod_1.default.number(), zod_1.default.string()])
+    .transform((value) => {
+    if (typeof value === 'string') {
+        return value.trim().replace(',', '.');
+    }
+    return value;
+})
+    .pipe(zod_1.default.coerce.number({ error: i18n_1.ValidationMessages.NUMBER }))
+    .refine((val) => Number.isFinite(val), { error: i18n_1.ValidationMessages.NUMBER })
+    .refine((val) => Math.abs(val * 100 - Math.round(val * 100)) < 1e-8, {
+    error: i18n_1.ValidationMessages.NUMBER,
+});
 exports.createExpenseSchema = zod_1.default.object({
     id: zod_1.default.string().optional(),
     merchant: zod_1.default.string().nonempty({ error: i18n_1.ValidationMessages.REQUIRED }),
     date: zod_1.default.iso.datetime({ error: i18n_1.ValidationMessages.ISO_DATETIME }),
-    total: zod_1.default
-        .union([zod_1.default.number(), zod_1.default.string()])
-        .pipe(zod_1.default.coerce.number({ error: i18n_1.ValidationMessages.NUMBER }))
-        .refine((val) => !isNaN(val), { error: i18n_1.ValidationMessages.NUMBER })
-        .refine((val) => Math.round(val * 100) === val * 100, {
-        error: i18n_1.ValidationMessages.NUMBER,
-    }),
-    tax: zod_1.default
-        .union([zod_1.default.number(), zod_1.default.string()])
-        .pipe(zod_1.default.coerce.number({ error: i18n_1.ValidationMessages.NUMBER }))
-        .refine((val) => !isNaN(val), { error: i18n_1.ValidationMessages.NUMBER })
-        .refine((val) => Math.round(val * 100) === val * 100, {
-        error: i18n_1.ValidationMessages.NUMBER,
-    }),
+    total: moneySchema,
+    tax: moneySchema,
     imageUrl: exports.imageUrlSchema,
     notes: zod_1.default.string().optional(),
     categoryId: zod_1.default
