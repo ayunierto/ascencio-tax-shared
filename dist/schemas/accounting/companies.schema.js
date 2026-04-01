@@ -35,4 +35,4 @@ exports.createCompanySchema = zod_1.default.object({
     email: common_schemas_1.emailSchema,
     mediaToken: zod_1.default.string().nullish(),
 });
-exports.updateCompanySchema = exports.createCompanySchema.partial();
+exports.updateCompanySchema = exports.createCompanySchema;

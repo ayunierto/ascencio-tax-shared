@@ -32,6 +32,6 @@ export const createCompanySchema = z.object({
 });
 export type CreateCompanyRequest = z.infer<typeof createCompanySchema>;
 
-export const updateCompanySchema = createCompanySchema.partial();
+export const updateCompanySchema = createCompanySchema;
 
 export type UpdateCompanyRequest = z.infer<typeof updateCompanySchema>;
