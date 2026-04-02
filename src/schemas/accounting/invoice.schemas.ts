@@ -61,6 +61,10 @@ export const createInvoiceSchema = z
     dueDate: z.string({ error: ValMsgs.STRING }),
     taxRate: z.coerce.number({ error: ValMsgs.NUMBER }).default(13),
     notes: z.string({ error: ValMsgs.STRING }).optional().or(z.literal("")),
+    logoMediaToken: z
+      .union([z.string({ error: ValMsgs.STRING }), z.literal(""), z.undefined()])
+      .transform((val) => (val === "" ? undefined : val))
+      .optional(),
     logoUrl: z
       .union([z.url({ error: ValMsgs.URL }), z.literal(""), z.undefined()])
       .optional(),
@@ -161,6 +165,10 @@ export const updateInvoiceSchema = z.object({
     .optional(),
   notes: z
     .union([z.string({ error: ValMsgs.STRING }), z.literal(""), z.undefined()])
+    .optional(),
+  logoMediaToken: z
+    .union([z.string({ error: ValMsgs.STRING }), z.literal(""), z.undefined()])
+    .transform((val) => (val === "" ? undefined : val))
     .optional(),
   logoUrl: z
     .union([
