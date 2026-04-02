@@ -21,6 +21,7 @@ export declare const createInvoiceSchema: z.ZodObject<{
     dueDate: z.ZodString;
     taxRate: z.ZodDefault<z.ZodCoercedNumber<unknown>>;
     notes: z.ZodUnion<[z.ZodOptional<z.ZodString>, z.ZodLiteral<"">]>;
+    logoMediaToken: z.ZodOptional<z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodLiteral<"">, z.ZodUndefined]>, z.ZodTransform<string | undefined, string | undefined>>>;
     logoUrl: z.ZodOptional<z.ZodUnion<readonly [z.ZodURL, z.ZodLiteral<"">, z.ZodUndefined]>>;
     lineItems: z.ZodArray<z.ZodObject<{
         description: z.ZodString;
@@ -53,6 +54,7 @@ export declare const updateInvoiceSchema: z.ZodObject<{
     dueDate: z.ZodOptional<z.ZodUnion<readonly [z.ZodString, z.ZodUndefined]>>;
     taxRate: z.ZodOptional<z.ZodUnion<readonly [z.ZodNumber, z.ZodUndefined]>>;
     notes: z.ZodOptional<z.ZodUnion<readonly [z.ZodString, z.ZodLiteral<"">, z.ZodUndefined]>>;
+    logoMediaToken: z.ZodOptional<z.ZodPipe<z.ZodUnion<readonly [z.ZodString, z.ZodLiteral<"">, z.ZodUndefined]>, z.ZodTransform<string | undefined, string | undefined>>>;
     logoUrl: z.ZodOptional<z.ZodUnion<readonly [z.ZodString, z.ZodLiteral<"">, z.ZodUndefined]>>;
     lineItems: z.ZodOptional<z.ZodUnion<readonly [z.ZodArray<z.ZodObject<{
         description: z.ZodString;

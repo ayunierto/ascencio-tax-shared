@@ -59,6 +59,10 @@ exports.createInvoiceSchema = zod_1.z
     dueDate: zod_1.z.string({ error: i18n_1.ValidationMessages.STRING }),
     taxRate: zod_1.z.coerce.number({ error: i18n_1.ValidationMessages.NUMBER }).default(13),
     notes: zod_1.z.string({ error: i18n_1.ValidationMessages.STRING }).optional().or(zod_1.z.literal("")),
+    logoMediaToken: zod_1.z
+        .union([zod_1.z.string({ error: i18n_1.ValidationMessages.STRING }), zod_1.z.literal(""), zod_1.z.undefined()])
+        .transform((val) => (val === "" ? undefined : val))
+        .optional(),
     logoUrl: zod_1.z
         .union([zod_1.z.url({ error: i18n_1.ValidationMessages.URL }), zod_1.z.literal(""), zod_1.z.undefined()])
         .optional(),
@@ -151,6 +155,10 @@ exports.updateInvoiceSchema = zod_1.z.object({
         .optional(),
     notes: zod_1.z
         .union([zod_1.z.string({ error: i18n_1.ValidationMessages.STRING }), zod_1.z.literal(""), zod_1.z.undefined()])
+        .optional(),
+    logoMediaToken: zod_1.z
+        .union([zod_1.z.string({ error: i18n_1.ValidationMessages.STRING }), zod_1.z.literal(""), zod_1.z.undefined()])
+        .transform((val) => (val === "" ? undefined : val))
         .optional(),
     logoUrl: zod_1.z
         .union([
