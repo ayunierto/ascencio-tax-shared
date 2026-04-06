@@ -3,15 +3,25 @@ import { InvoiceStatus } from '../../interfaces';
 import { ValidationMessages as ValMsgs } from '../../i18n';
 
 // Schema for individual line items in an invoice
-export const invoiceLineItemSchema = z.object({
-  description: z.string({ error: ValMsgs.STRING }),
-  quantity: z.coerce
-    .number({ error: ValMsgs.NUMBER })
-    .positive({ error: ValMsgs.POSITIVE }),
-  price: z.coerce
-    .number({ error: ValMsgs.NUMBER })
-    .nonnegative({ error: ValMsgs.NON_NEGATIVE }),
-});
+export const invoiceLineItemSchema = z
+  .object({
+    description: z.string({ error: ValMsgs.STRING }),
+    quantity: z.coerce
+      .number({ error: ValMsgs.NUMBER })
+      .positive({ error: ValMsgs.POSITIVE }),
+    price: z.coerce
+      .number({ error: ValMsgs.NUMBER })
+      .positive({ error: ValMsgs.POSITIVE }),
+  })
+  .superRefine((data, ctx) => {
+    if (data.quantity * data.price <= 0) {
+      ctx.addIssue({
+        path: ['price'],
+        message: 'invoiceLineItemTotalMustBeGreaterThanZero',
+        code: 'custom',
+      });
+    }
+  });
 
 export const createInvoiceSchema = z
   .object({

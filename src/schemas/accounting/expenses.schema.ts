@@ -21,6 +21,7 @@ const moneySchema = z
   })
   .pipe(z.coerce.number({ error: ValMsgs.NUMBER }))
   .refine((val) => Number.isFinite(val), { error: ValMsgs.NUMBER })
+  .refine((val) => val > 0, { error: ValMsgs.POSITIVE })
   .refine((val) => Math.abs(val * 100 - Math.round(val * 100)) < 1e-8, {
     error: ValMsgs.NUMBER,
   });
