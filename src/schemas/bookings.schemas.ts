@@ -5,9 +5,11 @@ import { ValidationMessages as ValMsgs } from '../i18n';
 export const createAppointmentSchema = z.object({
   serviceId: z.uuid({ error: ValMsgs.UUID }),
   staffId: z.uuid({ error: ValMsgs.UUID }),
-  start: z.iso.datetime({ error: ValMsgs.ISO_DATETIME }),
-  end: z.iso.datetime({ error: ValMsgs.ISO_DATETIME }),
-  timeZone: z.string().nonempty({ error: ValMsgs.REQUIRED }),
+  startTimeUTC: z.iso.datetime({ error: ValMsgs.ISO_DATETIME }),
+  endTimeUTC: z.iso.datetime({ error: ValMsgs.ISO_DATETIME }),
+  timeZone: z
+    .string({ error: ValMsgs.STRING })
+    .nonempty({ error: ValMsgs.REQUIRED }),
   comments: z.string().optional(),
   source: z.enum(['app', 'admin', 'imported', 'api']).optional(),
 });
