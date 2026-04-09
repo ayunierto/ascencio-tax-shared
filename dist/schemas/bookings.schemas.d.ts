@@ -1,9 +1,9 @@
 import { z } from 'zod';
 export declare const createAppointmentSchema: z.ZodObject<{
-    serviceId: z.ZodUUID;
-    staffId: z.ZodUUID;
-    start: z.ZodISODateTime;
-    end: z.ZodISODateTime;
+    serviceId: z.ZodPipe<z.ZodTransform<unknown, unknown>, z.ZodUUID>;
+    staffId: z.ZodPipe<z.ZodTransform<unknown, unknown>, z.ZodUUID>;
+    startTimeUTC: z.ZodPipe<z.ZodTransform<unknown, unknown>, z.ZodISODateTime>;
+    endTimeUTC: z.ZodPipe<z.ZodTransform<unknown, unknown>, z.ZodISODateTime>;
     timeZone: z.ZodString;
     comments: z.ZodOptional<z.ZodString>;
     source: z.ZodOptional<z.ZodEnum<{
@@ -15,10 +15,10 @@ export declare const createAppointmentSchema: z.ZodObject<{
 }, z.core.$strip>;
 export type CreateAppointmentRequest = z.infer<typeof createAppointmentSchema>;
 export declare const updateAppointmentSchema: z.ZodObject<{
-    serviceId: z.ZodOptional<z.ZodUUID>;
-    staffId: z.ZodOptional<z.ZodUUID>;
-    start: z.ZodOptional<z.ZodISODateTime>;
-    end: z.ZodOptional<z.ZodISODateTime>;
+    serviceId: z.ZodOptional<z.ZodPipe<z.ZodTransform<unknown, unknown>, z.ZodUUID>>;
+    staffId: z.ZodOptional<z.ZodPipe<z.ZodTransform<unknown, unknown>, z.ZodUUID>>;
+    startTimeUTC: z.ZodOptional<z.ZodPipe<z.ZodTransform<unknown, unknown>, z.ZodISODateTime>>;
+    endTimeUTC: z.ZodOptional<z.ZodPipe<z.ZodTransform<unknown, unknown>, z.ZodISODateTime>>;
     timeZone: z.ZodOptional<z.ZodString>;
     comments: z.ZodOptional<z.ZodOptional<z.ZodString>>;
     source: z.ZodOptional<z.ZodOptional<z.ZodEnum<{

@@ -5,11 +5,14 @@ const zod_1 = require("zod");
 const i18n_1 = require("../i18n");
 // Appointments
 exports.createAppointmentSchema = zod_1.z.object({
-    serviceId: zod_1.z.uuid({ error: i18n_1.ValidationMessages.UUID }),
-    staffId: zod_1.z.uuid({ error: i18n_1.ValidationMessages.UUID }),
-    start: zod_1.z.iso.datetime({ error: i18n_1.ValidationMessages.ISO_DATETIME }),
-    end: zod_1.z.iso.datetime({ error: i18n_1.ValidationMessages.ISO_DATETIME }),
-    timeZone: zod_1.z.string().nonempty({ error: i18n_1.ValidationMessages.REQUIRED }),
+    serviceId: zod_1.z.preprocess((value) => (typeof value === 'string' ? value.trim() : value), zod_1.z.uuid({ error: i18n_1.ValidationMessages.UUID })),
+    staffId: zod_1.z.preprocess((value) => (typeof value === 'string' ? value.trim() : value), zod_1.z.uuid({ error: i18n_1.ValidationMessages.UUID })),
+    startTimeUTC: zod_1.z.preprocess((value) => (typeof value === 'string' ? value.trim() : value), zod_1.z.iso.datetime({ error: i18n_1.ValidationMessages.ISO_DATETIME })),
+    endTimeUTC: zod_1.z.preprocess((value) => (typeof value === 'string' ? value.trim() : value), zod_1.z.iso.datetime({ error: i18n_1.ValidationMessages.ISO_DATETIME })),
+    timeZone: zod_1.z
+        .string({ error: i18n_1.ValidationMessages.STRING })
+        .trim()
+        .nonempty({ error: i18n_1.ValidationMessages.REQUIRED }),
     comments: zod_1.z.string().optional(),
     source: zod_1.z.enum(['app', 'admin', 'imported', 'api']).optional(),
 });

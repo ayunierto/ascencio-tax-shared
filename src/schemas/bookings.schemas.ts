@@ -3,12 +3,25 @@ import { ValidationMessages as ValMsgs } from '../i18n';
 
 // Appointments
 export const createAppointmentSchema = z.object({
-  serviceId: z.uuid({ error: ValMsgs.UUID }),
-  staffId: z.uuid({ error: ValMsgs.UUID }),
-  startTimeUTC: z.iso.datetime({ error: ValMsgs.ISO_DATETIME }),
-  endTimeUTC: z.iso.datetime({ error: ValMsgs.ISO_DATETIME }),
+  serviceId: z.preprocess(
+    (value) => (typeof value === 'string' ? value.trim() : value),
+    z.uuid({ error: ValMsgs.UUID }),
+  ),
+  staffId: z.preprocess(
+    (value) => (typeof value === 'string' ? value.trim() : value),
+    z.uuid({ error: ValMsgs.UUID }),
+  ),
+  startTimeUTC: z.preprocess(
+    (value) => (typeof value === 'string' ? value.trim() : value),
+    z.iso.datetime({ error: ValMsgs.ISO_DATETIME }),
+  ),
+  endTimeUTC: z.preprocess(
+    (value) => (typeof value === 'string' ? value.trim() : value),
+    z.iso.datetime({ error: ValMsgs.ISO_DATETIME }),
+  ),
   timeZone: z
     .string({ error: ValMsgs.STRING })
+    .trim()
     .nonempty({ error: ValMsgs.REQUIRED }),
   comments: z.string().optional(),
   source: z.enum(['app', 'admin', 'imported', 'api']).optional(),
