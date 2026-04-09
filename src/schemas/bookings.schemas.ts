@@ -77,3 +77,7 @@ export const searchAvailabilitySchema = z.object({
 export type SearchAvailabilityRequest = z.infer<
   typeof searchAvailabilitySchema
 >;
+
+// Alias semántico para consumo frontend/backend.
+export const availabilitySchema = searchAvailabilitySchema;
+export type AvailabilityRequest = SearchAvailabilityRequest;

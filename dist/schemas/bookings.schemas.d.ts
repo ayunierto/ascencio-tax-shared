@@ -52,4 +52,11 @@ export declare const searchAvailabilitySchema: z.ZodObject<{
     timeZone: z.ZodString;
 }, z.core.$strip>;
 export type SearchAvailabilityRequest = z.infer<typeof searchAvailabilitySchema>;
+export declare const availabilitySchema: z.ZodObject<{
+    serviceId: z.ZodUUID;
+    staffId: z.ZodOptional<z.ZodUUID>;
+    date: z.ZodString;
+    timeZone: z.ZodString;
+}, z.core.$strip>;
+export type AvailabilityRequest = SearchAvailabilityRequest;
 //# sourceMappingURL=bookings.schemas.d.ts.map

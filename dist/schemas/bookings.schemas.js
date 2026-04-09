@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.searchAvailabilitySchema = exports.updateScheduleSchema = exports.scheduleSchema = exports.cancelAppointmentSchema = exports.updateAppointmentSchema = exports.createAppointmentSchema = void 0;
+exports.availabilitySchema = exports.searchAvailabilitySchema = exports.updateScheduleSchema = exports.scheduleSchema = exports.cancelAppointmentSchema = exports.updateAppointmentSchema = exports.createAppointmentSchema = void 0;
 const zod_1 = require("zod");
 const i18n_1 = require("../i18n");
 // Appointments
@@ -48,3 +48,5 @@ exports.searchAvailabilitySchema = zod_1.z.object({
         .string({ error: i18n_1.ValidationMessages.STRING })
         .nonempty({ error: i18n_1.ValidationMessages.REQUIRED }),
 });
+// Alias semántico para consumo frontend/backend.
+exports.availabilitySchema = exports.searchAvailabilitySchema;
