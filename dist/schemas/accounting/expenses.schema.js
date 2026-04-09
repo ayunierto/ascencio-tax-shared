@@ -24,6 +24,7 @@ const moneySchema = zod_1.default
 })
     .pipe(zod_1.default.coerce.number({ error: i18n_1.ValidationMessages.NUMBER }))
     .refine((val) => Number.isFinite(val), { error: i18n_1.ValidationMessages.NUMBER })
+    .refine((val) => val > 0, { error: i18n_1.ValidationMessages.POSITIVE })
     .refine((val) => Math.abs(val * 100 - Math.round(val * 100)) < 1e-8, {
     error: i18n_1.ValidationMessages.NUMBER,
 });

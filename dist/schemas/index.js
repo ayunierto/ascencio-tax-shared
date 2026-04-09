@@ -20,6 +20,7 @@ __exportStar(require("./auth"), exports);
 __exportStar(require("./blog.schemas"), exports);
 __exportStar(require("./blog.schemas"), exports);
 __exportStar(require("./bookings.schemas"), exports);
+__exportStar(require("./calendar.schemas"), exports);
 __exportStar(require("./logs.schemas"), exports);
 __exportStar(require("./logs.schemas"), exports);
 __exportStar(require("./notification.schemas"), exports);

@@ -4,6 +4,7 @@ export * from './auth';
 export * from './blog.schemas';
 export * from './blog.schemas';
 export * from './bookings.schemas';
+export * from './calendar.schemas';
 export * from './logs.schemas';
 export * from './logs.schemas';
 export * from './notification.schemas';

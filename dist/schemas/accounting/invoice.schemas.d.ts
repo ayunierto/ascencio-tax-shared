@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 export declare const invoiceLineItemSchema: z.ZodObject<{
     description: z.ZodString;
     quantity: z.ZodCoercedNumber<unknown>;
