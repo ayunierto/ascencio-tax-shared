@@ -51,6 +51,7 @@ export type CalendarStaffConnectQueryRequest = z.infer<
 >;
 
 export const calendarClientConnectQuerySchema = z.object({
+  calendarId: z.string({ error: ValMsgs.STRING }).optional(),
   redirectUrl: z.string({ error: ValMsgs.STRING }).optional(),
 });
 

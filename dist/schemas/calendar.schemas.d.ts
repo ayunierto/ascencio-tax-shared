@@ -29,6 +29,7 @@ export declare const calendarStaffConnectQuerySchema: z.ZodObject<{
 }, z.core.$strip>;
 export type CalendarStaffConnectQueryRequest = z.infer<typeof calendarStaffConnectQuerySchema>;
 export declare const calendarClientConnectQuerySchema: z.ZodObject<{
+    calendarId: z.ZodOptional<z.ZodString>;
     redirectUrl: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;
 export type CalendarClientConnectQueryRequest = z.infer<typeof calendarClientConnectQuerySchema>;

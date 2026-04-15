@@ -28,6 +28,7 @@ exports.calendarStaffConnectQuerySchema = zod_1.z.object({
     redirectUrl: zod_1.z.string({ error: i18n_1.ValidationMessages.STRING }).optional(),
 });
 exports.calendarClientConnectQuerySchema = zod_1.z.object({
+    calendarId: zod_1.z.string({ error: i18n_1.ValidationMessages.STRING }).optional(),
     redirectUrl: zod_1.z.string({ error: i18n_1.ValidationMessages.STRING }).optional(),
 });
 exports.calendarOauthCallbackQuerySchema = zod_1.z
