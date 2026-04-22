@@ -2,9 +2,7 @@ import z from 'zod';
 import { ValidationMessages as ValMsgs } from '../../i18n';
 
 // Valida Cloudinary publicId (folders + filename, extensión opcional)
-const cloudinaryPublicId = z
-  .string()
-  .regex(/^[\w\-\/]+(\.[\w\-]+)?$/, 'invalid_public_id');
+const cloudinaryPublicId = z.string().regex(/^[\w\-\/]+(\.[\w\-]+)?$/, 'invalid_public_id');
 
 // Acepta URL o publicId
 export const imageUrlSchema = z
@@ -31,7 +29,7 @@ export const createExpenseSchema = z.object({
   merchant: z.string().nonempty({ error: ValMsgs.REQUIRED }),
   date: z.iso.datetime({ error: ValMsgs.ISO_DATETIME }),
   total: moneySchema,
-  tax: moneySchema,
+  tax: moneySchema.optional(),
   imageUrl: imageUrlSchema,
   notes: z.string().optional(),
   categoryId: z

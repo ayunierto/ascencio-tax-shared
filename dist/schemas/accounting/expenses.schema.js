@@ -7,9 +7,7 @@ exports.updateExpenseSchema = exports.createExpenseSchema = exports.imageUrlSche
 const zod_1 = __importDefault(require("zod"));
 const i18n_1 = require("../../i18n");
 // Valida Cloudinary publicId (folders + filename, extensión opcional)
-const cloudinaryPublicId = zod_1.default
-    .string()
-    .regex(/^[\w\-\/]+(\.[\w\-]+)?$/, 'invalid_public_id');
+const cloudinaryPublicId = zod_1.default.string().regex(/^[\w\-\/]+(\.[\w\-]+)?$/, 'invalid_public_id');
 // Acepta URL o publicId
 exports.imageUrlSchema = zod_1.default
     .union([zod_1.default.url({ error: i18n_1.ValidationMessages.URL }), cloudinaryPublicId])
@@ -33,7 +31,7 @@ exports.createExpenseSchema = zod_1.default.object({
     merchant: zod_1.default.string().nonempty({ error: i18n_1.ValidationMessages.REQUIRED }),
     date: zod_1.default.iso.datetime({ error: i18n_1.ValidationMessages.ISO_DATETIME }),
     total: moneySchema,
-    tax: moneySchema,
+    tax: moneySchema.optional(),
     imageUrl: exports.imageUrlSchema,
     notes: zod_1.default.string().optional(),
     categoryId: zod_1.default
