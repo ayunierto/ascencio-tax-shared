@@ -10,19 +10,19 @@ export const imageUrlSchema = z
   .optional();
 
 const moneySchema = z
-  .union([z.number(), z.string()])
+  .union([z.number(), z.string()]) // Acepta números y cadenas
   .transform((value) => {
     if (typeof value === 'string') {
       return value.trim().replace(',', '.');
     }
     return value;
-  })
-  .pipe(z.coerce.number({ error: ValMsgs.NUMBER }))
-  .refine((val) => Number.isFinite(val), { error: ValMsgs.NUMBER })
-  .refine((val) => val > 0, { error: ValMsgs.POSITIVE })
+  }) // Convierte cadenas a números, reemplazando comas por puntos
+  .pipe(z.coerce.number({ error: ValMsgs.NUMBER })) // Transformación final a número
+  .refine((val) => Number.isFinite(val), { error: ValMsgs.NUMBER }) // Valida que el número sea finito
+  .refine((val) => val >= 0, { error: ValMsgs.POSITIVE }) // Valida que sea positivo
   .refine((val) => Math.abs(val * 100 - Math.round(val * 100)) < 1e-8, {
     error: ValMsgs.NUMBER,
-  });
+  }); // Valida que el número sea un decimal válido
 
 export const createExpenseSchema = z.object({
   id: z.string().optional(),
